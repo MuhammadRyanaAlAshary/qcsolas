@@ -19,7 +19,7 @@
 
     <div class="row mt-3">
         <div class="col-md-6"><a href="<?= base_url('admin/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
-    </div><br>
+    </div>
     <!--  Divider -->
     <hr class="sidebar-divider">
 
