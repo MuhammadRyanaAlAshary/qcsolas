@@ -93,9 +93,9 @@
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
                                 <td>
-									<a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i>Fill</a>
-									<a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                    <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+									<!-- <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                    <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
                                 </td>
 
                             </tr>
@@ -104,7 +104,7 @@
                     </tbody>
                     <tfoot class="footer-restore-columns">
                         <tr>
-                            <th colspan="11"><a class="restore-columns" href="#">Some columns hidden - click to show all</a></th>
+                            <th colspan="12"><a class="restore-columns" href="#">Some columns hidden - click to show all</a></th>
                         </tr>
                     </tfoot>
                 </table>

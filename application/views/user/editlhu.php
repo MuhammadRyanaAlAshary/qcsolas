@@ -13,14 +13,14 @@
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Kode Prodak</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kode_produk" name="kode_produk" value="<?= $datalhu['kode_produk'] . set_value('kode_produk'); ?>">
+                        <input type="text" class="form-control" id="kode_produk" name="kode_produk" value="<?= $datalhu['kode_produk'] . set_value('kode_produk'); ?>" disabled>
                         <?= form_error('kode_produk', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nama_lhu" class="col-sm-2 col-form-label">Nama LHU</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="nama_lhu" name="nama_lhu">
+                        <select class="form-control" id="nama_lhu" name="nama_lhu" disabled>
                             <option value="">---Select Nama LHU---</option>
                             <?php foreach ($produk as $p) : ?>
                                 <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>
@@ -35,7 +35,7 @@
                 <div class="form-group row">
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="jenis_lhu" name="jenis_lhu">
+                        <select class="form-control" id="jenis_lhu" name="jenis_lhu" disabled>
                             <option value="">---Select Jenis LHU---</option>
                             <?php foreach ($jenislhu as $jl) : ?>
                                 <?php if ($jl['jenis_lhu'] == $datalhu['jenis_lhu']) : ?>
@@ -51,12 +51,11 @@
                     <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
                     <div class="col-sm-10">
                         <div class="col-sm-9">
-                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu">
+                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" disabled>
                             <label class="custom-file-label" for="file_lhu"><?= $datalhu['file_lhu']; ?></label>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
                         <button type="submit" name="editlhu" class="btn btn-primary">Edit</button>

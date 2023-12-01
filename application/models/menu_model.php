@@ -12,7 +12,7 @@ class  Menu_model extends CI_Model
 
 		// return $this->db->get('tb_pdf_book')->result_array();
     }
-
+            
     public function getSubmenu()
     {
         $query = "SELECT `user_sub_menu`.*, `user_menu`.`menu`
@@ -24,7 +24,10 @@ class  Menu_model extends CI_Model
 
     public function getlhuId($id)
     {
-        return $this->db->get_where('tb_pdf_book', ['id' => $id])->row_array();
+        $this->db->select('*');
+        $this->db->from('user_data_lhu_history');
+        $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
+        return $this->db->where('id', $id)->row();
     }
 
     public function hapusDatamenu($id)
