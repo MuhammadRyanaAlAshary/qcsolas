@@ -64,22 +64,12 @@ class  admin extends CI_Controller
 
         $data['produk'] = $this->db->get('produk')->result_array();
         $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
-        $data['satuan'] = $this->db->get('satuan')->result_array();
 
         $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
         $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required');
         $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required');
-        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required');
-        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required');
-        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
-        $this->form_validation->set_rules('tgl_produksi', 'Tgl Produksi', 'required');
-        $this->form_validation->set_rules('tgl_sampling', 'Tgl Sampling', 'required');
-        $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');
-        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
-
 
         if ($this->form_validation->run() == false) {
-
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -87,7 +77,6 @@ class  admin extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-
             $this->menu->tambahlhu();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
             redirect('admin/datalhu/');
@@ -117,7 +106,6 @@ class  admin extends CI_Controller
         $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');
         $this->form_validation->set_rules('satuan', 'Satuan', 'required');
 
-
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -126,7 +114,6 @@ class  admin extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-
             $this->menu->editlhu($id);
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
             redirect('admin/datalhu/');

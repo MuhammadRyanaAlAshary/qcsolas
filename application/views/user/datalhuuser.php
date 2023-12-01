@@ -3,37 +3,12 @@
     <i class="icofont-angle-double-left"></i>
 
     <!-- Page Heading -->
+	<div class="row mt-3">
+		<div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
+	</div>
 
     <!--  Divider -->
     <hr class="sidebar-divider">
-
-    <!-- <div class="card-header">
-        <div class="row">
-           
-            <div class="col-lg-3">
-                <form>
-                    <div class="multiselect">
-                        <div class="selectBox" onclick="showCheckboxes()">
-                            <select>
-                                <option>Select an option</option>
-                            </select>
-                            <div class="overSelect"></div>
-                        </div>
-                        <div id="checkboxes">
-                            <input type="checkbox" name="kode_produk" checked="checked">KODE PRODUK</input>
-                            <input type="checkbox" name="nama_lhu" checked="checked">NAMA LHU</input>
-                            <input type="checkbox" name="jenis_lhu" checked="checked">JENIS LHU</input>
-                            <input type="checkbox" name="nomer_analisa" checked="checked">NO. ANALISA</input>
-                            <input type="checkbox" name="nomer_batch" checked="checked">NO. BATCH</input>
-                            <input type="checkbox" name="exp_date" checked="checked">EXP DATE</input>
-                            <input type="checkbox" name="tgl_produksi" checked="checked">TGL PRODUKSI</input>
-                            <input type="checkbox" name="tgl_sampling" checked="checked">TGL SAMPLING</input>
-                            <input type="checkbox" name="besaran_batch" checked="checked">BESARAN BATCH</input>
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>-->
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -124,7 +99,8 @@
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+									<a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i>Fill</a>
+									<a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                     <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
                                 </td>
 
