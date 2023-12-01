@@ -5,7 +5,12 @@ class  Menu_model extends CI_Model
 {
     public function getlhu()
     {
-		return $this->db->get('tb_pdf_book')->result_array();
+        $this->db->select('*');
+        $this->db->from('user_data_lhu_history');
+        $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
+        return $this->db->get()->result_array();
+
+		// return $this->db->get('tb_pdf_book')->result_array();
     }
 
     public function getSubmenu()
@@ -115,6 +120,9 @@ class  Menu_model extends CI_Model
 					'file_lhu' => $filelhu,
 				];
 
+				$this->db->insert('tb_pdf_book', $data);
+                $insert_id = $this->db->insert_id();
+
 				$create_data_lhu_users_history = [
 					'nomor_analisa' => "",
 					'nomor_batch' => "",
@@ -123,7 +131,7 @@ class  Menu_model extends CI_Model
 					'tgl_sampling' => '',
 					'besaran_batch' => '',
 					'satuan' => '',
-					'id_tb_pdf_book' => $data['id'],
+					'id_tb_pdf_book' => $insert_id,
 				];
 
                 $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');

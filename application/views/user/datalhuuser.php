@@ -85,6 +85,13 @@
                                 <td><?= $dl['kode_produk']; ?></td>
                                 <td><?= $dl['nama_lhu']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
+                                <td><?= $dl['nomor_analisa']; ?></td>
+                                <td><?= $dl['nomor_batch']; ?></td>
+                                <td><?= $dl['exp_date']; ?></td>
+                                <td><?= $dl['tgl_produksi']; ?></td>
+                                <td><?= $dl['tgl_sampling']; ?></td>
+                                <td><?= $dl['besaran_batch']; ?></td>
+                                <td><?= $dl['satuan']; ?></td>
                                 <td>
 									<a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i>Fill</a>
 									<a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
