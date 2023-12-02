@@ -75,7 +75,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     $(function() {
         // on init
         $(".table-hideable .hide-col").each(HideColumnIndex);
@@ -114,7 +114,7 @@
         })
 
     })
-</script>
+</script> -->
 
 <script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/script.js"></script>
