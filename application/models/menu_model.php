@@ -8,6 +8,7 @@ class  Menu_model extends CI_Model
         $this->db->select('*');
         $this->db->from('user_data_lhu_history');
         $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
+        $this->db->where('is_active', NULL);
         return $this->db->get()->result_array();
 
         // return $this->db->get('tb_pdf_book')->result_array();
@@ -24,10 +25,6 @@ class  Menu_model extends CI_Model
 
     public function getlhuId($id)
     {
-        // $this->db->select('*');
-        // $this->db->from('user_data_lhu_history');
-        // $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
-
         $query = "SELECT tb_pdf_book.*, user_data_lhu_history.* FROM `user_data_lhu_history` 
         INNER JOIN tb_pdf_book ON user_data_lhu_history.id_tb_pdf_book=tb_pdf_book.id WHERE user_data_lhu_history.id_tb_pdf_book = $id";
         return $this->db->query($query)->row_array();
@@ -101,9 +98,9 @@ class  Menu_model extends CI_Model
                 $this->db->insert('tb_pdf_book', $data);
                 $insert_id = $this->db->insert_id();
 
-                $create_data_lhu_users = [
-                    'nomor_analisa' => "",
-                    'nomor_batch' => "",
+                $create_data_lhu_users_history = [
+                    'nomer_analisa' => "",
+                    'nomer_batch' => "",
                     'exp_date' => "",
                     'tgl_produksi' => '',
                     'tgl_sampling' => '',
@@ -112,7 +109,7 @@ class  Menu_model extends CI_Model
                     'id_tb_pdf_book' => $insert_id
                 ];
 
-                $this->db->insert('user_data_lhu_history', $create_data_lhu_users);
+                $this->db->insert('user_data_lhu_history', $create_data_lhu_users_history);
 
                 $this->session->set_flashdata('flash', 'Ditambahkan & file gagal di upload,tipe file salah!.');
                 redirect('admin/datalhu/');
@@ -130,8 +127,8 @@ class  Menu_model extends CI_Model
                 $insert_id = $this->db->insert_id();
 
                 $create_data_lhu_users_history = [
-                    'nomor_analisa' => "",
-                    'nomor_batch' => "",
+                    'nomer_analisa' => "",
+                    'nomer_batch' => "",
                     'exp_date' => "",
                     'tgl_produksi' => '',
                     'tgl_sampling' => '',
@@ -140,9 +137,8 @@ class  Menu_model extends CI_Model
                     'id_tb_pdf_book' => $insert_id,
                 ];
 
+                $this->db->insert('user_data_lhu_history', $create_data_lhu_users_history);
                 $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
-                $this->db->insert('tb_pdf_book', $data);
-                $this->db->insert('user_data_lhu_history', $create_data_lhu_users);
             }
         }
     }
@@ -180,18 +176,10 @@ class  Menu_model extends CI_Model
                     'kode_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
                     'nama_lhu' => htmlspecialchars($this->input->post('nama_lhu', true)),
                     'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-                    'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-                    'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-                    'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-                    'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
-                    'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
-                    'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
-                    'satuan' => htmlspecialchars($this->input->post('satuan', true))
                 ];
 
                 $this->db->where('id', $this->input->post('id'));
                 $this->db->update('tb_pdf_book', $data);
-
                 $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
 
                 redirect('admin/datalhu/');
@@ -213,6 +201,25 @@ class  Menu_model extends CI_Model
 
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('tb_pdf_book', $data);
+    }
+
+    public function editlhuUser($id){
+        $data['datalhu'] = $this->db->get_where('user_data_lhu_history', ['id' => $id])->row_array();
+
+        // cek jika ada gambar yang di upload
+        $data = [
+            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+            'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
+            'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
+            'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
+            'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+            'is_active' => 1,
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('user_data_lhu_history', $data);
     }
 
     public function hapuslhubyid($id)

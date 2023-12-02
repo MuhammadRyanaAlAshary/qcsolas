@@ -70,32 +70,32 @@ class  User extends CI_Controller
         $this->load->view('templates/query1');
     }
 
-    public function tambahlhu()
-    {
-        $data['title'] = 'Entry LHU';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+    // public function tambahlhu()
+    // {
+    //     $data['title'] = 'Entry LHU';
+    //     $data['user'] = $this->db->get_where('user', ['email' =>
+    //     $this->session->userdata('email')])->row_array();
 
-        $data['produk'] = $this->db->get('produk')->result_array();
-        $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
+    //     $data['produk'] = $this->db->get('produk')->result_array();
+    //     $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
 
-        $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
-        $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required');
-        $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required');
+    //     $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
+    //     $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required');
+    //     $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required');
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('user/tambahdatalhu', $data);
-            $this->load->view('templates/footer');
-            $this->load->view('templates/query1');
-        } else {
-            $this->menu->tambahlhu();
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
-            redirect('user/datalhu/');
-        }
-    }
+    //     if ($this->form_validation->run() == false) {
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/sidebar', $data);
+    //         $this->load->view('templates/topbar', $data);
+    //         $this->load->view('user/tambahdatalhu', $data);
+    //         $this->load->view('templates/footer');
+    //         $this->load->view('templates/query1');
+    //     } else {
+    //         $this->menu->tambahlhu();
+    //         $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+    //         redirect('user/datalhu/');
+    //     }
+    // }
 
     public function editlhu($id = 0)
     {
@@ -104,13 +104,8 @@ class  User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $data['datalhu'] = $this->menu->getlhuId($id);
-        $data['produk'] = $this->db->get('produk')->result_array();
-        $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
 
-        $this->form_validation->set_rules('kode_produk', 'Kode Prodak', 'required');
-        $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required|trim');
-        $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required|trim');
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
@@ -127,9 +122,9 @@ class  User extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->editlhu($id);
+            $this->menu->editlhuUser($id);
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/datalhu/');
+            redirect('user/datalhuuser/');
         }
     }
 }
