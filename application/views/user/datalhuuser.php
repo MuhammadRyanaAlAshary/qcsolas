@@ -44,7 +44,7 @@
                             <th scope="col">Tgl.Prod
                             </th>
                             <th scope="col">Tgl.Sampling
-                            </th> 
+                            </th>
                             <th scope="col">Qty
                             </th>
                             <th scope="col">Sat
@@ -69,13 +69,11 @@
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
                                 <td>
-                                    <?php if($dl['nomer_analisa'] != NULL) : ?>
+                                    <?php if ($dl['nomer_analisa'] != NULL) : ?>
                                         <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                         <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-
-                                        <a href="<?= base_url('Laporan/index/') . $dl['id']; ?>/<?= $dl['file_lhu']; ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
                                     <?php else : ?>
-                                        <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i> Add Data LHU</a>
+                                        <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Add Data LHU</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
