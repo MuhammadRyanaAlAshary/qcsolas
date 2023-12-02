@@ -11,16 +11,20 @@
                 <?= form_open_multipart('user/editlhu/' . $datalhu['id']); ?>
                 <input type="hidden" id="id" name="id" value="<?= $datalhu['id']; ?>">
                 <div class="form-group row">
-                    <label for="kode_produk" class="col-sm-2 col-form-label">Kode Prodak</label>
+                    <label for="kode_produk" class="col-sm-2 col-form-label">Kode Produk</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kode_produk" name="kode_produk" value="<?= $datalhu['kode_produk'] . set_value('kode_produk'); ?>" disabled>
+                        <select class="form-control" id="kode_produk" name="kode_produk">
+                            <?php foreach ($jenislhu as $jl) : ?>
+                                <option value="<?= $jl['jenis_lhu']; ?>"><?= $jl['jenis_lhu']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <?= form_error('kode_produk', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nama_lhu" class="col-sm-2 col-form-label">Nama LHU</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="nama_lhu" name="nama_lhu" disabled>
+                        <select class="form-control" id="nama_lhu" name="nama_lhu">
                             <?php if ($datalhu['nama_lhu'] == $datalhu['nama_lhu']) : ?>
                                     <option value="<?= $datalhu['nama_lhu']; ?>" selected><?= $datalhu['nama_lhu']; ?></option>
                             <?php endif; ?>
@@ -30,7 +34,7 @@
                 <div class="form-group row">
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="jenis_lhu" name="jenis_lhu" disabled>
+                        <select class="form-control" id="jenis_lhu" name="jenis_lhu">
                             <?php if ($datalhu['jenis_lhu'] == $datalhu['jenis_lhu']) : ?>
                                 <option value="<?= $datalhu['jenis_lhu']; ?>" selected><?= $datalhu['jenis_lhu']; ?></option>
                             <?php endif; ?>
@@ -87,27 +91,15 @@
                         <?= form_error('besaran_batch', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-9">
-                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" disabled>
-                            <label class="custom-file-label" for="file_lhu"><?= $datalhu['file_lhu']; ?></label>
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
                         <button type="submit" name="editlhu" class="btn btn-primary">Edit</button>
                     </div>
                 </div>
                 </form>
-
             </div>
         </div>
-
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
