@@ -7,8 +7,8 @@ class  User extends CI_Controller
     {
         parent::__construct();
         $this->load->library('pagination');
-        $this->load->model('menu_model', 'menu');
         $this->load->library('form_validation');
+        $this->load->model('menu_model', 'menu');
         is_logged_in();
     }
 
@@ -99,5 +99,10 @@ class  User extends CI_Controller
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
             redirect('user/datalhuuser/');
         }
+    }
+
+    public function printlhu($id = 0) 
+    {
+        
     }
 }

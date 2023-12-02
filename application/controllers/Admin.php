@@ -142,7 +142,7 @@ class  admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['datalhu'] = $this->menu->getlhu();
+        $data['datalhu'] = $this->menu->getlhuIdHistory();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

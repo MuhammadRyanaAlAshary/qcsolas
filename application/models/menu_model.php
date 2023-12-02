@@ -27,6 +27,15 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
+    public function getlhuIdHistory()
+    {
+        $this->db->select('*');
+        $this->db->from('user_data_lhu_history');
+        $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
+        $this->db->where('is_active', 1);
+        return $this->db->get()->result_array();        
+    }    
+
     public function hapusDatamenu($id)
     {
         $this->db->delete('user_menu', ['id' => $id]);
@@ -212,7 +221,6 @@ class  Menu_model extends CI_Model
             'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
             'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
             'satuan' => htmlspecialchars($this->input->post('satuan', true)),
-            'is_active' => 1,
         ];
 
         $this->db->where('id', $this->input->post('id'));
