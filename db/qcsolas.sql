@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2023 at 02:09 AM
+-- Generation Time: Dec 01, 2023 at 03:31 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1420,76 +1420,17 @@ CREATE TABLE `tb_pdf_book` (
   `kode_produk` varchar(256) NOT NULL,
   `file_lhu` varchar(256) NOT NULL,
   `nama_lhu` varchar(256) NOT NULL,
-  `jenis_lhu` varchar(256) NOT NULL,
-  `nomer_analisa` varchar(256) NOT NULL,
-  `nomer_batch` varchar(256) NOT NULL,
-  `exp_date` date NOT NULL,
-  `tgl_produksi` date NOT NULL,
-  `tgl_sampling` date NOT NULL,
-  `besaran_batch` int(123) NOT NULL,
-  `satuan` varchar(128) NOT NULL
+  `jenis_lhu` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_pdf_book`
 --
 
-INSERT INTO `tb_pdf_book` (`id`, `kode_produk`, `file_lhu`, `nama_lhu`, `jenis_lhu`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`) VALUES
-(1, 'BR0098', '6c09418db89fdf074286cb5db885f6f7.pdf', 'Colidium Kaplet', 'Obat Jadi', '00555', 'ABC 13', '2025-06-15', '2023-11-01', '2023-11-08', 0, 'KG'),
-(13, 'TL0009', '04QC-004-022-F1_Hasil_Pengkajian_Penentuan_Frekuensi_Aktivasi_Silica_Gel_Rev_01.pdf', 'Talk', 'Obat Jadi', '12312', '12345', '2023-11-30', '2023-11-21', '2023-11-13', 20, 'G'),
-(18, '0', '04QC-004-021-F2_Formulir_Aktivasi_Silica_Gel_Rev_012.pdf', 'Solvitron', 'Obat Jadi', '09878', '56576', '0000-00-00', '0000-00-00', '0000-00-00', 0, ''),
-(22, '0', '04QC-004-021-F2_Formulir_Aktivasi_Silica_Gel_Rev_014.pdf', 'Solvita Max', 'Obat Jadi', '23213', '12313', '0000-00-00', '0000-00-00', '0000-00-00', 0, ''),
-(24, '0', 'FLOW_BARU_MANUFACTURING_ORDER5.pdf', 'Primunox', 'BBA', '12321423123', '23123123123', '2020-11-23', '0000-00-00', '0000-00-00', 1, ''),
-(29, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG3.pdf', 'Primunox', 'BBA', '123124', '123213', '0000-00-00', '1970-01-01', '1970-01-01', 1, ''),
-(30, 'REGASCL90', 'FLOW_BARU_MANUFACTURING_ORDER7.pdf', 'Primunox', 'BBA', '123121', '12313', '0000-00-00', '2023-11-02', '2023-11-08', 1, ''),
-(32, 'REGASCL90', 'REPORTING_SOLAS13.pdf', 'Primunox', 'BBT', '123/1213/1231', '123/1231/123', '0000-00-00', '2023-11-01', '2023-11-08', 1, ''),
-(35, 'REGASCL90', 'REPORTING_SOLAS24.pdf', 'Primunox', 'BBT', '123124', '123213', '0000-00-00', '2023-11-17', '2023-11-01', 1, ''),
-(36, 'REGASCL90', 'FLOW_BARU_MANUFACTURING_ORDER10.pdf', 'Primunox', 'BBT', '123124', '21312', '0000-00-00', '2023-11-24', '2023-11-30', 1, ''),
-(39, 'REGASCL1000', 'FLOW_PENERIMAAN_BARANG6.pdf', 'Primunox', 'BBT', '123124', '123213', '2025-12-12', '2023-11-09', '2023-11-16', 1, ''),
-(40, 'REGASCL90', '', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-16', '2023-11-14', '2023-11-07', 1, ''),
-(42, 'REGASCL90', '', 'Zitrolas', 'Mikro Biologi BB', '123124', '123213', '2023-11-08', '2023-11-07', '2023-11-10', 1, 'BATCH'),
-(44, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG8.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-01', '2023-11-15', '2023-11-14', 1, 'KG'),
-(45, 'REGASCL90', 'FLOW_SALES_ORDER.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-09', '2023-11-14', '2023-11-14', 1, 'VIAL'),
-(46, 'REGASCL90', 'FLOW_PEMBUATAN_PURCHASE_REQUEST_DAN_PURCHASE_ORDER.pdf', 'Paracetamol', 'Mikro Biologi BB', '123124', '123213', '2023-11-01', '2023-11-01', '2023-11-16', 0, 'KG'),
-(47, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG9.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-07', '2023-11-15', '2023-11-08', -1, 'G'),
-(48, 'REGASCL90', 'PENGISIAN_KAS_ATAU_TRANSFER_ANTAR_BANK.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-08', '2023-11-16', '2023-11-13', 1, 'VIAL'),
-(49, 'REGASCL90', 'FLOW_PENGIRIMAN_BARANG_SOLAS.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-08', '2023-11-16', '2023-11-13', 1, 'VIAL'),
-(50, 'REGASCL90', 'FLOW_SALES_ORDER1.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-08', '2023-11-15', '2023-11-07', 1, 'BOTOL'),
-(51, 'REGASCL90', 'FLOW_PEMBUATAN_VENDOR_BILL.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-08', '2023-11-08', '2023-11-15', 1, 'KG'),
-(52, 'REGASCL90', 'FLOW_SALES_ORDER2.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-07', '2023-11-10', '2023-11-07', 1, 'BATCH'),
-(53, 'REGASCL90', 'FLOW_PENGIRIMAN_BARANG_SOLAS1.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-07', '2023-11-09', '2023-11-09', 1, 'BATCH'),
-(54, 'REGASCL90', 'PENGISIAN_KAS_ATAU_TRANSFER_ANTAR_BANK1.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-06', '2023-11-14', '2023-11-15', 1, 'KG'),
-(55, 'REGASCL90', 'FLOW_PENGIRIMAN_BARANG_SOLAS2.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-14', '2023-11-14', '2023-11-14', 1, 'BATCH'),
-(56, 'REGASCL90', 'FLOW_PENGIRIMAN_BARANG_SOLAS3.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-11-07', '2023-11-20', '2023-11-08', 1, 'BATCH'),
-(57, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG10.pdf', 'Primunox', 'Mikro Biologi BB', '123124', '123213', '2023-10-31', '2023-11-04', '2023-11-15', 1, 'BOTOL'),
-(58, 'REGASCL90', 'FLOW_SALES_ORDER3.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-07', '2023-11-16', '2023-11-07', 1, 'BATCH'),
-(59, 'REGASCL90', 'PENGISIAN_KAS_ATAU_TRANSFER_ANTAR_BANK2.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-07', '2023-11-15', '2023-11-14', 1, 'KG'),
-(60, 'REGASCL90', 'FLOW_SALES_ORDER4.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-06', '2023-11-14', '2023-11-16', 1, 'G'),
-(61, 'REGASCL90', 'FLOW_PEMBUATAN_VENDOR_BILL1.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-10-30', '2023-11-08', '2023-11-09', 1, 'G'),
-(62, 'REGASCL90', 'FLOW_PENGIRIMAN_BARANG_SOLAS4.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-06', '2023-11-15', '2023-11-08', 1, 'BOX'),
-(63, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG11.pdf', 'Primunox', 'Mikro Biologi OJ', '123', '123213', '2023-11-15', '2023-11-08', '2023-11-08', 1, 'BATCH'),
-(64, 'REGASCL90', 'FLOW_SALES_ORDER5.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-01', '2023-11-16', '2023-11-09', 1, 'G'),
-(65, 'REGASCL90', 'FLOW_SALES_ORDER6.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-14', '2023-11-08', '2023-11-09', 1, 'BATCH'),
-(66, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG12.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-07', '2023-11-15', '2023-11-01', 1, 'BOTOL'),
-(67, 'REGASCL90', 'PENGISIAN_KAS_ATAU_TRANSFER_ANTAR_BANK3.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-14', '2023-11-15', '2023-11-08', 1, 'KG'),
-(68, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG13.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-15', '2023-11-14', '2023-11-14', 1, 'BATCH'),
-(69, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG14.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-10-31', '2023-11-16', '2023-11-07', 1, 'BOX'),
-(70, 'REGASCL90', 'FLOW_PENERIMAAN_BARANG15.pdf', 'Primunox', 'Obat Jadi', '123124', '123213', '2023-11-08', '2023-11-08', '2023-11-09', 1, 'BATCH'),
-(71, 'REGASCL90', 'FLOW_PEMBUATAN_VENDOR_BILL2.pdf', 'Primunox', 'Obat Jadi', '123124', '123213', '2023-11-08', '2023-11-17', '2023-11-09', 1, 'BATCH'),
-(72, 'REGASCL90', 'FLOW_PEMBUATAN_PURCHASE_REQUEST_DAN_PURCHASE_ORDER1.pdf', 'Primunox', 'Obat Jadi', '123124', '123213', '2023-11-07', '2023-11-16', '2023-11-10', 1, 'BATCH'),
-(73, 'REGASCL90', 'FLOW_PEMBUATAN_VENDOR_BILL3.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-15', '2023-11-17', '2023-11-15', 1, 'BATCH'),
-(74, 'REGASCL90', '3f0de0ee7ea26431a3e737b91a0101a8.pdf', 'Zetron', 'Mikro Biologi OJ', '123124', '123213', '2025-10-15', '2023-11-15', '2023-11-23', 1, 'KG'),
-(76, 'REGASCL90', 'e844d78bd08605e548ec8c5199e5a93d.pdf', 'Primunox', 'Obat Jadi', '123124', '123213', '2023-11-15', '2023-11-08', '2023-11-13', 1, 'BOTOL'),
-(79, 'REGASCL90', 'default.pdf', 'XXXXXXXXX', 'Mikro Biologi OJ', '123124', '123213', '2023-11-17', '2023-11-17', '2023-11-03', 1, 'KG'),
-(80, 'REGASCL90', 'default.pdf', 'Primunox', 'Obat Jadi', '123', '123213', '2023-11-08', '2023-11-23', '2023-11-09', 1, 'BOTOL'),
-(81, 'REGASCL90', 'default.pdf', 'Primunox', 'Mikro Biologi OJ', '123', '123213', '2023-11-22', '2023-11-21', '2023-11-17', 1, 'KG'),
-(83, 'REGASCL90', '4327c07a3c6546569df5ad015f22fb90.pdf', 'Primunox', 'Mikro Biologi OJ', '123124', '123213', '2023-11-16', '2023-11-15', '2023-11-08', 1, 'VIAL'),
-(84, 'REGASCL90', 'default.pdf', 'Primunox', 'Obat Jadi', '123124', '123213', '2023-11-29', '2023-11-15', '2023-11-09', 1, 'G'),
-(86, 'REGASCL90', 'ee3ab0bf15c8f223c11940d9e33265a6.pdf', 'qw', 'Obat Jadi', '123124', '123213', '2023-11-07', '2023-11-09', '2023-11-14', 1, 'VIAL'),
-(87, 'REGASCL90', 'c7e34bbcce9b1cee4a669d92477e9c44.pdf', 'Solpenox Dry Syrup 60 Ex.MYA', 'Obat Jadi', '123124', 'SOY 47', '2025-07-10', '2023-11-20', '2023-11-24', 1, 'BATCH'),
-(88, 'REGASCL90', 'aa01f9c2cd8abce50de32768d1227897.pdf', 'Arfen Forte 60', 'Obat Jadi', '123124', '123213', '2023-11-16', '2023-11-09', '2023-11-24', 1, 'BATCH'),
-(89, 'REGASCL90', '4e36daa0a90db6969a1922bce31f67e2.pdf', 'Carniten', 'BBA', '123124', '123213', '2023-11-15', '2023-10-31', '2023-11-07', 1, 'G'),
-(90, 'REGASCL90', 'ccf3e71959e13915f831a48987fbd820.pdf', 'Bital', 'Obat Jadi', '123124', 'THX 16', '2023-11-22', '2023-11-14', '2023-11-14', 1, 'BATCH');
+INSERT INTO `tb_pdf_book` (`id`, `kode_produk`, `file_lhu`, `nama_lhu`, `jenis_lhu`) VALUES
+(107, 'NRTCLD100', 'default.pdf', 'Arfen Forte 60', 'BBA'),
+(108, 'NRTCLD100', 'default.pdf', 'Arfen Forte 60', 'BBA'),
+(109, 'TL0009', 'default.pdf', 'Arfen Kaplet', 'BBA');
 
 -- --------------------------------------------------------
 
@@ -1516,7 +1457,8 @@ INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_a
 (3, 'Ryan', 'ryana6661007@gmail.com', 'default.jpg', '$2y$10$TdJeRU9/rK1wVNEuB1Zkoe3Wi4dpBgzWJMhXaEhD79DuAzirx0cMq', 3, 1, 1698718444),
 (4, 'SLS.MGR.QC', 'mgr@gmail.com', 'default.jpg', '$2y$10$9/6uaCYqpBWjTtXWszWn8egSaOuBi/OLWIfjqDNpuUm.giRXp3386', 1, 1, 1698718470),
 (5, 'SLS.QC.1', 'qc1@gmail.com', 'default.jpg', '$2y$10$GQCW.2kaITWfKA2KaHgkv.Q7UFnTM4KSDmskxnFYjlLf7z8/c97T6', 2, 1, 1700232093),
-(10, 'Aam Priatna', 'ryana666fdsfdsf1007@gmail.com', 'default.jpg', '$2y$10$tHmVJxe9xVsaWcLiMVzDJugZ8djGvbYUwQdKyrdh9crybfPCgdyQe', 1, 1, 1701141032);
+(10, 'Aam Priatna', 'ryana666fdsfdsf1007@gmail.com', 'default.jpg', '$2y$10$tHmVJxe9xVsaWcLiMVzDJugZ8djGvbYUwQdKyrdh9crybfPCgdyQe', 1, 1, 1701141032),
+(11, 'Valentio', 'valen@gmail.com', 'default.jpg', '$2y$10$xvI9UZe6syAZ26ipSm.SS.MQ4T8UBdQqoeEoeNOzOrmUREIZqHKmy', 2, 1, 1701400282);
 
 -- --------------------------------------------------------
 
@@ -1544,6 +1486,31 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (32, 1, 2),
 (34, 3, 4),
 (41, 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_data_lhu_history`
+--
+
+CREATE TABLE `user_data_lhu_history` (
+  `id` int(11) NOT NULL,
+  `nomor_analisa` varchar(256) NOT NULL,
+  `nomor_batch` varchar(256) NOT NULL,
+  `exp_date` date DEFAULT NULL,
+  `tgl_produksi` date DEFAULT NULL,
+  `tgl_sampling` date DEFAULT NULL,
+  `besaran_batch` int(12) NOT NULL,
+  `satuan` varchar(128) NOT NULL,
+  `id_tb_pdf_book` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data_lhu_history`
+--
+
+INSERT INTO `user_data_lhu_history` (`id`, `nomor_analisa`, `nomor_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`) VALUES
+(4, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 109);
 
 -- --------------------------------------------------------
 
@@ -1660,6 +1627,13 @@ ALTER TABLE `user_access_menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_data_lhu_history`
+--
+ALTER TABLE `user_data_lhu_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tb_pdf_book` (`id_tb_pdf_book`);
+
+--
 -- Indexes for table `user_menu`
 --
 ALTER TABLE `user_menu`
@@ -1703,19 +1677,25 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `user_data_lhu_history`
+--
+ALTER TABLE `user_data_lhu_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_menu`

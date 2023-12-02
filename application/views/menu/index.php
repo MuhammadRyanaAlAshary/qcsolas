@@ -30,14 +30,8 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Menu
-                                <button class="pull-right btn btn-default btn-condensed hide-column" data-toggle="tooltip" data-placement="bottom" title="Hide Column">
-                                    <i class="fa fa-eye-slash"></i>
-                                </button>
                             </th>
                             <th scope="col">Action
-                                <button class="pull-right btn btn-default btn-condensed hide-column" data-toggle="tooltip" data-placement="bottom" title="Hide Column">
-                                    <i class="fa fa-eye-slash"></i>
-                                </button>
                             </th>
                         </tr>
                     </thead>
