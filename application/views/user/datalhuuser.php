@@ -12,11 +12,6 @@
             <div class="table-responsive">
                 <?= $this->session->flashdata('message'); ?>
                 <table class="table table-hover table-striped table-hideable table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <?php if (empty($datalhu)) : ?>
-                        <div class="alert alert-danger" role="alert">
-                            Data LHU tidak ditemukan.
-                        </div>
-                    <?php endif; ?>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -60,7 +55,7 @@
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                    <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Add Data LHU</a>
                                     <!-- <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                     <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
                                 </td>
