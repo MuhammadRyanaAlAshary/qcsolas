@@ -56,6 +56,7 @@
                                 <td><?= $dl['satuan']; ?></td>
                                 <td>
                                     <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Add Data LHU</a>
+                                    <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> </a>
                                     <!-- <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                     <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
                                 </td>
@@ -63,11 +64,6 @@
                             <?php $i++ ?>
                         <?php endforeach; ?>
                     </tbody>
-                    <tfoot class="footer-restore-columns">
-                        <tr>
-                            <th colspan="12"><a class="restore-columns" href="#">Some columns hidden - click to show all</a></th>
-                        </tr>
-                    </tfoot>
                 </table>
                 <?= $this->pagination->create_links(); ?>
             </div>

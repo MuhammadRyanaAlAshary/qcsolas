@@ -30,11 +30,6 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <?php if (empty($datalhu)) : ?>
-                        <div class="alert alert-danger" role="alert">
-                            Data LHU tidak ditemukan.
-                        </div>
-                    <?php endif; ?>
                     <thead>
                         <tr>
                             <th scope="col">#</th>

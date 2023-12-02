@@ -46,11 +46,6 @@
                             <?php $i++ ?>
                         <?php endforeach; ?>
                     </tbody>
-                    <tfoot class="footer-restore-columns">
-                        <tr>
-                            <th colspan="3"><a class="restore-columns" href="#">Some columns hidden - click to show all</a></th>
-                        </tr>
-                    </tfoot>
                 </table>
 
             </div>
