@@ -30,7 +30,7 @@ class  Menu_model extends CI_Model
 
         $query = "SELECT tb_pdf_book.*, user_data_lhu_history.* FROM `user_data_lhu_history` 
         INNER JOIN tb_pdf_book ON user_data_lhu_history.id_tb_pdf_book=tb_pdf_book.id WHERE user_data_lhu_history.id_tb_pdf_book = $id";
-        $datalhu =$this->db->query($query)->num_rows();
+        return $this->db->query($query)->row_array();
     }
 
     public function hapusDatamenu($id)
