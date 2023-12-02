@@ -21,14 +21,9 @@
                     <label for="nama_lhu" class="col-sm-2 col-form-label">Nama LHU</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="nama_lhu" name="nama_lhu" disabled>
-                            <option value="">---Select Nama LHU---</option>
-                            <?php foreach ($produk as $p) : ?>
-                                <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>
-                                    <option value="<?= $p['produk_name']; ?>" selected><?= $p['produk_name']; ?></option>
-                                <?php else : ?>
-                                    <option value="<?= $p['produk_name']; ?>"><?= $p['produk_name']; ?></option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <?php if ($datalhu['nama_lhu'] == $datalhu['nama_lhu']) : ?>
+                                    <option value="<?= $datalhu['nama_lhu']; ?>" selected><?= $datalhu['nama_lhu']; ?></option>
+                            <?php endif; ?>
                         </select>
                     </div>
                 </div>
@@ -36,49 +31,44 @@
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="jenis_lhu" name="jenis_lhu" disabled>
-                            <option value="">---Select Jenis LHU---</option>
-                            <?php foreach ($jenislhu as $jl) : ?>
-                                <?php if ($jl['jenis_lhu'] == $datalhu['jenis_lhu']) : ?>
-                                    <option value="<?= $jl['jenis_lhu']; ?>" selected><?= $jl['jenis_lhu']; ?></option>
-                                <?php else : ?>
-                                    <option value="<?= $jl['jenis_lhu']; ?>"><?= $jl['jenis_lhu']; ?></option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <?php if ($datalhu['jenis_lhu'] == $datalhu['jenis_lhu']) : ?>
+                                <option value="<?= $datalhu['jenis_lhu']; ?>" selected><?= $datalhu['jenis_lhu']; ?></option>
+                            <?php endif; ?>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nomer_analsia" class="col-sm-2 col-form-label">Nomer Analisa</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nomer_analisa" name="nomer_analisa">
+                        <input type="text" class="form-control" id="nomer_analisa" name="nomer_analisa" required>
                         <?= form_error('nomer_analisa', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nomer_batch" class="col-sm-2 col-form-label">Nomer Batch</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nomer_batch" name="nomer_batch">
+                        <input type="text" class="form-control" id="nomer_batch" name="nomer_batch" required>
                         <?= form_error('nomer_batch', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="exp_date" class="col-sm-2 col-form-label">Exp Date</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="exp_date" name="exp_date">
+                        <input type="date" class="form-control" id="exp_date" name="exp_date" required>
                         <?= form_error('exp_date', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tgl_produksi" class="col-sm-2 col-form-label">Tgl Produksi</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="tgl_produksi" name="tgl_produksi">
+                        <input type="date" class="form-control" id="tgl_produksi" name="tgl_produksi" required>
                         <?= form_error('tgl_produksi', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="tgl_sampling" class="col-sm-2 col-form-label">Tgl Sampling</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="tgl_sampling" name="tgl_sampling">
+                        <input type="date" class="form-control" id="tgl_sampling" name="tgl_sampling" required>
                         <?= form_error('tgl_sampling', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
@@ -86,7 +76,7 @@
                     <label for="besaran_batch" class="col-sm-2 col-form-label">Besaran Batch</label>
                     <div class="col-sm-5">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="besaran_batch" name="besaran_batch">
+                            <input type="number" class="form-control" id="besaran_batch" name="besaran_batch" required>
                             <select class="form-control" id="satuan" name="satuan">
                                 <option value="">---Satuan---</option>
                                 <?php foreach ($satuan as $s) : ?>
