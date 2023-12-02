@@ -93,7 +93,7 @@ class  User extends CI_Controller
         } else {
             $this->menu->tambahlhu();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
-            redirect('admin/datalhu/');
+            redirect('user/datalhu/');
         }
     }
 

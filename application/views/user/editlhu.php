@@ -4,11 +4,11 @@
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('admin/datalhu'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Edit Data LHU</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('user/datalhu'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Edit Data LHU</h6>
         </div>
         <div class="card-body col-sm-10">
             <div class="table-responsive">
-                <?= form_open_multipart('admin/editlhu/' . $datalhu['id']); ?>
+                <?= form_open_multipart('user/editlhu/' . $datalhu['id']); ?>
                 <input type="hidden" id="id" name="id" value="<?= $datalhu['id']; ?>">
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Kode Prodak</label>
