@@ -29,7 +29,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover table-striped table-hideable table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-hover table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <?php if (empty($datalhu)) : ?>
                         <div class="alert alert-danger" role="alert">
                             Data LHU tidak ditemukan.
@@ -39,24 +39,12 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">K.Prof
-                                <button class="pull-right btn btn-default btn-condensed hide-column" data-toggle="tooltip" data-placement="bottom" title="Hide Column">
-                                    <i class="fa fa-eye-slash"></i>
-                                </button>
                             </th>
                             <th scope="col">Nama Lhu
-                                <button class="pull-right btn btn-default btn-condensed hide-column" data-toggle="tooltip" data-placement="bottom" title="Hide Column">
-                                    <i class="fa fa-eye-slash"></i>
-                                </button>
                             </th>
                             <th scope="col">Jenis Lhu
-                                <button class="pull-right btn btn-default btn-condensed hide-column" data-toggle="tooltip" data-placement="bottom" title="Hide Column">
-                                    <i class="fa fa-eye-slash"></i>
-                                </button>
                             </th>
                             <th scope="col">Action
-                                <button class="pull-right btn btn-default btn-condensed hide-column" data-toggle="tooltip" data-placement="bottom" title="Hide Column">
-                                    <i class="fa fa-eye-slash"></i>
-                                </button>
                             </th>
                         </tr>
                     </thead>
@@ -78,11 +66,6 @@
                             <?php $i++ ?>
                         <?php endforeach; ?>
                     </tbody>
-                    <tfoot class="footer-restore-columns">
-                        <tr>
-                            <th colspan="11"><a class="restore-columns" href="#">Some columns hidden - click to show all</a></th>
-                        </tr>
-                    </tfoot>
                 </table>
                 <?= $this->pagination->create_links(); ?>
             </div>
