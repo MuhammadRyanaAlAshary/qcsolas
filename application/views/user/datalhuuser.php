@@ -15,6 +15,10 @@
     <?php endif; ?>
 
     <i class="icofont-angle-double-left"></i>
+    <div class="row mt-3">
+        <div class="col-md-6"><a href="<?= base_url('user/editlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
+    </div>
+
     <!--  Divider -->
     <hr class="sidebar-divider">
 
@@ -29,7 +33,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">K.Prof
+                            <th scope="col">K.Prod
                             </th>
                             <th scope="col">Nama Lhu
                             </th>
@@ -48,6 +52,10 @@
                             <th scope="col">Qty
                             </th>
                             <th scope="col">Sat
+                            </th>
+                            <th scope="col">Print Date
+                            </th>
+                            <th scope="col">Print By
                             </th>
                             <th scope="col">Action
                             </th>
@@ -68,15 +76,13 @@
                                 <td><?= $dl['tgl_sampling']; ?></td>
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
+                                <td></td>
+                                <td></td>
                                 <td>
                                     <?php if($dl['nomer_analisa'] != NULL) : ?>
                                         <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                         <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-
-                                        <a href="<?= base_url('Laporan/index/') . $dl['id']; ?>/<?= $dl['file_lhu']; ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
-                                    <?php else : ?>
-                                        <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i> Add Data LHU</a>
-                                    <?php endif; ?>
+                                    <?php endif; ?> 
                                 </td>
                             </tr>
                             <?php $i++ ?>

@@ -33,7 +33,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">K.Prof
+                            <th scope="col">K.Prod
                             </th>
                             <th scope="col">Nama Lhu
                             </th>

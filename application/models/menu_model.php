@@ -8,6 +8,7 @@ class  Menu_model extends CI_Model
         $this->db->select('*');
         $this->db->from('user_data_lhu_history');
         $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
+        $this->db->where('is_active', 1);
         return $this->db->get()->result_array();
     }
 
@@ -15,8 +16,7 @@ class  Menu_model extends CI_Model
     {
         $query = "SELECT `user_sub_menu`.*, `user_menu`.`menu` 
             FROM `user_sub_menu` JOIN `user_menu` 
-            ON `user_sub_menu`.`menu_id` = `user_menu`.`id`";
-            
+            ON `user_sub_menu`.`menu_id` = `user_menu`.`id`";            
         return $this->db->query($query)->result_array();
     }
 
@@ -26,15 +26,6 @@ class  Menu_model extends CI_Model
         INNER JOIN tb_pdf_book ON user_data_lhu_history.id_tb_pdf_book=tb_pdf_book.id WHERE user_data_lhu_history.id_tb_pdf_book = $id";
         return $this->db->query($query)->row_array();
     }
-
-    public function getlhuIdHistory()
-    {
-        $this->db->select('*');
-        $this->db->from('user_data_lhu_history');
-        $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
-        $this->db->where('is_active', 1);
-        return $this->db->get()->result_array();        
-    }    
 
     public function hapusDatamenu($id)
     {
