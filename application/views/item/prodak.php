@@ -62,11 +62,6 @@
                             <?php $i++ ?>
                         <?php endforeach; ?>
                     </tbody>
-                    <tfoot class="footer-restore-columns">
-                        <tr>
-                            <th colspan="5"><a class="restore-columns" href="#">Some columns hidden - click to show all</a></th>
-                        </tr>
-                    </tfoot>
                 </table>
                 <?= $this->pagination->create_links(); ?>
             </div>
