@@ -44,7 +44,7 @@
                             <th scope="col">Tgl.Prod
                             </th>
                             <th scope="col">Tgl.Sampling
-                            </th>
+                            </th> 
                             <th scope="col">Qty
                             </th>
                             <th scope="col">Sat
