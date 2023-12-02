@@ -47,8 +47,8 @@
                                 <td><?= $dl['kode_produk']; ?></td>
                                 <td><?= $dl['nama_lhu']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
-                                <td><?= $dl['nomor_analisa']; ?></td>
-                                <td><?= $dl['nomor_batch']; ?></td>
+                                <td><?= $dl['nomer_analisa']; ?></td>
+                                <td><?= $dl['nomer_batch']; ?></td>
                                 <td><?= $dl['exp_date']; ?></td>
                                 <td><?= $dl['tgl_produksi']; ?></td>
                                 <td><?= $dl['tgl_sampling']; ?></td>
