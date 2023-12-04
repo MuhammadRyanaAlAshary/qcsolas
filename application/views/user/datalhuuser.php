@@ -79,8 +79,19 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                    <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php if ($dl['active_print_cover'] == 1) : ?>
+                                        <!-- <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a> -->
+                                        <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php elseif($dl['active_print_lhu'] == 1) : ?>
+                                        <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                        <!-- <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
+                                    <?php elseif($dl['active_print_lhu'] == 0 && $dl['active_print_cover'] == 0) : ?>
+                                        <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                        <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php else: ?>
+                                        <!-- <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                        <a href="<?= base_url('Laporan/printLhu/'). $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++ ?>
