@@ -8,7 +8,6 @@ class  Menu_model extends CI_Model
         $this->db->select('*');
         $this->db->from('user_data_lhu_history');
         $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
-        $this->db->where('is_active', 1);
         return $this->db->get()->result_array();
     }
 
