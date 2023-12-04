@@ -16,7 +16,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
     </div>
 
     <!--  Divider -->
@@ -48,7 +48,7 @@
                             <th scope="col">Tgl.Prod
                             </th>
                             <th scope="col">Tgl.Sampling
-                            </th> 
+                            </th>
                             <th scope="col">Qty
                             </th>
                             <th scope="col">Sat

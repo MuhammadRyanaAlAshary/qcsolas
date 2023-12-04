@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('user/datalhuuser'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Tambah Data LHU</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('user/datalhuuser'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Select Data yang akan di Print</h6>
         </div>
         <div class="card-body col-sm-10">
             <div class="table-responsive">
@@ -15,7 +15,7 @@
                         <select class="form-control" id="kode_produk" name="id_tb_pdf_book" required>
                             <option value="">[Kode produk] - [Nama Produk] - [Jenis lhu]</option>
                             <?php foreach ($dataLhu as $data) : ?>
-                                <option value="<?= $data['id']; ?>">[ <?= $data['kode_produk']; ?> ] - <?= $data['produk_name']; ?> -  <?= $data['jenis_lhu']; ?></option>
+                                <option value="<?= $data['id']; ?>">[ <?= $data['kode_produk']; ?> ] - <?= $data['produk_name']; ?> - <?= $data['jenis_lhu']; ?></option>
                             <?php endforeach; ?>
                         </select>
                         <?= form_error('kode_produk', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
-                        <button type="submit" name="editlhu" class="btn btn-primary">Tambah</button>
+                        <button type="submit" name="editlhu" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Tambah</button>
                     </div>
                 </div>
                 </form>
