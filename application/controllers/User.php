@@ -60,7 +60,7 @@ class  User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['datalhu'] = $this->menu->getlhu();
+        $data['datalhu'] = $this->menu->getlhuUser();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -70,13 +70,18 @@ class  User extends CI_Controller
         $this->load->view('templates/query1');
     }
 
-    public function editlhu($id = 0)
+    public function tambahlhu()
     {
         $data['title'] = 'Data LHU';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['datalhu'] = $this->menu->getlhuId($id);
+        $query = "SELECT tb_pdf_book.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu
+        FROM tb_pdf_book
+        JOIN produk
+        ON tb_pdf_book.id_produk = produk.id";
+
+        $data['dataLhu'] = $this->db->query($query)->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
 
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
@@ -91,18 +96,13 @@ class  User extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('user/editlhu', $data);
+            $this->load->view('user/tambahdatalhu', $data);
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->editlhuUser($id);
+            $this->menu->tambahLhuUser();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
             redirect('user/datalhuuser/');
         }
-    }
-
-    public function printlhu($id = 0) 
-    {
-        
     }
 }

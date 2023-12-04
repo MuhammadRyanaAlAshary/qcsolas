@@ -16,7 +16,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/editlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
     </div>
 
     <!--  Divider -->
@@ -35,7 +35,7 @@
                             <th scope="col">#</th>
                             <th scope="col">K.Prod
                             </th>
-                            <th scope="col">Nama Lhu
+                            <th scope="col">Nama Produk
                             </th>
                             <th scope="col">Jenis Lhu
                             </th>
@@ -67,7 +67,7 @@
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $dl['kode_produk']; ?></td>
-                                <td><?= $dl['nama_lhu']; ?></td>
+                                <td><?= $dl['produk_name']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td><?= $dl['nomer_analisa']; ?></td>
                                 <td><?= $dl['nomer_batch']; ?></td>
@@ -79,6 +79,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>
+<<<<<<< HEAD
                                     <?php if ($dl['nomer_analisa'] != NULL) : ?>
                                         <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                         <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
@@ -89,6 +90,10 @@
 =======
                                     <?php endif; ?> 
 >>>>>>> b794432f745fdf4dedac3a04c87ddddadd3baaf4
+=======
+                                    <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                    <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+>>>>>>> 0e1dc5a66843706a4ef6ac97088b091842d0cfc6
                                 </td>
                             </tr>
                             <?php $i++ ?>

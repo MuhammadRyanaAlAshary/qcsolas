@@ -33,9 +33,9 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">K.Prod
+                            <th scope="col">Kode Produk
                             </th>
-                            <th scope="col">Nama Lhu
+                            <th scope="col">Nama Produk
                             </th>
                             <th scope="col">Jenis Lhu
                             </th>
@@ -49,7 +49,7 @@
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $dl['kode_produk']; ?></td>
-                                <td><?= $dl['nama_lhu']; ?></td>
+                                <td><?= $dl['produk_name']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td>
                                     <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
