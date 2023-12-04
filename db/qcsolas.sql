@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 10:29 AM
+-- Generation Time: Dec 04, 2023 at 05:22 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1417,24 +1417,22 @@ INSERT INTO `satuan` (`id`, `satuan`) VALUES
 
 CREATE TABLE `tb_pdf_book` (
   `id` int(11) NOT NULL,
-  `kode_produk` varchar(256) NOT NULL,
-  `file_lhu` varchar(256) NOT NULL,
-  `nama_lhu` varchar(256) NOT NULL,
-  `jenis_lhu` varchar(256) NOT NULL
+  `id_produk` int(11) NOT NULL,
+  `jenis_lhu` varchar(100) NOT NULL,
+  `file_lhu` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_pdf_book`
 --
 
-INSERT INTO `tb_pdf_book` (`id`, `kode_produk`, `file_lhu`, `nama_lhu`, `jenis_lhu`) VALUES
-(107, 'NRTCLD100', 'default.pdf', 'Arfen Forte 60', 'BBA'),
-(108, 'NRTCLD100', 'default.pdf', 'Arfen Forte 60', 'BBA'),
-(115, 'TL0009', 'default.pdf', 'Arfen Kaplet', 'BBA'),
-(116, 'NRTCLD100', 'default.pdf', 'Cetrol Kaplet', 'Mikro Biologi OJ'),
-(117, 'CBA', 'default.pdf', 'Cefadroxil Kps', 'Mikro Biologi OJ'),
-(118, 'CBA', '9a85455dec0fd031bd0c3076e1fb9ca1.pdf', 'Arfen Suspensi 60', 'BBT'),
-(119, 'NRTCLD100', 'c0fbabc3f6cb006b1fd5aed021d02d1f.pdf', 'Arfen Suspensi 60', 'Mikro Biologi BB');
+INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu`) VALUES
+(124, 0, 'BBT', '7b1cb0bee3d32512c0ef5b2db5345ed9.pdf'),
+(125, 8, 'BBT', 'default.pdf'),
+(126, 34, 'BBA', 'cb43528c2eb816613fb5e56f882988fd.pdf'),
+(127, 56, 'Mikro Biologi BB', 'default.pdf'),
+(128, 142, 'Mikro Biologi BB', 'c52ff1bf88db7fda3f41f606675debab.pdf'),
+(129, 6, 'Mikro Biologi BB', 'default.pdf');
 
 -- --------------------------------------------------------
 
@@ -1519,17 +1517,11 @@ CREATE TABLE `user_data_lhu_history` (
 --
 
 INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `is_active`, `active_print_cover`, `active_print_lhu`, `print_date`, `users`) VALUES
-(4, 'ABC', 'ABC', '2023-12-06', '2023-12-04', '2023-12-26', 1, 'BATCH', 109, NULL, NULL, NULL, NULL, NULL),
-(5, 'MNB1982', 'MNA123', '2023-12-07', '2023-12-14', '2023-12-22', 10, 'KG', 110, NULL, NULL, NULL, NULL, NULL),
-(6, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 111, NULL, NULL, NULL, NULL, NULL),
-(7, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 112, NULL, NULL, NULL, NULL, NULL),
-(8, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 113, NULL, NULL, NULL, NULL, NULL),
-(9, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 114, NULL, NULL, NULL, NULL, NULL),
-(10, 'MNB1982', 'MNA123', '2023-12-06', '2023-12-07', '2023-12-22', 2, 'BOTOL', 115, NULL, NULL, NULL, NULL, NULL),
-(11, 'ABC123', 'BCA213', '2023-12-27', '2023-12-07', '2023-12-14', 2, 'BOTOL', 116, NULL, NULL, NULL, NULL, NULL),
-(12, 'AAA', 'AAA', '2023-12-21', '2023-12-27', '2023-12-28', 10, 'BOX', 117, NULL, NULL, NULL, NULL, NULL),
-(13, 'BBT', 'BBT', '2023-12-14', '2023-12-16', '2023-12-17', 2, 'VIAL', 118, NULL, NULL, NULL, NULL, NULL),
-(14, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 119, NULL, NULL, NULL, NULL, NULL);
+(16, 'ABC123', 'ABC123', '2023-12-14', '2023-12-13', '2023-12-21', 4, 'KG', 0, 1, NULL, NULL, NULL, NULL),
+(17, 'ABC123', '123BCA', '2023-12-06', '2023-12-09', '2023-12-20', 5, 'KG', 0, 1, NULL, NULL, NULL, NULL),
+(18, 'ABC', 'MNAJSN', '2023-12-15', '2023-12-15', '2023-12-20', 5, 'KG', 126, 1, NULL, NULL, NULL, NULL),
+(19, 'ABC123', 'ABC123', '2023-12-13', '2023-12-15', '2023-12-30', 5, 'KG', 127, 1, NULL, NULL, NULL, NULL),
+(20, 'AAA', 'AAA', '2023-12-13', '2023-12-16', '2023-12-19', 10, 'KG', 127, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1631,7 +1623,8 @@ ALTER TABLE `satuan`
 -- Indexes for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kode_produk` (`id_produk`) USING BTREE;
 
 --
 -- Indexes for table `user`
@@ -1697,7 +1690,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1715,7 +1708,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
