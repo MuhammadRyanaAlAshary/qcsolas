@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="kode_produk" name="kode_produk" required>
+                        <select class="selectpicker form-control" data-live-search="true" id="kode_produk" name="kode_produk" required>
                             <option value="">--- Select Kode Produk - Nama LHU ---</option>
                             <?php foreach ($produk as $data) : ?>
                                 <option value="<?= $data['id']; ?>">[ <?= $data['kode_produk']; ?> ] - <?= $data['produk_name']; ?></option>
