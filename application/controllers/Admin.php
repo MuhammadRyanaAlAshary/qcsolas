@@ -66,7 +66,6 @@ class  admin extends CI_Controller
         $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
 
         $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
-        $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required');
         $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -77,12 +76,11 @@ class  admin extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->tambahlhu();
+            $this->menu->tambahLhu();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
             redirect('admin/datalhu/');
         }
     }
-
 
     public function editlhu($id = 0)
     {

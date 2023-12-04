@@ -13,11 +13,10 @@
             </div>
         </div> -->
     <?php endif; ?>
-    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newobatjadiModal">Add New Obat Jadi</a>
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newobatjadiModal">Add New Obat Jadi</a>
     <!-- Page Heading -->
     <!--  Divider -->
     <hr class="sidebar-divider">
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-capsules" aria-hidden="true"></i> <?= $title; ?></h6>
@@ -39,7 +38,7 @@
                             </th>
                             <th scope="col">Sales Type
                             </th>
-                            <th scope="col">Obat Jadi
+                            <th scope="col">Nama Produk
                             </th>
                             <th scope="col">Action
                             </th>

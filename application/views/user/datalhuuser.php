@@ -16,7 +16,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/editlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
     </div>
 
     <!--  Divider -->
@@ -35,7 +35,7 @@
                             <th scope="col">#</th>
                             <th scope="col">K.Prod
                             </th>
-                            <th scope="col">Nama Lhu
+                            <th scope="col">Nama Produk
                             </th>
                             <th scope="col">Jenis Lhu
                             </th>
@@ -48,7 +48,7 @@
                             <th scope="col">Tgl.Prod
                             </th>
                             <th scope="col">Tgl.Sampling
-                            </th> 
+                            </th>
                             <th scope="col">Qty
                             </th>
                             <th scope="col">Sat
@@ -67,7 +67,7 @@
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $dl['kode_produk']; ?></td>
-                                <td><?= $dl['nama_lhu']; ?></td>
+                                <td><?= $dl['produk_name']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td><?= $dl['nomer_analisa']; ?></td>
                                 <td><?= $dl['nomer_batch']; ?></td>
@@ -79,10 +79,19 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <?php if($dl['nomer_analisa'] != NULL) : ?>
-                                        <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                        <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-                                    <?php endif; ?> 
+                                    <?php if ($dl['active_print_cover'] == 1) : ?>
+                                        <!-- <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a> -->
+                                        <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php elseif($dl['active_print_lhu'] == 1) : ?>
+                                        <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                        <!-- <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
+                                    <?php elseif($dl['active_print_lhu'] == 0 && $dl['active_print_cover'] == 0) : ?>
+                                        <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                        <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php else: ?>
+                                        <!-- <a href="<?= base_url('Laporan/index/') . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                        <a href="<?= base_url('Laporan/printLhu/'). $dl['file_lhu']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a> -->
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++ ?>
