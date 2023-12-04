@@ -79,21 +79,8 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-<<<<<<< HEAD
-                                    <?php if ($dl['nomer_analisa'] != NULL) : ?>
-                                        <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                        <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-<<<<<<< HEAD
-                                    <?php else : ?>
-                                        <a href="<?= base_url('user/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Add Data LHU</a>
-                                    <?php endif; ?>
-=======
-                                    <?php endif; ?> 
->>>>>>> b794432f745fdf4dedac3a04c87ddddadd3baaf4
-=======
                                     <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                     <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
->>>>>>> 0e1dc5a66843706a4ef6ac97088b091842d0cfc6
                                 </td>
                             </tr>
                             <?php $i++ ?>
