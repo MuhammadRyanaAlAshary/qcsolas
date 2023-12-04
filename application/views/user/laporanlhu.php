@@ -38,7 +38,7 @@
                         </tr>
                         <tr>
                             <td style="width: 231.05pt;padding: 0cm 5.4pt;vertical-align: top;">
-                                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:15px;font-family:"Calibri",sans-serif;'>NAMA SAMPLE : <?= $dl['nama_lhu']; ?></p>
+                                <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:15px;font-family:"Calibri",sans-serif;'>NAMA SAMPLE : <?= $dl['produk_name'];?> </p>
                             </td>
                         </tr>
                         <tr>
