@@ -231,7 +231,6 @@
                     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:115%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
                 </td>
             </tr>
-
             <?php $i++; ?>
         <?php endforeach; ?>
         </tbody>
