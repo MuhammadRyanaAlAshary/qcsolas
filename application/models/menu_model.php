@@ -213,7 +213,7 @@ class  Menu_model extends CI_Model
                     JOIN produk 
                     ON produk.id = user_data_lhu_history.id_tb_pdf_book 
                     WHERE tb_pdf_book.file_lhu = '$id' ";
-
+                    
         $data = [
             'active_print_lhu' => 1
         ];
