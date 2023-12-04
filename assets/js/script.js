@@ -29,7 +29,7 @@ $('.tombol-hapus').on('click', function (e) {
     })
 });
 
-// Tombol print user lhu
+// Tombol print user COVER
 $('.tombol-print').on('click', function (e) {
 
     e.preventDefault();
