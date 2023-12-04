@@ -83,10 +83,10 @@ class  Menu_model extends CI_Model
 
         if ($filelhu = '') {
         } else {
-
             $config['allowed_types'] = 'docx|xlsx|pdf';
             $config['max_size']      = '4000';
             $config['upload_path'] = './assets/data/';
+            $config['remove_spaces'] = TRUE;
             $config['encrypt_name'] = TRUE;
             // $new_name = time() . $_FILES["userfiles"]['name'];
             // $config['file_name'] = $new_name;
@@ -106,7 +106,7 @@ class  Menu_model extends CI_Model
                 $this->session->set_flashdata('flash', 'Ditambahkan & file gagal di upload,tipe file salah!.');
                 redirect('admin/datalhu/');
             } else {
-                $filelhu = $this->upload->data('file_name', true);
+                $filelhu = $this->upload->data('file_name');
 
                 $data = [
                     'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
@@ -187,6 +187,38 @@ class  Menu_model extends CI_Model
         ];
         
         $this->db->insert('user_data_lhu_history', $data);
+    }
+
+    public function printCover($id){
+        $query = "SELECT * 
+                    FROM tb_pdf_book
+                    JOIN user_data_lhu_history
+                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                    JOIN produk 
+                    ON produk.id = user_data_lhu_history.id_tb_pdf_book 
+                    WHERE tb_pdf_book.file_lhu = '$id' ";
+
+        $data = [
+            'active_print_cover' => 1
+        ];
+
+        $this->db->update('user_data_lhu_history', $data);
+    }
+
+    public function printLhu($id) {
+        $query = "SELECT * 
+                    FROM tb_pdf_book
+                    JOIN user_data_lhu_history
+                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                    JOIN produk 
+                    ON produk.id = user_data_lhu_history.id_tb_pdf_book 
+                    WHERE tb_pdf_book.file_lhu = '$id' ";
+
+        $data = [
+            'active_print_lhu' => 1
+        ];
+
+        $this->db->update('user_data_lhu_history', $data);
     }
 
     public function hapuslhubyid($id)
