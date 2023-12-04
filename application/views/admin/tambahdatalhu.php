@@ -12,8 +12,8 @@
                 <div class="form-group row">
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="jenis_lhu" name="jenis_lhu">
-                            <option value="">---Select Jenis LHU---</option>
+                        <select class="form-control" id="jenis_lhu" name="jenis_lhu" required>
+                            <option value="">--- Select Jenis LHU ---</option>
                             <?php foreach ($jenislhu as $jl) : ?>
                                 <option value="<?= $jl['jenis_lhu']; ?>"><?= $jl['jenis_lhu']; ?></option>
                             <?php endforeach; ?>
@@ -21,12 +21,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="nama_lhu" class="col-sm-2 col-form-label">Nama LHU</label>
+                    <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="nama_lhu" name="nama_lhu">
-                            <option value="">---Select Nama LHU---</option>
-                            <?php foreach ($produk as $p) : ?>
-                                <option value="<?= $p['produk_name']; ?>"><?= $p['produk_name']; ?></option>
+                        <select class="form-control" id="kode_produk" name="kode_produk" required>
+                            <option value="">--- Select Kode Produk - Nama LHU ---</option>
+                            <?php foreach ($produk as $data) : ?>
+                                <option value="<?= $data['id']; ?>">[ <?= $data['kode_produk']; ?> ] - <?= $data['produk_name']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -38,13 +38,6 @@
                             <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu">
                             <label class="custom-file-label" for="file_lhu">Choose file</label>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="kode_produk" class="col-sm-2 col-form-label">Kode produk</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kode_produk" name="kode_produk">
-                        <?= form_error('kode_produk', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

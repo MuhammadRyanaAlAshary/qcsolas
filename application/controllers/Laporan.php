@@ -20,9 +20,10 @@ class Laporan extends CI_Controller
         $this->db->select('*');
         $this->db->from('user_data_lhu_history');
         $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
-        $this->db->where('id_tb_pdf_book', $id);
-        $data['datalhu'] = $this->db->get()->result_array();
+        $this->db->join('produk', 'produk.id = tb_pdf_book.id_produk');
+        $data['datalhu'] = $this->db->where('id', $id)->result_array();
 
+        // $this->db->get_where('tb_pdf_book', ['id' => $id])->result_array($id);
         $this->mypdf->generate('user/laporanlhu', $data, 'laporan-lhu', 'A4', 'potret');
     }
 }
