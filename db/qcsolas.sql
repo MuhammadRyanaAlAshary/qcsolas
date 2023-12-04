@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2023 at 03:31 PM
+-- Generation Time: Dec 02, 2023 at 10:29 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1430,7 +1430,11 @@ CREATE TABLE `tb_pdf_book` (
 INSERT INTO `tb_pdf_book` (`id`, `kode_produk`, `file_lhu`, `nama_lhu`, `jenis_lhu`) VALUES
 (107, 'NRTCLD100', 'default.pdf', 'Arfen Forte 60', 'BBA'),
 (108, 'NRTCLD100', 'default.pdf', 'Arfen Forte 60', 'BBA'),
-(109, 'TL0009', 'default.pdf', 'Arfen Kaplet', 'BBA');
+(115, 'TL0009', 'default.pdf', 'Arfen Kaplet', 'BBA'),
+(116, 'NRTCLD100', 'default.pdf', 'Cetrol Kaplet', 'Mikro Biologi OJ'),
+(117, 'CBA', 'default.pdf', 'Cefadroxil Kps', 'Mikro Biologi OJ'),
+(118, 'CBA', '9a85455dec0fd031bd0c3076e1fb9ca1.pdf', 'Arfen Suspensi 60', 'BBT'),
+(119, 'NRTCLD100', 'c0fbabc3f6cb006b1fd5aed021d02d1f.pdf', 'Arfen Suspensi 60', 'Mikro Biologi BB');
 
 -- --------------------------------------------------------
 
@@ -1495,22 +1499,37 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 
 CREATE TABLE `user_data_lhu_history` (
   `id` int(11) NOT NULL,
-  `nomor_analisa` varchar(256) NOT NULL,
-  `nomor_batch` varchar(256) NOT NULL,
+  `nomer_analisa` varchar(256) NOT NULL,
+  `nomer_batch` varchar(256) NOT NULL,
   `exp_date` date DEFAULT NULL,
   `tgl_produksi` date DEFAULT NULL,
   `tgl_sampling` date DEFAULT NULL,
   `besaran_batch` int(12) NOT NULL,
   `satuan` varchar(128) NOT NULL,
-  `id_tb_pdf_book` int(11) NOT NULL
+  `id_tb_pdf_book` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `active_print_cover` tinyint(1) DEFAULT NULL,
+  `active_print_lhu` tinyint(1) DEFAULT NULL,
+  `print_date` date DEFAULT NULL,
+  `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_data_lhu_history`
 --
 
-INSERT INTO `user_data_lhu_history` (`id`, `nomor_analisa`, `nomor_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`) VALUES
-(4, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 109);
+INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `is_active`, `active_print_cover`, `active_print_lhu`, `print_date`, `users`) VALUES
+(4, 'ABC', 'ABC', '2023-12-06', '2023-12-04', '2023-12-26', 1, 'BATCH', 109, NULL, NULL, NULL, NULL, NULL),
+(5, 'MNB1982', 'MNA123', '2023-12-07', '2023-12-14', '2023-12-22', 10, 'KG', 110, NULL, NULL, NULL, NULL, NULL),
+(6, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 111, NULL, NULL, NULL, NULL, NULL),
+(7, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 112, NULL, NULL, NULL, NULL, NULL),
+(8, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 113, NULL, NULL, NULL, NULL, NULL),
+(9, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 114, NULL, NULL, NULL, NULL, NULL),
+(10, 'MNB1982', 'MNA123', '2023-12-06', '2023-12-07', '2023-12-22', 2, 'BOTOL', 115, NULL, NULL, NULL, NULL, NULL),
+(11, 'ABC123', 'BCA213', '2023-12-27', '2023-12-07', '2023-12-14', 2, 'BOTOL', 116, NULL, NULL, NULL, NULL, NULL),
+(12, 'AAA', 'AAA', '2023-12-21', '2023-12-27', '2023-12-28', 10, 'BOX', 117, NULL, NULL, NULL, NULL, NULL),
+(13, 'BBT', 'BBT', '2023-12-14', '2023-12-16', '2023-12-17', 2, 'VIAL', 118, NULL, NULL, NULL, NULL, NULL),
+(14, '', '', '0000-00-00', '0000-00-00', '0000-00-00', 0, '', 119, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1631,7 +1650,8 @@ ALTER TABLE `user_access_menu`
 --
 ALTER TABLE `user_data_lhu_history`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_tb_pdf_book` (`id_tb_pdf_book`);
+  ADD KEY `id_tb_pdf_book` (`id_tb_pdf_book`),
+  ADD KEY `users` (`users`);
 
 --
 -- Indexes for table `user_menu`
@@ -1677,7 +1697,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1695,7 +1715,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -1713,7 +1733,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
