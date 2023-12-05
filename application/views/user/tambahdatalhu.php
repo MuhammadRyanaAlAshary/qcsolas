@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-sm-1,5">
                         <div class="input-group mb-3">
-                            <select class="selectpicker form-control" data-live-search="true" id="satuan" name="satuan">
+                            <select class="selectpicker form-control" data-live-search="true" id="satuan" name="satuan" required>
                                 <option value="">Satuan</option>
                                 <?php foreach ($satuan as $s) : ?>
                                     <option value="<?= $s['satuan']; ?>"><?= $s['satuan']; ?></option>
