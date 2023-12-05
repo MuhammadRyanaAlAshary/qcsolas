@@ -32,10 +32,11 @@ class  Menu_model extends CI_Model
 
     public function getlhuId($id)
     {
-        $query = "SELECT * 
-        FROM `tb_pdf_book`
-        WHERE id = $id";
-        return $this->db->query($query)->row_array();
+        $this->db->select('*');
+        $this->db->from('tb_pdf_book');
+        $this->db->join('produk', 'produk.id = tb_pdf_book.id_produk');
+        $this->db->where('tb_pdf_book.id', $id);
+        return $this->db->get()->row_array();
     }
 
     public function hapusDatamenu($id)

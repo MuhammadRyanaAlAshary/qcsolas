@@ -34,7 +34,7 @@
                                 <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>
                                     <option value="<?= $p['produk_name']; ?>" selected><?= $p['produk_name']; ?></option>
                                 <?php else : ?>
-                                    <option value="<?= $p['produk_name']; ?>"><?= $p['produk_name']; ?></option>
+                                    <option value="<?= $p['id']; ?>">[ <?= $p['kode_produk']; ?> ] - <?= $data['produk_name']; ?></option>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
