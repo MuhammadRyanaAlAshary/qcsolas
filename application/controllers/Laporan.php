@@ -22,7 +22,8 @@ class Laporan extends CI_Controller
                 JOIN user_data_lhu_history
                 ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
                 JOIN produk 
-                ON produk.id = user_data_lhu_history.id_tb_pdf_book";
+                ON produk.id = user_data_lhu_history.id_tb_pdf_book
+                WHERE user_data_lhu_history.id = $id";
 
         $this->menu->printCover($id);
         
@@ -41,12 +42,12 @@ class Laporan extends CI_Controller
                 ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
                 JOIN produk 
                 ON produk.id = user_data_lhu_history.id_tb_pdf_book
-                WHERE tb_pdf_book.file_lhu = '$id' ";
+                WHERE user_data_lhu_history.id = $id";
 
         $this->menu->printLhu($id);
 
-        $data['datalhu'] = $this->db->query($query)->result_array();
-        redirect('./assets/data/' . $id);
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/data/' . $data['datalhu']['file_lhu']);
     }
 }
   
