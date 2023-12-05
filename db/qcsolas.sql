@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2023 at 05:22 AM
+-- Generation Time: Dec 04, 2023 at 10:41 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1427,12 +1427,8 @@ CREATE TABLE `tb_pdf_book` (
 --
 
 INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu`) VALUES
-(124, 0, 'BBT', '7b1cb0bee3d32512c0ef5b2db5345ed9.pdf'),
-(125, 8, 'BBT', 'default.pdf'),
-(126, 34, 'BBA', 'cb43528c2eb816613fb5e56f882988fd.pdf'),
-(127, 56, 'Mikro Biologi BB', 'default.pdf'),
-(128, 142, 'Mikro Biologi BB', 'c52ff1bf88db7fda3f41f606675debab.pdf'),
-(129, 6, 'Mikro Biologi BB', 'default.pdf');
+(140, 6, 'BBT', '686f11213c1a85aba29565aee3435208.pdf'),
+(141, 317, 'BBT', '9f961c9d326fef0d1e478b820dbf9759.pdf');
 
 -- --------------------------------------------------------
 
@@ -1517,11 +1513,9 @@ CREATE TABLE `user_data_lhu_history` (
 --
 
 INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `is_active`, `active_print_cover`, `active_print_lhu`, `print_date`, `users`) VALUES
-(16, 'ABC123', 'ABC123', '2023-12-14', '2023-12-13', '2023-12-21', 4, 'KG', 0, 1, NULL, NULL, NULL, NULL),
-(17, 'ABC123', '123BCA', '2023-12-06', '2023-12-09', '2023-12-20', 5, 'KG', 0, 1, NULL, NULL, NULL, NULL),
-(18, 'ABC', 'MNAJSN', '2023-12-15', '2023-12-15', '2023-12-20', 5, 'KG', 126, 1, NULL, NULL, NULL, NULL),
-(19, 'ABC123', 'ABC123', '2023-12-13', '2023-12-15', '2023-12-30', 5, 'KG', 127, 1, NULL, NULL, NULL, NULL),
-(20, 'AAA', 'AAA', '2023-12-13', '2023-12-16', '2023-12-19', 10, 'KG', 127, 1, NULL, NULL, NULL, NULL);
+(63, 'ABC123', 'MNA123', '2023-12-15', '2023-12-22', '2023-12-20', 10, 'KG', 140, 1, 1, 1, NULL, NULL),
+(64, 'MNB1982', 'MNA123', '2023-12-13', '2023-12-15', '2023-12-18', 10, 'KG', 141, 1, 1, NULL, NULL, NULL),
+(65, 'MNB1982', 'ABC', '2023-12-13', '2023-12-16', '2023-12-25', 5, 'BOTOL', 140, 1, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1690,7 +1684,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1708,7 +1702,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
