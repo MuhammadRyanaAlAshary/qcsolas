@@ -17,13 +17,16 @@ class Laporan extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $query = "SELECT * 
-                FROM tb_pdf_book
-                JOIN user_data_lhu_history
-                ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
-                JOIN produk 
-                ON produk.id = user_data_lhu_history.id_tb_pdf_book
-                WHERE user_data_lhu_history.id = $id";
+        $query = "SELECT user_data_lhu_history.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
+                    FROM user_data_lhu_history  
+                    JOIN tb_pdf_book
+                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                    JOIN produk 
+                    ON tb_pdf_book.id_produk = produk.id
+                    LEFT JOIN user 
+                    ON user_data_lhu_history.users = user.id
+                    WHERE user_data_lhu_history.id = $id";
+                
 
         $this->menu->printCover($id);
         
