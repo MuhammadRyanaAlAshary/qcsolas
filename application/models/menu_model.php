@@ -190,7 +190,8 @@ class  Menu_model extends CI_Model
         $this->db->insert('user_data_lhu_history', $data);
     }
 
-    public function printCover($id){
+    public function printCover($id)
+    {
         $query = "SELECT * 
                     FROM tb_pdf_book
                     JOIN user_data_lhu_history
@@ -206,7 +207,8 @@ class  Menu_model extends CI_Model
         $this->db->update('user_data_lhu_history', $data);
     }
 
-    public function printLhu($id) {
+    public function printLhu($id)
+    {
         $query = "SELECT * 
                     FROM tb_pdf_book
                     JOIN user_data_lhu_history

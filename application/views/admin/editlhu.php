@@ -7,7 +7,7 @@
             <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('admin/datalhu'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Edit Data LHU</h6>
         </div>
         <div class="card-body col-sm-10">
-            <div class="table-responsive">
+            <div class="table-responsive" style="height:550px;">
                 <?= form_open_multipart('admin/editlhu/' . $datalhu['id']); ?>
                 <input type="hidden" id="id" name="id" value="<?= $datalhu['id']; ?>">
                 <div class="form-group row">
@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <label for="nama_lhu" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="nama_lhu" name="nama_lhu">
+                        <select class="form-control selectpicker" data-live-search="true" id="nama_lhu" name="nama_lhu">
                             <option value="">---Select Nama LHU---</option>
                             <?php foreach ($produk as $p) : ?>
                                 <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>

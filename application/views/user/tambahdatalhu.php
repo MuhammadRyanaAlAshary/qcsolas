@@ -7,7 +7,7 @@
             <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('user/datalhuuser'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Select Data yang akan di Print</h6>
         </div>
         <div class="card-body col-sm-10">
-            <div class="table-responsive">
+            <div class="table-responsive" style="height:550px;">
                 <?= form_open_multipart('user/tambahlhu'); ?>
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
