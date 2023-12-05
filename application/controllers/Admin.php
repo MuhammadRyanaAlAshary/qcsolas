@@ -93,16 +93,8 @@ class  admin extends CI_Controller
         $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
 
-        $this->form_validation->set_rules('kode_produk', 'Kode Prodak', 'required');
-        $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required|trim');
+        $this->form_validation->set_rules('id_produk', 'Kode Prodak', 'required');
         $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required|trim');
-        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
-        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
-        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
-        $this->form_validation->set_rules('tgl_produksi', 'Tgl Produksi', 'required');
-        $this->form_validation->set_rules('tgl_sampling', 'Tgl Sampling', 'required');
-        $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');
-        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
