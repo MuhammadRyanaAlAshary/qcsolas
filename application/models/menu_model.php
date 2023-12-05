@@ -11,7 +11,7 @@ class  Menu_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function getlhuUser() 
+    public function getlhuUser()
     {
         // $this->db->select('kode_produk, produk_name, jenis_lhu, nomer_analisa, nomer_batch, exp_date, tgl_produksi, tgl_sampling, besaran_batch, satuan, user_data_lhu_history.id, file_lhu, nomer_analisa');
         $this->db->select('*');
@@ -26,7 +26,7 @@ class  Menu_model extends CI_Model
     {
         $query = "SELECT `user_sub_menu`.*, `user_menu`.`menu` 
             FROM `user_sub_menu` JOIN `user_menu` 
-            ON `user_sub_menu`.`menu_id` = `user_menu`.`id`";            
+            ON `user_sub_menu`.`menu_id` = `user_menu`.`id`";
         return $this->db->query($query)->result_array();
     }
 
@@ -172,7 +172,8 @@ class  Menu_model extends CI_Model
         $this->db->update('tb_pdf_book', $data);
     }
 
-    public function tambahLhuUser(){
+    public function tambahLhuUser()
+    {
         // cek jika ada gambar yang di upload
         $data = [
             'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
@@ -185,11 +186,12 @@ class  Menu_model extends CI_Model
             'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
             'is_active' => 1,
         ];
-        
+
         $this->db->insert('user_data_lhu_history', $data);
     }
 
-    public function printCover($id){
+    public function printCover($id)
+    {
         $query = "SELECT * 
                     FROM tb_pdf_book
                     JOIN user_data_lhu_history
@@ -205,7 +207,8 @@ class  Menu_model extends CI_Model
         $this->db->update('user_data_lhu_history', $data);
     }
 
-    public function printLhu($id) {
+    public function printLhu($id)
+    {
         $query = "SELECT * 
                     FROM tb_pdf_book
                     JOIN user_data_lhu_history

@@ -7,9 +7,9 @@
             <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('admin/datalhu'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Tambah Data LHU</h6>
         </div>
         <div class="card-body col-sm-10">
-            <div class="table-responsive">
+            <div class="table-responsive" style="height:550px;">
                 <?= form_open_multipart('admin/tambahlhu'); ?>
-                <div class="form-group row">
+                <div class=" form-group row">
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="jenis_lhu" name="jenis_lhu" required>
@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="kode_produk" name="kode_produk" required>
+                        <select class="form-control selectpicker" data-live-search="true" id="kode_produk" name="kode_produk" required>
                             <option value="">--- Select Kode Produk - Nama LHU ---</option>
                             <?php foreach ($produk as $data) : ?>
                                 <option value="<?= $data['id']; ?>">[ <?= $data['kode_produk']; ?> ] - <?= $data['produk_name']; ?></option>

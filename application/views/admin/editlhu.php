@@ -7,31 +7,9 @@
             <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('admin/datalhu'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Edit Data LHU</h6>
         </div>
         <div class="card-body col-sm-10">
-            <div class="table-responsive">
+            <div class="table-responsive" style="height:550px;">
                 <?= form_open_multipart('admin/editlhu/' . $datalhu['id']); ?>
                 <input type="hidden" id="id" name="id" value="<?= $datalhu['id']; ?>">
-                <div class="form-group row">
-                    <label for="kode_produk" class="col-sm-2 col-form-label">Kode Prodak</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kode_produk" name="kode_produk" value="<?= $datalhu['kode_produk'] . set_value('kode_produk'); ?>">
-                        <?= form_error('kode_produk', '<small class="text-danger pl-3">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="nama_lhu" class="col-sm-2 col-form-label">Nama LHU</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="nama_lhu" name="nama_lhu">
-                            <option value="">---Select Nama LHU---</option>
-                            <?php foreach ($produk as $p) : ?>
-                                <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>
-                                    <option value="<?= $p['produk_name']; ?>" selected><?= $p['produk_name']; ?></option>
-                                <?php else : ?>
-                                    <option value="<?= $p['produk_name']; ?>"><?= $p['produk_name']; ?></option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
@@ -42,6 +20,21 @@
                                     <option value="<?= $jl['jenis_lhu']; ?>" selected><?= $jl['jenis_lhu']; ?></option>
                                 <?php else : ?>
                                     <option value="<?= $jl['jenis_lhu']; ?>"><?= $jl['jenis_lhu']; ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nama_lhu" class="col-sm-2 col-form-label">Nama Produk</label>
+                    <div class="col-sm-10">
+                        <select class="form-control selectpicker" data-live-search="true" id="nama_lhu" name="nama_lhu">
+                            <option value="">---Select Nama LHU---</option>
+                            <?php foreach ($produk as $p) : ?>
+                                <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>
+                                    <option value="<?= $p['produk_name']; ?>" selected><?= $p['produk_name']; ?></option>
+                                <?php else : ?>
+                                    <option value="<?= $p['produk_name']; ?>"><?= $p['produk_name']; ?></option>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
