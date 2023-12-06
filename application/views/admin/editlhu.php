@@ -32,7 +32,7 @@
                             <option value="">--- Select Nama LHU ---</option>
                             <?php foreach ($produk as $p) : ?>
                                 <?php if ($p['produk_name'] == $datalhu['produk_name']) : ?>
-                                    <option value="<?= $p['id']; ?>" selected>[ <?= $p['kode_produk']; ?> ] - <?= $p['produk_name'] ?></option>
+                                          <option value="<?= $p['id']; ?>" selected>[ <?= $p['kode_produk']; ?> ] - <?= $p['produk_name'] ?></option>
                                 <?php else : ?>
                                     <option value="<?= $p['id']; ?>"> [ <?= $p['kode_produk']; ?> ] - <?= $p['produk_name']; ?></option>
                                 <?php endif; ?>
