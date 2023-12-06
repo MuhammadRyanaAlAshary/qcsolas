@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 03:43 AM
+-- Generation Time: Dec 06, 2023 at 04:19 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1422,17 +1422,6 @@ CREATE TABLE `tb_pdf_book` (
   `file_lhu` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_pdf_book`
---
-
-INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu`) VALUES
-(140, 26, 'BBT', '686f11213c1a85aba29565aee3435208.pdf'),
-(141, 317, 'BBT', '9f961c9d326fef0d1e478b820dbf9759.pdf'),
-(142, 644, 'BBT', 'default.pdf'),
-(143, 17, 'BBT', 'default.pdf'),
-(144, 6, 'BBT', '9e82d2b5097f5e097db095a7a08b3501.pdf');
-
 -- --------------------------------------------------------
 
 --
@@ -1511,25 +1500,6 @@ CREATE TABLE `user_data_lhu_history` (
   `print_date` date DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_data_lhu_history`
---
-
-INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `is_active`, `active_print_cover`, `active_print_lhu`, `print_date`, `users`) VALUES
-(67, 'ABC123', 'ABC123', '2023-12-07', '2023-12-09', '2023-12-12', 3, 'KG', 140, 1, 1, 1, '2023-12-05', 3),
-(68, 'ABC123', 'ABC123', '2023-12-05', '2023-12-05', '2023-12-05', 10, 'KG', 140, 1, 1, 1, '2023-12-05', 11),
-(69, 'ABC123', 'ABC123', '2023-12-09', '2023-12-11', '2023-12-14', 5, 'G', 141, 1, 1, 1, '2023-12-05', 3),
-(70, 'CIM091', 'CIM091', '2023-12-06', '2023-12-09', '2023-12-14', 10, 'KG', 143, 1, 1, 1, '2023-12-05', 3),
-(71, 'ABC123', 'ABC123', '2023-12-08', '2023-12-09', '2023-12-12', 5, 'KG', 142, 1, 1, 1, '2023-12-05', 3),
-(72, 'MNB1982', 'ABC123', '2023-12-14', '2023-12-14', '2023-12-15', 4, 'KG', 142, 1, 1, 1, '2023-12-05', 3),
-(73, 'ABC123', 'ABC123', '2023-12-15', '2023-12-20', '2023-12-22', 5, 'KG', 142, 1, 1, 1, '2023-12-05', 11),
-(74, 'MNB1982', 'MNB1982', '2023-12-14', '2023-12-22', '2023-12-30', 5, 'KG', 141, 1, 1, 1, '2023-12-05', 3),
-(75, 'ABC123', 'ABC123', '2023-12-07', '2023-12-13', '2023-12-15', 5, 'KG', 142, 1, 1, 1, '2023-12-05', 11),
-(76, 'ABC123', 'ABC123', '2023-12-09', '2023-12-14', '2023-12-19', 3, 'KG', 142, 1, 1, NULL, '2023-12-05', 11),
-(77, 'XXXX', 'XXXX', '1970-01-01', '1970-01-01', '1970-01-01', 5, 'KG', 143, 1, 1, 1, '2023-12-05', 3),
-(78, 'ZZZ', 'ZZZ', '2023-12-21', '2023-12-21', '2023-12-21', 5, 'KG', 140, 1, 1, 1, '2023-12-05', 3),
-(79, 'ABC123', 'ABC', '2023-12-14', '2023-12-22', '2023-12-23', 10, 'KG', 142, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
