@@ -26,8 +26,7 @@ class Laporan extends CI_Controller
                     LEFT JOIN user 
                     ON user_data_lhu_history.users = user.id
                     WHERE user_data_lhu_history.id = $id";
-                
-
+                    
         $this->menu->printCover($id);
         
         $data['datalhu'] = $this->db->query($query)->result_array();
@@ -53,6 +52,3 @@ class Laporan extends CI_Controller
         redirect('./assets/data/' . $data['datalhu']['file_lhu']);
     }
 }
-  
-  /* End of file Laporan.php */
-  /* Location: ./application/controllers/Laporan.php */
