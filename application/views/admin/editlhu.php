@@ -8,8 +8,8 @@
         </div>
         <div class="card-body col-sm-10">
             <div class="table-responsive" style="height:550px;">
-                <?= form_open_multipart('admin/editlhu/' . $datalhu['id']); ?>
-                <input type="hidden" id="id" name="id" value="<?= $datalhu['id']; ?>">
+                <?= form_open_multipart('admin/editlhu/' . $datalhu['id_tb_pdf_book']); ?>
+                <input type="hidden" id="id" name="id" value="<?= $datalhu['id_tb_pdf_book']; ?>">
                 <div class="form-group row">
                     <label for="jenis_lhu" class="col-sm-2 col-form-label">Jenis LHU</label>
                     <div class="col-sm-10">
@@ -26,15 +26,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="nama_lhu" class="col-sm-2 col-form-label">Nama Produk</label>
+                    <label for="nama_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
-                        <select class="form-control selectpicker" data-live-search="true" id="nama_lhu" name="nama_lhu">
-                            <option value="">---Select Nama LHU---</option>
+                        <select class="form-control selectpicker" data-live-search="true" id="kode_produk" name="kode_produk">
+                            <option value="">--- Select Nama LHU ---</option>
                             <?php foreach ($produk as $p) : ?>
-                                <?php if ($p['produk_name'] == $datalhu['nama_lhu']) : ?>
-                                    <option value="<?= $p['produk_name']; ?>" selected><?= $p['produk_name']; ?></option>
+                                <?php if ($p['produk_name'] == $datalhu['produk_name']) : ?>
+                                          <option value="<?= $p['id']; ?>" selected>[ <?= $p['kode_produk']; ?> ] - <?= $p['produk_name'] ?></option>
                                 <?php else : ?>
-                                    <option value="<?= $p['id']; ?>">[ <?= $p['kode_produk']; ?> ] - <?= $data['produk_name']; ?></option>
+                                    <option value="<?= $p['id']; ?>"> [ <?= $p['kode_produk']; ?> ] - <?= $p['produk_name']; ?></option>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>

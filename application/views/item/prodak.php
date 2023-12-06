@@ -13,7 +13,7 @@
             </div>
         </div> -->
     <?php endif; ?>
-    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newobatjadiModal">Add New Obat Jadi</a>
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newobatjadiModal">Add New Produk</a>
     <!-- Page Heading -->
     <!--  Divider -->
     <hr class="sidebar-divider">
@@ -71,8 +71,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title fs-5" id="newobatjadiModalLabel">Add New Prodak</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title fs-5" id="newobatjadiModalLabel">Add New Produk</h5>
                     </div>
                     <form action="<?= base_url('item/prodak'); ?>" method="post">
                         <div class="modal-body">

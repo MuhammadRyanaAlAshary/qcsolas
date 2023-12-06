@@ -6,6 +6,7 @@ class  Menu_model extends CI_Model
     public function getlhu()
     {
         $this->db->select('*');
+        $this->db->select('tb_pdf_book.id as id_tb_pdf_book');
         $this->db->from('tb_pdf_book');
         $this->db->join('produk', 'produk.id = tb_pdf_book.id_produk');
         return $this->db->get()->result_array();
@@ -35,11 +36,13 @@ class  Menu_model extends CI_Model
 
     public function getlhuId($id)
     {
-        $this->db->select('*');
-        $this->db->from('tb_pdf_book');
-        $this->db->join('produk', 'produk.id = tb_pdf_book.id_produk');
-        $this->db->where('tb_pdf_book.id', $id);
-        return $this->db->get()->row_array();
+        $query = "SELECT tb_pdf_book.id AS id_tb_pdf_book, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, produk.* 
+                    FROM tb_pdf_book 
+                    JOIN produk 
+                    ON produk.id = tb_pdf_book.id_produk
+                    WHERE tb_pdf_book.id = $id";
+
+        return $this->db->query($query)->row_array();
     }
 
     public function hapusDatamenu($id)
@@ -127,7 +130,6 @@ class  Menu_model extends CI_Model
     public function editlhu($id)
     {
         $data['datalhu'] = $this->db->get_where('tb_pdf_book', ['id' => $id])->row_array();
-
         // cek jika ada gambar yang di upload
         $upload_pdf = $_FILES['file_lhu'];
 
@@ -168,7 +170,6 @@ class  Menu_model extends CI_Model
 
         $data = [
             'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-            'nama_lhu' => htmlspecialchars($this->input->post('nama_lhu', true)),
             'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
         ];
 
