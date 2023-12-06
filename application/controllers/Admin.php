@@ -93,8 +93,8 @@ class  admin extends CI_Controller
         $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
 
-        $this->form_validation->set_rules('id_produk', 'Kode Prodak', 'required');
-        $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required|trim');
+        $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
+        $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
