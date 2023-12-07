@@ -93,16 +93,8 @@ class  admin extends CI_Controller
         $data['jenislhu'] = $this->db->get('jenis_lhu')->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
 
-        $this->form_validation->set_rules('kode_produk', 'Kode Prodak', 'required');
-        $this->form_validation->set_rules('nama_lhu', 'Nama LHU', 'required|trim');
-        $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required|trim');
-        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
-        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
-        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
-        $this->form_validation->set_rules('tgl_produksi', 'Tgl Produksi', 'required');
-        $this->form_validation->set_rules('tgl_sampling', 'Tgl Sampling', 'required');
-        $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');
-        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+        $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
+        $this->form_validation->set_rules('jenis_lhu', 'Jenis LHU', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -132,21 +124,5 @@ class  admin extends CI_Controller
         $this->menu->hapuslhubyid($id);
         $this->session->set_flashdata('flash', 'Data LHU Berhasil Dihapus');
         redirect('admin/datalhu/');
-    }
-
-    public function histori()
-    {
-        $data['title'] = 'Histori';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $data['datalhu'] = $this->menu->getlhuIdHistory();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/histori', $data);
-        $this->load->view('templates/footer');
-        $this->load->view('templates/query1');
     }
 }

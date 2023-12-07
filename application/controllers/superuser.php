@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class  superuser extends CI_Controller
+class superuser extends CI_Controller
 {
     public function __construct()
     {
@@ -12,54 +12,6 @@ class  superuser extends CI_Controller
         is_logged_in();
     }
 
-    public function index()
-    {
-        $data['title'] = 'Registration';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-
-            'valid_email' => 'Cek format email',
-            'is_unique' => 'Email Sudah ada'
-
-        ]);
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-
-            'matches' => 'Password dont match!',
-            'min_length' => 'Password too short'
-
-        ]);
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-
-        if ($this->form_validation->run() == false) {
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('superuser/registration');
-            $this->load->view('templates/footer');
-            $this->load->view('templates/query1');
-        } else {
-
-            $data = [
-
-                'name' => htmlspecialchars($this->input->post('name', true)),
-                'email' => htmlspecialchars($this->input->post('email', true)),
-                'image' => 'default.jpg',
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => htmlspecialchars($this->input->post('role_id', true)),
-                'is_active' => 1,
-                'date_created' => time()
-
-            ];
-
-            $this->db->insert('user', $data);
-            $this->session->set_flashdata('flash', 'Data User Berhasil Ditambahkan');
-            redirect('superuser');
-        }
-    }
     public function role()
     {
         $data['title'] = 'Role';
@@ -114,5 +66,107 @@ class  superuser extends CI_Controller
         }
 
         $this->session->set_flashdata('flash', 'Change Access');
+    }
+
+    public function usersManagement()
+    {
+        $data['title'] = 'Users Management';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT name, email, role, date_created, user.id 
+                    FROM user
+                    JOIN user_role 
+                    ON user.role_id = user_role.id;";
+
+        $data['data_user'] = $this->db->query($query)->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('superuser/users-management', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }
+
+    public function addUser()
+    {
+        $data['title'] = 'Add Users';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+
+            'valid_email' => 'Cek format email',
+            'is_unique' => 'Email Sudah ada'
+
+        ]);
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+
+            'matches' => 'Password dont match!',
+            'min_length' => 'Password too short'
+
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('superuser/add-user');
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+
+            $data = [
+
+                'name' => htmlspecialchars($this->input->post('name', true)),
+                'email' => htmlspecialchars($this->input->post('email', true)),
+                'image' => 'default.jpg',
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+                'role_id' => htmlspecialchars($this->input->post('role_id', true)),
+                'is_active' => 1,
+                'date_created' => date("Y-m-d")
+            ];
+
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('flash', 'Data User Berhasil Ditambahkan');
+            redirect('superuser/usersmanagement');
+        }
+    }
+
+    public function editUsers($id)
+    {
+        $data['title'] = 'Edit Users';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['users_data'] = $this->db->get_where('user', ['id' => $id])->row_array();
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('superuser/edit-user');
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+
+            $data = [
+                'name' => htmlspecialchars($this->input->post('name')),
+                'email' => htmlspecialchars($this->input->post('email')),
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+                'role_id' => htmlspecialchars($this->input->post('role_id')),
+            ];
+
+            $this->db->where('id', $id);
+            $this->db->update('user', $data);
+    
+            $this->session->set_flashdata('flash', 'Data User Berhasil Perbarui');
+            redirect('superuser/usersmanagement');
+        }
     }
 }

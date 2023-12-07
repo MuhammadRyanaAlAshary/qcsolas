@@ -6,6 +6,7 @@ class  Menu_model extends CI_Model
     public function getlhu()
     {
         $this->db->select('*');
+        $this->db->select('tb_pdf_book.id as id_tb_pdf_book');
         $this->db->from('tb_pdf_book');
         $this->db->join('produk', 'produk.id = tb_pdf_book.id_produk');
         return $this->db->get()->result_array();
@@ -13,11 +14,16 @@ class  Menu_model extends CI_Model
 
     public function getlhuUser()
     {
-        // $this->db->select('kode_produk, produk_name, jenis_lhu, nomer_analisa, nomer_batch, exp_date, tgl_produksi, tgl_sampling, besaran_batch, satuan, user_data_lhu_history.id, file_lhu, nomer_analisa');
-        $this->db->select('*');
-        $this->db->from('user_data_lhu_history');
-        $this->db->join('tb_pdf_book', 'tb_pdf_book.id = user_data_lhu_history.id_tb_pdf_book');
-        return $this->db->get()->result_array();
+        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
+                    FROM user_data_lhu_history  
+                    JOIN tb_pdf_book
+                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                    JOIN produk 
+                    ON tb_pdf_book.id_produk = produk.id
+                    LEFT JOIN user 
+                    ON user_data_lhu_history.users = user.id";
+
+        return $this->db->query($query)->result_array();
     }
 
     public function getSubmenu()
@@ -30,9 +36,28 @@ class  Menu_model extends CI_Model
 
     public function getlhuId($id)
     {
-        $query = "SELECT * 
-        FROM `tb_pdf_book`
-        WHERE id = $id";
+        $query = "SELECT tb_pdf_book.id AS id_tb_pdf_book, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, produk.* 
+                  FROM tb_pdf_book 
+                  JOIN produk 
+                  ON produk.id = tb_pdf_book.id_produk
+                    WHERE tb_pdf_book.id = $id";
+
+        return $this->db->query($query)->row_array();
+    }
+
+    public function checkDuplicateProdakJadi($id)
+    {
+        $query = "SELECT * FROM produk WHERE kode_produk = '$id' AND produk_type = 'Prodak Jadi'";
+        return $this->db->query($query)->row_array();
+    }
+
+    public function checkDuplicateBahanBaku($id) {
+        $query = "SELECT * FROM produk WHERE kode_produk = '$id' AND produk_type = 'Bahan Baku'";
+        return $this->db->query($query)->row_array();
+    }
+
+    public function checkDuplicateBahanKemas($id){
+        $query = "SELECT * FROM produk WHERE kode_produk = '$id' AND produk_type = 'Bahan Kemas' ";
         return $this->db->query($query)->row_array();
     }
 
@@ -121,7 +146,6 @@ class  Menu_model extends CI_Model
     public function editlhu($id)
     {
         $data['datalhu'] = $this->db->get_where('tb_pdf_book', ['id' => $id])->row_array();
-
         // cek jika ada gambar yang di upload
         $upload_pdf = $_FILES['file_lhu'];
 
@@ -162,7 +186,6 @@ class  Menu_model extends CI_Model
 
         $data = [
             'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-            'nama_lhu' => htmlspecialchars($this->input->post('nama_lhu', true)),
             'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
         ];
 
@@ -188,35 +211,33 @@ class  Menu_model extends CI_Model
         $this->db->insert('user_data_lhu_history', $data);
     }
 
-    public function printCover($id){
-        $query = "SELECT * 
-                    FROM tb_pdf_book
-                    JOIN user_data_lhu_history
-                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
-                    JOIN produk 
-                    ON produk.id = user_data_lhu_history.id_tb_pdf_book 
-                    WHERE tb_pdf_book.file_lhu = '$id' ";
+    public function printCover($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
 
         $data = [
-            'active_print_cover' => 1
+            'users' => $data['user']['id'],
+            'active_print_cover' => 1,
+            'print_date' => date("Y-m-d")  
         ];
-
+        
+        $this->db->where('user_data_lhu_history.id', $id);
         $this->db->update('user_data_lhu_history', $data);
     }
 
-    public function printLhu($id) {
-        $query = "SELECT * 
-                    FROM tb_pdf_book
-                    JOIN user_data_lhu_history
-                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
-                    JOIN produk 
-                    ON produk.id = user_data_lhu_history.id_tb_pdf_book 
-                    WHERE tb_pdf_book.file_lhu = '$id' ";
-                    
+    public function printLhu($id)
+    {               
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
         $data = [
-            'active_print_lhu' => 1
+            'users' => $data['user']['id'],
+            'active_print_lhu' => 1,
+            'print_date' => date("Y-m-d")
         ];
 
+        $this->db->where('user_data_lhu_history.id', $id);
         $this->db->update('user_data_lhu_history', $data);
     }
 

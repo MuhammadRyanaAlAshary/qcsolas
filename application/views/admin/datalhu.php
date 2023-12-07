@@ -52,10 +52,8 @@
                                 <td><?= $dl['produk_name']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('Laporan/index/') . $dl['id'] . $dl['file_lhu']; ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                     <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-                                    <a href="<?= base_url('admin/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    <a href="<?= base_url('admin/hapuslhu/') . $dl['id']; ?>/<?= $dl['file_lhu']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash-alt" aria-hidden="true"></i> Hapus</a>
+                                    <a href="<?= base_url('admin/editlhu/') . $dl['id_tb_pdf_book']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

@@ -1,19 +1,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-    <?php if ($this->session->flashdata('flash')) : ?>
-        <!--<div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Item<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
-    <?php endif; ?>
-    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newobatjadiModal">Add New Obat Jadi</a>
+    <!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newobatjadiModal">Add New Produk</a>
     <!-- Page Heading -->
     <!--  Divider -->
     <hr class="sidebar-divider">
@@ -32,16 +20,11 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Kode Prodak
-                            </th>
-                            <th scope="col">Produk Type
-                            </th>
-                            <th scope="col">Sales Type
-                            </th>
-                            <th scope="col">Nama Produk
-                            </th>
-                            <th scope="col">Action
-                            </th>
+                            <th scope="col">Kode Prodak</th>
+                            <th scope="col">Produk Type</th>
+                            <th scope="col">Sales Type</th>
+                            <th scope="col">Nama Produk</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,8 +37,8 @@
                                 <td><?= $p['sales_type']; ?></td>
                                 <td><?= $p['produk_name']; ?></td>
                                 <td>
-                                    <a href="" class="badge badge-success">Edit</a>
-                                    <a href="<?= base_url('item/hapusobatjadi/') . $p['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fa-edit" aria-hidden="true"></i> Delete</a>
+                                    <a href="" class="badge badge-success">Update</a>
+                                    <!-- <a href="<?= base_url('item/hapusobatjadi/') . $p['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fa-edit" aria-hidden="true"></i> Delete</a> -->
                                 </td>
                             </tr>
                             <?php $i++ ?>
@@ -71,21 +54,25 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title fs-5" id="newobatjadiModalLabel">Add New Prodak</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title fs-5" id="newobatjadiModalLabel">Add New Produk</h5>
                     </div>
                     <form action="<?= base_url('item/prodak'); ?>" method="post">
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="kode_produk" name="kode_produk" placeholder="Kode Produk">
+                            <input type="text" class="form-control" id="kode_produk" name="kode_produk" placeholder="Kode Produk" required>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="produk_type" name="produk_type" placeholder="Produk Type">
+                            <select class="form-control" name="produk_type" id="produk_type" required>
+                                <option selected>-- Pilih Produk Type ---</option>
+                                <option value="Prodak Jadi">Prodak Jadi</option>
+                                <option value="Bahan Baku">Bahan Baku</option>
+                                <option value="Bahan Kemas">Bahan Kemas</option>
+                            </select>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="sales_type" name="sales_type" placeholder="Sales Type">
+                            <input type="text" class="form-control" id="sales_type" name="sales_type" placeholder="Sales Type" required>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="produk_name" name="produk_name" placeholder="Produk Name">
+                            <input type="text" class="form-control" id="produk_name" name="produk_name" placeholder="Produk Name" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -95,8 +82,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <!-- /.container-fluid -->
 
