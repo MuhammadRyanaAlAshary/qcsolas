@@ -125,20 +125,4 @@ class  admin extends CI_Controller
         $this->session->set_flashdata('flash', 'Data LHU Berhasil Dihapus');
         redirect('admin/datalhu/');
     }
-
-    public function histori()
-    {
-        $data['title'] = 'Histori';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $data['datalhu'] = $this->menu->getlhuIdHistory();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/histori', $data);
-        $this->load->view('templates/footer');
-        $this->load->view('templates/query1');
-    }
 }

@@ -1,12 +1,12 @@
-const flashData = $('.flash-data').data('flashdata');
+// const flashData = $('.flash-data').data('flashdata');
 
-if (flashData) {
-    Swal({
-        title: 'Sukses',
-        text: '' + flashData,
-        type: 'success'
-    });
-}
+// if (flashData) {
+//     Swal({
+//         title: 'Sukses',
+//         text: '' + flashData,
+//         type: 'success'
+//     });
+// }
 
 // // tombol-hapus
 $('.tombol-hapus').on('click', function (e) {
