@@ -37,11 +37,27 @@ class  Menu_model extends CI_Model
     public function getlhuId($id)
     {
         $query = "SELECT tb_pdf_book.id AS id_tb_pdf_book, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, produk.* 
-                    FROM tb_pdf_book 
-                    JOIN produk 
-                    ON produk.id = tb_pdf_book.id_produk
+                  FROM tb_pdf_book 
+                  JOIN produk 
+                  ON produk.id = tb_pdf_book.id_produk
                     WHERE tb_pdf_book.id = $id";
 
+        return $this->db->query($query)->row_array();
+    }
+
+    public function checkDuplicateProdakJadi($id)
+    {
+        $query = "SELECT * FROM produk WHERE kode_produk = '$id' AND produk_type = 'Prodak Jadi'";
+        return $this->db->query($query)->row_array();
+    }
+
+    public function checkDuplicateBahanBaku($id) {
+        $query = "SELECT * FROM produk WHERE kode_produk = '$id' AND produk_type = 'Bahan Baku'";
+        return $this->db->query($query)->row_array();
+    }
+
+    public function checkDuplicateBahanKemas($id){
+        $query = "SELECT * FROM produk WHERE kode_produk = '$id' AND produk_type = 'Bahan Kemas' ";
         return $this->db->query($query)->row_array();
     }
 

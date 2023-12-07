@@ -79,9 +79,7 @@ class  item extends CI_Controller
     public function prodak()
     {
         $data['title'] = 'Prodak';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['produk'] = $this->menu->getobatjadi();
 
         $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
@@ -97,18 +95,37 @@ class  item extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
+            $kode_produk = $this->input->post('kode_produk');
 
-            $data = [
-                'kode_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-                'produk_type' => htmlspecialchars($this->input->post('produk_type', true)),
-                'sales_type' => htmlspecialchars($this->input->post('sales_type', true)),
-                'produk_name' => htmlspecialchars($this->input->post('produk_name', true)),
-            ];
-            $this->db->insert('produk', $data);
-            $this->session->set_flashdata('flash', ' Data Obat Jadi Berhasil Ditambahkan');
-            redirect('item/prodak');
+            // Check if kode_produk already exists
+            $existing_produkJadi = $this->menu->checkDuplicateProdakJadi($kode_produk);
+            $existing_BahanBaku = $this->menu->checkDuplicateBahanBaku($kode_produk);
+            $existing_BahanKemas = $this->menu->checkDuplicateBahanKemas($kode_produk);
+
+            if ($existing_produkJadi) {
+                $this->session->set_flashdata('existing_produkJadi', 'Kode Produk Jadi Sudah Ada!');
+                redirect('item/prodak');
+            } elseif ($existing_BahanBaku) {
+                $this->session->set_flashdata('existing_BahanBaku', 'Kode Produk Bahan Baku Sudah Ada!');
+                redirect('item/prodak');
+            } elseif ($existing_BahanKemas) {
+                $this->session->set_flashdata('existing_BahanKemas', 'Kode Produk Bahan Kemas Sudah Ada!');
+                redirect('item/prodak');
+            } else {
+                $insert_data = [
+                    'kode_produk' => $kode_produk,
+                    'produk_type' => $this->input->post('produk_type'),
+                    'sales_type' => $this->input->post('sales_type'),
+                    'produk_name' => $this->input->post('produk_name'),
+                ];
+
+                $this->db->insert('produk', $insert_data);
+                $this->session->set_flashdata('success', 'Data Produk Berhasil Ditambahkan');
+                redirect('item/prodak');
+            }
         }
     }
+
     public function hapusobatjadi($id)
     {
         $this->menu->hapusobatjadi($id);

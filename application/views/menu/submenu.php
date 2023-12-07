@@ -14,7 +14,7 @@
         </div>-->
     <?php endif; ?>
 
-    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubmenuModal">Add New Submenu</a>
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newSubmenuModal">Add New Submenu</a>
     <!-- Page Heading -->
     <!--  Divider -->
     <hr class="sidebar-divider">
@@ -85,12 +85,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-5" id="newSubmenuModalLabel">Add New Submenu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="<?= base_url('menu/submenu'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Submenu title">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Submenu Title">
                     </div>
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
