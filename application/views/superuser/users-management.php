@@ -1,19 +1,15 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-<div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
+<!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
     <?php if ($this->session->flashdata('flash')) : ?>
-        <!-- <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data User<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Users Berhasil Di Tambahkan!",
+        });
+    </script>
     <?php endif; ?>
-
     <a href="/qcsolas/superuser/addUser" class="btn btn-primary">Add user</a>
     <!-- Page Heading -->
     <!--  Divider -->
@@ -47,8 +43,7 @@
                                 <td><?= $r['role']; ?></td>
                                 <td><?= $r['date_created']; ?></td>
                                 <td>
-                                    <a href="editUsers/<?= $r['id'] ?>" class="badge badge-warning">Update</a>
-                                    <a href="delete/<?= $r['id'] ?>" class="badge badge-danger">Delete</a>
+                                    <a href="<?= base_url('superuser/deleteUser/') . $r['id']; ?>" class="badge badge-danger tombol-hapus">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>
@@ -63,3 +58,5 @@
 
 </div>
 <!-- End of Main Content -->
+
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>

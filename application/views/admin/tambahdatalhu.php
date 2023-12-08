@@ -35,9 +35,10 @@
                     <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
                     <div class="col-sm-10">
                         <div class="col-sm-9">
-                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu">
+                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf">
                             <label class="custom-file-label" for="file_lhu">Choose file</label>
                         </div>
+                        <small>* File Harus Berupa format .pdf (MAX SIZE: 4MB)</small>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

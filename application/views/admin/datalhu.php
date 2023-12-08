@@ -1,17 +1,13 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <?php if ($this->session->flashdata('flash')) : ?>
-        <!--<div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data LHU<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data LHU Berhasil Di Tambahkan",
+        });
+    </script>
     <?php endif; ?>
     <i class="icofont-angle-double-left"></i>
     <!-- Page Heading -->

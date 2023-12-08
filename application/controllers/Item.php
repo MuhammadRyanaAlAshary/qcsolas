@@ -129,7 +129,7 @@ class  item extends CI_Controller
     public function hapusobatjadi($id)
     {
         $this->menu->hapusobatjadi($id);
-        $this->session->set_flashdata('flash', 'Data Obat Jadi Berhasil Dihapus');
+        $this->session->set_flashdata('deleted', 'Data Obat Jadi Berhasil Dihapus');
         redirect('item/prodak');
     }
 }

@@ -42,50 +42,6 @@
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Sweetalert 2 -->
-<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<?php if ($this->session->flashdata('existing_produkJadi')): ?>
-    <script>
-        Swal.fire({
-            icon: "error",
-            title: "Duplicate",
-            text: "Kode Pada 'Produk Jadi' Sebelumnya Sudah Ada!",
-        });
-    </script>
-    <?php endif; ?>
-
-    <?php if ($this->session->flashdata('existing_BahanBaku')): ?>
-    <script>
-        Swal.fire({
-            icon: "error",
-            title: "Duplicate",
-            text: "Kode Pada 'Bahan Baku' Sebelumnya Sudah Ada!",
-        });
-    </script>
-    <?php endif; ?>
-
-    <?php if ($this->session->flashdata('existing_BahanKemas')): ?>
-    <script>
-        Swal.fire({
-            icon: "error",
-            title: "Duplicate",
-            text: "Kode Pada 'Bahan Kemas' Sebelumnya Sudah Ada!",
-        });
-    </script>
-    <?php endif; ?>
-
-    <?php if ($this->session->flashdata('success')): ?>
-    <script>
-        Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Data Berhasil Di Tambahkan!",
-        });
-    </script>
-    <?php endif; ?>
-
 <!-- Core plugin JavaScript-->
 <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 

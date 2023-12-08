@@ -1,6 +1,58 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
+    
+    <!-- End of Main Content -->
+    <?php if ($this->session->flashdata('success')): ?>
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Data Berhasil Di Tambahkan!",
+            });
+    </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('deleted')): ?>
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Data Produk Berhasil Di Hapus!",
+            });
+    </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('existing_produkJadi')): ?>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Duplicate",
+                text: "Kode Pada 'Produk Jadi' Sebelumnya Sudah Ada!",
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('existing_BahanBaku')): ?>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Duplicate",
+                text: "Kode Pada 'Bahan Baku' Sebelumnya Sudah Ada!",
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('existing_BahanKemas')): ?>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Duplicate",
+                text: "Kode Pada 'Bahan Kemas' Sebelumnya Sudah Ada!",
+            });
+        </script>
+    <?php endif; ?>
+
     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newobatjadiModal">Add New Produk</a>
     <!-- Page Heading -->
     <!--  Divider -->
@@ -37,8 +89,8 @@
                                 <td><?= $p['sales_type']; ?></td>
                                 <td><?= $p['produk_name']; ?></td>
                                 <td>
-                                    <a href="" class="badge badge-success">Update</a>
-                                    <!-- <a href="<?= base_url('item/hapusobatjadi/') . $p['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fa-edit" aria-hidden="true"></i> Delete</a> -->
+                                    <!-- <a href="" class="badge badge-success">Update</a> -->
+                                    <a href="<?= base_url('item/hapusobatjadi/') . $p['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fa-edit" aria-hidden="true"></i> Delete</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>
@@ -84,6 +136,5 @@
         </div>
     </div>
     <!-- /.container-fluid -->
-
 </div>
-<!-- End of Main Content -->
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>

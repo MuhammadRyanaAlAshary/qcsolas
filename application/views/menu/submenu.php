@@ -1,19 +1,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-    <?php if ($this->session->flashdata('flash')) : ?>
-        <!-- <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Sub Menu<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div>-->
-    <?php endif; ?>
-
+    <!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
     <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newSubmenuModal">Add New Submenu</a>
     <!-- Page Heading -->
     <!--  Divider -->
@@ -35,18 +22,12 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title
-                            </th>
-                            <th scope="col">Menu
-                            </th>
-                            <th scope="col">Url
-                            </th>
-                            <th scope="col">Icon
-                            </th>
-                            <th scope="col">Active
-                            </th>
-                            <th scope="col">Action
-                            </th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Menu</th>
+                            <th scope="col">Url</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +41,6 @@
                                 <td><?= $sm['icon']; ?></td>
                                 <td><?= $sm['is_active']; ?></td>
                                 <td>
-                                    <a href="" class="badge badge-success">Edit</a>
                                     <a href="<?= base_url('menu/hapusSubmenu/') . $sm['id']; ?>" class="badge badge-danger tombol-hapus">Delete</a>
                                 </td>
                             </tr>
@@ -123,3 +103,16 @@
         </div>
     </div>
 </div>
+
+<?php if ($this->session->flashdata('flash')) : ?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Sub Menu Berhasil Di Tambahkan!",
+        });
+    </script>
+<?php endif; ?>
+
+<!-- End of Main Content -->
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
