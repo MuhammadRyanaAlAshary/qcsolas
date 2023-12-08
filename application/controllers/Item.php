@@ -84,7 +84,7 @@ class  item extends CI_Controller
 
         $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
         $this->form_validation->set_rules('produk_type', 'Produk Type', 'required');
-        $this->form_validation->set_rules('sales_type', 'Sales Type', 'required');
+        $this->form_validation->set_rules('sales_type', 'Sales Type');
         $this->form_validation->set_rules('produk_name', 'Prodak', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -129,7 +129,7 @@ class  item extends CI_Controller
     public function hapusobatjadi($id)
     {
         $this->menu->hapusobatjadi($id);
-        $this->session->set_flashdata('flash', 'Data Obat Jadi Berhasil Dihapus');
+        $this->session->set_flashdata('deleted', 'Data Obat Jadi Berhasil Dihapus');
         redirect('item/prodak');
     }
 }
