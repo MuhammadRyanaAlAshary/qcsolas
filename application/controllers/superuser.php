@@ -28,6 +28,22 @@ class superuser extends CI_Controller
         $this->load->view('templates/query1');
     }
 
+    public function roleAdd()
+    {
+        $this->form_validation->set_rules('role', 'Role', 'required');
+
+        $this->menu->roleAdd();
+        $this->session->set_flashdata('flash', 'Data Role Berhasil Di Tambahkan');
+        redirect('superuser/role');    
+    }
+
+    public function roleDeleted($id)
+    {
+        $this->menu->deleteRoleByID($id);
+        $this->session->set_flashdata('flash', 'Data Role Berhasil Di Hapus');
+        redirect('superuser/role');    
+    }
+
     public function roleaccess($role_id)
     {
         $data['title'] = 'Role Access';
@@ -45,7 +61,7 @@ class superuser extends CI_Controller
         $this->load->view('superuser/roleaccess', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/query1');
-    }
+    }    
 
     public function changeaccess()
     {
@@ -137,36 +153,10 @@ class superuser extends CI_Controller
         }
     }
 
-    public function editUsers($id)
+    public function deleteUser($id)
     {
-        $data['title'] = 'Edit Users';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $data['users_data'] = $this->db->get_where('user', ['id' => $id])->row_array();
-
-        if ($this->form_validation->run() == false) {
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('superuser/edit-user');
-            $this->load->view('templates/footer');
-            $this->load->view('templates/query1');
-        } else {
-
-            $data = [
-                'name' => htmlspecialchars($this->input->post('name')),
-                'email' => htmlspecialchars($this->input->post('email')),
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => htmlspecialchars($this->input->post('role_id')),
-            ];
-
-            $this->db->where('id', $id);
-            $this->db->update('user', $data);
-    
-            $this->session->set_flashdata('flash', 'Data User Berhasil Perbarui');
-            redirect('superuser/usersmanagement');
-        }
+        $this->menu->deleteUserByID($id);
+        $this->session->set_flashdata('flash', 'Data User Berhasil Di Hapus');
+        redirect('superuser/usersmanagement');    
     }
 }

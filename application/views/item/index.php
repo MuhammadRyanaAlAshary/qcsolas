@@ -1,17 +1,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
+    <!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
     <?php if ($this->session->flashdata('flash')) : ?>
-        <!--<div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Item<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div>-->
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Jenis LHU Berhasil Di Tambahkan!",
+        });
+    </script>
     <?php endif; ?>
 
     <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newjenisModal">Add New Jenis LHU</a>
@@ -43,7 +40,6 @@
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $j['jenis_lhu']; ?></td>
                                 <td>
-                                    <a href="" class="badge badge-success">Edit</a>
                                     <a href="<?= base_url('item/hapusjenis/') . $j['id']; ?>" class="badge badge-danger tombol-hapus">Delete</a>
                                 </td>
                             </tr>
@@ -61,7 +57,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title fs-5" id="newjenisModalLabel">Add New Jenis LHU</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="<?= base_url('item'); ?>" method="post">
                         <div class="modal-body">
@@ -82,3 +77,4 @@
 
 </div>
 <!-- End of Main Content -->
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>

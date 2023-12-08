@@ -1,16 +1,13 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php if ($this->session->flashdata('flash')) : ?>
-        <!-- <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Change<strong>Access</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Role Berhasil Di Tambahkan!",
+        });
+    </script>
     <?php endif; ?>
     <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newRoleModal">Add New Role</a>
     <!-- Page Heading -->
@@ -40,8 +37,7 @@
                                 <td><?= $r['role']; ?></td>
                                 <td>
                                     <a href="<?= base_url('superuser/roleaccess/') . $r['id']; ?>" class="badge badge-warning">Access</a>
-                                    <a href="" class="badge badge-success">Edit</a>
-                                    <a href="" class="badge badge-danger">Delete</a>
+                                    <a href="<?= base_url('superuser/roleDeleted/') . $r['id']; ?>" class="badge badge-danger tombol-hapus">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>
@@ -64,9 +60,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-5" id="newRoleModalLabel">Add New Role</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="<?= base_url('superuser/role'); ?>" method="post">
+            <form action="<?= base_url('superuser/roleAdd'); ?>" method="post">
                 <div class="modal-body">
                     <input type="text" class="form-control" id="role" name="role" placeholder="Role Nama">
                 </div>
@@ -78,3 +73,5 @@
         </div>
     </div>
 </div>
+
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>

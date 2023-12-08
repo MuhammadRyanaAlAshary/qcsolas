@@ -40,7 +40,7 @@ class  Menu_model extends CI_Model
                   FROM tb_pdf_book 
                   JOIN produk 
                   ON produk.id = tb_pdf_book.id_produk
-                    WHERE tb_pdf_book.id = $id";
+                  WHERE tb_pdf_book.id = $id";
 
         return $this->db->query($query)->row_array();
     }
@@ -61,6 +61,22 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
+    public function roleAdd()
+    {
+      $data = [
+        'role' => $this->input->post('role'),
+      ];
+
+      $this->db->insert('user_role', $data);
+      $this->session->set_flashdata('flash', 'Data Role berhasil di tambahkan');
+      redirect('superuser/role');
+    }
+
+    public function deleteRoleByID($id)
+    {
+        $this->db->delete('user_role', ['id' => $id]);
+    }
+
     public function hapusDatamenu($id)
     {
         $this->db->delete('user_menu', ['id' => $id]);
@@ -69,6 +85,11 @@ class  Menu_model extends CI_Model
     public function hapusSubmenu($id)
     {
         $this->db->delete('user_sub_menu', ['id' => $id]);
+    }
+
+    public function deleteUserByID($id)
+    {
+        $this->db->delete('user', ['id' => $id]);
     }
 
     public function countlhu()
@@ -106,7 +127,8 @@ class  Menu_model extends CI_Model
 
         if ($filelhu = '') {
         } else {
-            $config['allowed_types'] = 'docx|xlsx|pdf';
+            // $config['allowed_types'] = 'docx|xlsx|pdf';
+            $config['allowed_types'] = 'pdf';
             $config['max_size']      = '4000';
             $config['upload_path'] = './assets/data/';
             $config['remove_spaces'] = TRUE;
@@ -150,7 +172,8 @@ class  Menu_model extends CI_Model
         $upload_pdf = $_FILES['file_lhu'];
 
         if ($upload_pdf) {
-            $config['allowed_types'] = 'docx|xlsx|pdf';
+            // $config['allowed_types'] = 'docx|xlsx|pdf';
+            $config['allowed_types'] = 'pdf';
             $config['max_size']      = '4000';
             $config['upload_path'] = './assets/data/';
             $config['encrypt_name'] = TRUE;

@@ -1,17 +1,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
+    <!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
     <?php if ($this->session->flashdata('flash')) : ?>
-        <!-- <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Menu<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Sub Menu Berhasil Di Tambahkan",
+        });
+    </script>
     <?php endif; ?>
     <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
     <!-- Page Heading -->
@@ -42,7 +39,6 @@
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $m['menu']; ?></td>
                                 <td>
-                                    <a href="" class="badge badge-success">Edit</a>
                                     <a href="<?= base_url('menu/hapus/') . $m['id']; ?>" class="badge badge-danger tombol-hapus">Delete</a>
                                 </td>
                             </tr>
@@ -81,3 +77,6 @@
         </div>
     </div>
 </div>
+
+<!-- End of Main Content -->
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
