@@ -121,7 +121,7 @@
                             </select>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="sales_type" name="sales_type" placeholder="Sales Type" required>
+                            <input type="text" class="form-control" id="sales_type" name="sales_type" placeholder="Sales Type">
                         </div>
                         <div class="modal-body">
                             <input type="text" class="form-control" id="produk_name" name="produk_name" placeholder="Produk Name" required>
