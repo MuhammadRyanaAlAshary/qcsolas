@@ -157,7 +157,7 @@ class  User extends CI_Controller
         } else {
             $this->menu->add_lhu_bbp_bbk();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/datalhuuser/');
+            redirect('user/bbp/');
         }
     } 
 
@@ -211,7 +211,7 @@ class  User extends CI_Controller
         } else {
             $this->menu->add_lhu_bbp_bbk();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/datalhuuser/');
+            redirect('user/bbk/');
         }
     } 
 
@@ -249,22 +249,22 @@ class  User extends CI_Controller
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
-        $this->form_validation->set_rules('tgl_produksi', 'Tgl Produksi', 'required');
-        $this->form_validation->set_rules('tgl_sampling', 'Tgl Sampling', 'required');
-        $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');
-        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+        $this->form_validation->set_rules('tanggal_kedatangan', 'Tanggal Kedatangan', 'required');
+        $this->form_validation->set_rules('nama_produsen', 'Nama Produsen', 'required');
+        $this->form_validation->set_rules('nama_supplier', 'Nama Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_bahan', 'Jumlah Bahan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('user/add-bbp', $data);
+            $this->load->view('user/add-bkp', $data);
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
             $this->menu->add_data_bkp_history();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/datalhuuser/');
+            redirect('user/bkp/');
         }
     } 
 }

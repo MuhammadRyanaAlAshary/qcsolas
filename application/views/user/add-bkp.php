@@ -7,7 +7,7 @@
             <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('user/datalhuuser'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Select Data yang akan di Print</h6>
         </div>
         <div class="card-body col-sm-10">
-            <div class="table-responsive" style="height:550px;">
+            <div class="table-responsive">
                 <?= form_open_multipart('user/tambahlhu'); ?>
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
@@ -43,36 +43,31 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tgl_produksi" class="col-sm-2 col-form-label">Tgl Produksi</label>
+                    <label for="tanggal_kedatangan" class="col-sm-2 col-form-label">Tanggal Kedatangan</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="tgl_produksi" name="tgl_produksi" required>
-                        <?= form_error('tgl_produksi', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <input type="date" class="form-control" id="tanggal_kedatangan" name="tanggal_kedatangan" required>
+                        <?= form_error('tanggal_kedatangan', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tgl_sampling" class="col-sm-2 col-form-label">Tgl Sampling</label>
+                    <label for="nama_produsen" class="col-sm-2 col-form-label">Nama Produsen</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="tgl_sampling" name="tgl_sampling" required>
-                        <?= form_error('tgl_sampling', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <input type="date" class="form-control" id="nama_produsen" name="nama_produsen" required>
+                        <?= form_error('nama_produsen', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="besaran_batch" class="col-sm-2 col-form-label">Besaran Batch</label>
-                    <div class="col-sm-2">
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" id="besaran_batch" name="besaran_batch" required>
-                        </div>
+                    <label for="nama_supplier" class="col-sm-2 col-form-label">Nama Supplier</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" required>
+                        <?= form_error('nama_supplier', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
-                    <div class="col-sm-1,5">
-                        <div class="input-group mb-3">
-                            <select class="selectpicker form-control" data-live-search="true" id="satuan" name="satuan" required>
-                                <option value="">Satuan</option>
-                                <?php foreach ($satuan as $s) : ?>
-                                    <option value="<?= $s['satuan']; ?>"><?= $s['satuan']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <?= form_error('besaran_batch', '<small class="text-danger pl-3">', '</small>'); ?>
+                </div>
+                <div class="form-group row">
+                    <label for="jumlah_bahan" class="col-sm-2 col-form-label">Jumlah Bahan</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="jumlah_bahan" name="jumlah_bahan" required>
+                        <?= form_error('jumlah_bahan', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

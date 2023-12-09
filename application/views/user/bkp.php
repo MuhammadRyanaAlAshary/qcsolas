@@ -35,10 +35,10 @@
                             <th scope="col">N.Analisa</th>
                             <th scope="col">N.Batch</th>
                             <th scope="col">Exp.Date</th>
-                            <th scope="col">Tgl.Prod</th>
-                            <th scope="col">Tgl.Sampling</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Sat</th>
+                            <th scope="col">Tgl.Kedatangan</th>
+                            <th scope="col">Nama Produsen</th>
+                            <th scope="col">Nama Supplier</th>
+                            <th scope="col">Jumlah Bahan</th>
                             <th scope="col">Print Date</th>
                             <th scope="col">Print By</th>
                             <th scope="col">Action</th>
