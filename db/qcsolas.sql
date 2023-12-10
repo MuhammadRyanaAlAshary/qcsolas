@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 03:14 PM
+-- Generation Time: Dec 10, 2023 at 06:16 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1525,7 +1525,9 @@ CREATE TABLE `user_data_bbp_bba_history` (
 --
 
 INSERT INTO `user_data_bbp_bba_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `produsen`, `supplier`, `jumlah_penerimaan`, `no_protap_analisa_bb`, `tgl_berlaku`, `id_tb_pdf_book`, `print_lhu`, `print_date`, `users`) VALUES
-(1, 'test', 'test', '2003-11-11', '12', '12', 12, '12', '1970-01-01', 159, NULL, NULL, NULL);
+(1, 'test', 'test', '2003-11-11', '12', '12', 12, '12', '1970-01-01', 159, NULL, NULL, NULL),
+(2, 'test', 'test', '2000-11-11', 'test', 'test', 5, 'test', '2000-11-11', 159, NULL, NULL, NULL),
+(3, 'a', 'a', '2023-12-12', 'a', 'a', 2, 'test', '2023-12-14', 148, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1546,6 +1548,13 @@ CREATE TABLE `user_data_bkp_history` (
   `print_lhu` tinyint(1) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data_bkp_history`
+--
+
+INSERT INTO `user_data_bkp_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_kedatangan`, `nama_produsen`, `nama_supplier`, `jumlah_bahan`, `id_tb_pdf_book`, `print_lhu`, `users`) VALUES
+(1, 'b', 'b', '2002-11-11', '2000-11-11', '2003-11-12', 'test', 2, 160, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1575,7 +1584,7 @@ CREATE TABLE `user_data_lhu_history` (
 --
 
 INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `is_active`, `active_print_cover`, `active_print_lhu`, `print_date`, `users`) VALUES
-(91, 'RGLF2023', '001', '2023-12-16', '2023-12-21', '2023-12-30', 5, 'BATCH', 156, 1, NULL, NULL, NULL, NULL);
+(91, 'RGLF2023', '001', '2023-12-16', '2023-12-21', '2023-12-30', 5, 'BATCH', 156, 1, 1, 1, '2023-12-10', 13);
 
 -- --------------------------------------------------------
 
@@ -1651,7 +1660,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (15, 4, 'Prodak', 'item/prodak', 'fa fa-fw fa-sharp fa-light fa-capsules', 1),
 (17, 5, 'Users Management', 'superuser/usersmanagement', 'fa fa-solid fa-users', 1),
 (18, 2, 'BBP', 'user/bbp', 'fas fa-fw fa-sharp fa-light fa-book', 1),
-(19, 2, 'BBK', 'user/bbk', 'fas fa-fw fa-sharp fa-light fa-book ', 1),
+(19, 2, 'BBA', 'user/bba', 'fas fa-fw fa-sharp fa-light fa-book ', 1),
 (20, 2, 'BKP', 'user/bkp', 'fas fa-fw fa-sharp fa-light fa-book ', 1);
 
 --
@@ -1781,13 +1790,13 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_bbp_bba_history`
 --
 ALTER TABLE `user_data_bbp_bba_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_data_bkp_history`
 --
 ALTER TABLE `user_data_bkp_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_data_lhu_history`
