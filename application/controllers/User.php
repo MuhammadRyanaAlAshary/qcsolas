@@ -161,25 +161,25 @@ class  User extends CI_Controller
         }
     } 
 
-    public function bbk()
+    public function bba()
     {
-        $data['title'] = 'BBK';
+        $data['title'] = 'BBA';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['datalhu'] = $this->menu->getlhuBBK();
+        $data['datalhu'] = $this->menu->getlhuBBA();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('user/bbk', $data);
+        $this->load->view('user/bba', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/query1');
     }
 
-    public function addBBK()
+    public function addBBA()
     {
-        $data['title'] = 'Data BBK LHU';
+        $data['title'] = 'Data BBA LHU';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -187,7 +187,7 @@ class  User extends CI_Controller
                   FROM tb_pdf_book
                   JOIN produk
                   ON tb_pdf_book.id_produk = produk.id
-                  WHERE tb_pdf_book.jenis_lhu = 'BBK' ";
+                  WHERE tb_pdf_book.jenis_lhu = 'BBA' ";
 
         $data['dataLhu'] = $this->db->query($query)->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
@@ -200,18 +200,18 @@ class  User extends CI_Controller
         $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
         $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
         $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
-
+        
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('user/add-bbk', $data);
+            $this->load->view('user/add-bba', $data);
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->add_lhu_bbp_bbk();
+            $this->menu->add_lhu_bbp_bba();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/bbk/');
+            redirect('user/bba/');
         }
     } 
 

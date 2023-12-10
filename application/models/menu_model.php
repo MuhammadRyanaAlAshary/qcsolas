@@ -29,44 +29,44 @@ class  Menu_model extends CI_Model
 
     public function getlhuBBP()
     {
-        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
-                    FROM user_data_lhu_history  
+        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
+                    FROM user_data_bbp_bba_history
                     JOIN tb_pdf_book
-                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                    ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
                     JOIN produk 
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
-                    ON user_data_lhu_history.users = user.id
+                    ON user_data_bbp_bba_history.users = user.id
                     WHERE tb_pdf_book.jenis_lhu = 'BBP' ";
 
         return $this->db->query($query)->result_array();
     }
 
-    public function getlhuBBK()
+    public function getlhuBBA()
     {
-        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
-                    FROM user_data_lhu_history  
-                    JOIN tb_pdf_book
-                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
-                    JOIN produk 
-                    ON tb_pdf_book.id_produk = produk.id
-                    LEFT JOIN user 
-                    ON user_data_lhu_history.users = user.id
-                    WHERE tb_pdf_book.jenis_lhu = 'BBK' ";
+        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
+                FROM user_data_bbp_bba_history
+                JOIN tb_pdf_book
+                ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN produk 
+                ON tb_pdf_book.id_produk = produk.id
+                LEFT JOIN user 
+                ON user_data_bbp_bba_history.users = user.id
+                WHERE tb_pdf_book.jenis_lhu = 'BBA' ";
 
         return $this->db->query($query)->result_array();
     }
 
     public function getlhuBKP()
     {
-        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
-                    FROM user_data_lhu_history  
+        $query = "SELECT user_data_bkp_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bkp_history.*, user.name
+                    FROM user_data_bkp_history
                     JOIN tb_pdf_book
-                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                    ON user_data_bkp_history.id_tb_pdf_book = tb_pdf_book.id
                     JOIN produk 
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
-                    ON user_data_lhu_history.users = user.id
+                    ON user_data_bkp_history.users = user.id
                     WHERE tb_pdf_book.jenis_lhu = 'BKP' ";
 
         return $this->db->query($query)->result_array();
@@ -305,7 +305,7 @@ class  Menu_model extends CI_Model
             'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
             'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
             'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-            'tgl_kedatangan' => htmlspecialchars($this->input->post('tgl_kedatangan', true)),
+            'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
             'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
             'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
             'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),

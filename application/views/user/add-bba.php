@@ -8,7 +8,7 @@
         </div>
         <div class="card-body col-sm-10">
             <div class="table-responsive">
-                <?= form_open_multipart('user/tambahlhu'); ?>
+                <?= form_open_multipart('user/addBBA'); ?>
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="nomer_analsia" class="col-sm-2 col-form-label">Nomer Analisa</label>
+                    <label for="nomer_analisa" class="col-sm-2 col-form-label">Nomer Analisa</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="nomer_analisa" name="nomer_analisa" required>
                         <?= form_error('nomer_analisa', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -66,7 +66,7 @@
                 <div class="form-group row">
                     <label for="jumlah_penerimaan" class="col-sm-2 col-form-label">Jumlah Penerimaan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="jumlah_penerimaan" name="jumlah_penerimaan" required>
+                        <input type="number" class="form-control" id="jumlah_penerimaan" name="jumlah_penerimaan" required>
                         <?= form_error('jumlah_penerimaan', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
