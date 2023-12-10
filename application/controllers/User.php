@@ -56,11 +56,11 @@ class  User extends CI_Controller
 
     public function datalhuuser()
     {
-        $data['title'] = 'Data LHU';
+        $data['title'] = 'Obat Jadi';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['datalhu'] = $this->menu->getlhuUser();
+        $data['datalhu'] = $this->menu->getlhuObatJadi();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -77,9 +77,10 @@ class  User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $query = "SELECT tb_pdf_book.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu
-        FROM tb_pdf_book
-        JOIN produk
-        ON tb_pdf_book.id_produk = produk.id";
+                  FROM tb_pdf_book
+                  JOIN produk
+                  ON tb_pdf_book.id_produk = produk.id
+                  WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' ";
 
         $data['dataLhu'] = $this->db->query($query)->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
@@ -105,4 +106,165 @@ class  User extends CI_Controller
             redirect('user/datalhuuser/');
         }
     }
+
+    public function bbp()
+    {
+        $data['title'] = 'BBP';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->getlhuBBP();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/bbp', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }
+
+    public function addBBP()
+    {
+        $data['title'] = 'Data BBP LHU';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT tb_pdf_book.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu
+                  FROM tb_pdf_book
+                  JOIN produk
+                  ON tb_pdf_book.id_produk = produk.id
+                  WHERE tb_pdf_book.jenis_lhu = 'BBP' ";
+
+        $data['dataLhu'] = $this->db->query($query)->result_array();
+        $data['satuan'] = $this->db->get('satuan')->result_array();
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('produsen', 'Produsen', 'required');
+        $this->form_validation->set_rules('supplier', 'Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
+        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
+        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/add-bbp', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->add_lhu_bbp_bbk();
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bbp/');
+        }
+    } 
+
+    public function bba()
+    {
+        $data['title'] = 'BBA';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->getlhuBBA();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/bba', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }
+
+    public function addBBA()
+    {
+        $data['title'] = 'Data BBA LHU';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT tb_pdf_book.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu
+                  FROM tb_pdf_book
+                  JOIN produk
+                  ON tb_pdf_book.id_produk = produk.id
+                  WHERE tb_pdf_book.jenis_lhu = 'BBA' ";
+
+        $data['dataLhu'] = $this->db->query($query)->result_array();
+        $data['satuan'] = $this->db->get('satuan')->result_array();
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('produsen', 'Produsen', 'required');
+        $this->form_validation->set_rules('supplier', 'Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
+        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
+        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
+        
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/add-bba', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->add_lhu_bbp_bba();
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bba/');
+        }
+    } 
+
+    public function bkp()
+    {
+        $data['title'] = 'BKP';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->getlhuBKP();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/bkp', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }
+
+    public function addBKP()
+    {
+        $data['title'] = 'Data BKP LHU';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT tb_pdf_book.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu
+                  FROM tb_pdf_book
+                  JOIN produk
+                  ON tb_pdf_book.id_produk = produk.id
+                  WHERE tb_pdf_book.jenis_lhu = 'BKP' ";
+
+        $data['dataLhu'] = $this->db->query($query)->result_array();
+        $data['satuan'] = $this->db->get('satuan')->result_array();
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('tanggal_kedatangan', 'Tanggal Kedatangan', 'required');
+        $this->form_validation->set_rules('nama_produsen', 'Nama Produsen', 'required');
+        $this->form_validation->set_rules('nama_supplier', 'Nama Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_bahan', 'Jumlah Bahan', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/add-bkp', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->add_data_bkp_history();
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bkp/');
+        }
+    } 
 }

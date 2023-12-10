@@ -84,7 +84,7 @@ class  item extends CI_Controller
 
         $this->form_validation->set_rules('kode_produk', 'Kode Produk', 'required');
         $this->form_validation->set_rules('produk_type', 'Produk Type', 'required');
-        $this->form_validation->set_rules('sales_type', 'Sales Type', 'required');
+        $this->form_validation->set_rules('sales_type', 'Sales Type');
         $this->form_validation->set_rules('produk_name', 'Prodak', 'required');
 
         if ($this->form_validation->run() == false) {

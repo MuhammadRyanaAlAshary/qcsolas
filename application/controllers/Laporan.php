@@ -51,4 +51,16 @@ class Laporan extends CI_Controller
         $data['datalhu'] = $this->db->query($query)->row_array();
         redirect('./assets/data/' . $data['datalhu']['file_lhu']);
     }
+
+    public function printLhuBBA($id){
+
+    }
+
+    public function printLhuBBP($id) {
+
+    }
+
+    public function printLhuBKP($id) {
+
+    }
 }

@@ -12,7 +12,7 @@ class  Menu_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function getlhuUser()
+    public function getlhuObatJadi()
     {
         $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
                     FROM user_data_lhu_history  
@@ -21,7 +21,53 @@ class  Menu_model extends CI_Model
                     JOIN produk 
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
-                    ON user_data_lhu_history.users = user.id";
+                    ON user_data_lhu_history.users = user.id
+                    WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' ";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getlhuBBP()
+    {
+        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
+                    FROM user_data_bbp_bba_history
+                    JOIN tb_pdf_book
+                    ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
+                    JOIN produk 
+                    ON tb_pdf_book.id_produk = produk.id
+                    LEFT JOIN user 
+                    ON user_data_bbp_bba_history.users = user.id
+                    WHERE tb_pdf_book.jenis_lhu = 'BBP' ";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getlhuBBA()
+    {
+        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
+                FROM user_data_bbp_bba_history
+                JOIN tb_pdf_book
+                ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN produk 
+                ON tb_pdf_book.id_produk = produk.id
+                LEFT JOIN user 
+                ON user_data_bbp_bba_history.users = user.id
+                WHERE tb_pdf_book.jenis_lhu = 'BBA' ";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getlhuBKP()
+    {
+        $query = "SELECT user_data_bkp_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bkp_history.*, user.name
+                    FROM user_data_bkp_history
+                    JOIN tb_pdf_book
+                    ON user_data_bkp_history.id_tb_pdf_book = tb_pdf_book.id
+                    JOIN produk 
+                    ON tb_pdf_book.id_produk = produk.id
+                    LEFT JOIN user 
+                    ON user_data_bkp_history.users = user.id
+                    WHERE tb_pdf_book.jenis_lhu = 'BKP' ";
 
         return $this->db->query($query)->result_array();
     }
@@ -232,6 +278,41 @@ class  Menu_model extends CI_Model
         ];
 
         $this->db->insert('user_data_lhu_history', $data);
+    }
+
+    public function add_lhu_bbp_bbk()
+    {
+        // cek jika ada gambar yang di upload
+        $data = [
+            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+            'produsen' => htmlspecialchars($this->input->post('produsen', true)),
+            'supplier' => htmlspecialchars($this->input->post('supplier', true)),
+            'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
+            'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+            'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
+            'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+        ];
+
+        $this->db->insert('user_data_bbp_bba_history', $data);
+    }
+
+    public function add_data_bkp_history()
+    {
+        // cek jika ada gambar yang di upload
+        $data = [
+            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+            'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
+            'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
+            'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
+            'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
+            'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+        ];
+
+        $this->db->insert('user_data_bkp_history', $data);
     }
 
     public function printCover($id)
