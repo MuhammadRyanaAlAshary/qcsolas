@@ -77,10 +77,10 @@ class  User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $query = "SELECT tb_pdf_book.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu
-                  FROM tb_pdf_book
-                  JOIN produk
-                  ON tb_pdf_book.id_produk = produk.id
-                  WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' ";
+        FROM tb_pdf_book
+        JOIN produk
+        ON tb_pdf_book.id_produk = produk.id
+        WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' OR tb_pdf_book.jenis_lhu = 'MikroBiologi BB' OR tb_pdf_book.jenis_lhu = 'MikroBiologi OJ'";
 
         $data['dataLhu'] = $this->db->query($query)->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
@@ -140,6 +140,7 @@ class  User extends CI_Controller
 
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('tgl_sampling', 'Tanggal Sampling', 'required');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
         $this->form_validation->set_rules('produsen', 'Produsen', 'required');
         $this->form_validation->set_rules('supplier', 'Supplier', 'required');
@@ -155,7 +156,7 @@ class  User extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->add_lhu_bbp_bbk();
+            $this->menu->add_lhu_bbp_bba();
             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
             redirect('user/bbp/');
         }
@@ -194,6 +195,7 @@ class  User extends CI_Controller
 
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('tgl_sampling', 'Tanggal Sampling', 'required');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
         $this->form_validation->set_rules('produsen', 'Produsen', 'required');
         $this->form_validation->set_rules('supplier', 'Supplier', 'required');

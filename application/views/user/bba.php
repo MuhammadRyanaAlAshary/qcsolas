@@ -34,6 +34,7 @@
                             <th scope="col">Jenis Lhu</th>
                             <th scope="col">N.Analisa</th>
                             <th scope="col">N.Batch</th>
+                            <th scope="col">Tgl.Sampling</th>
                             <th scope="col">Exp.Date</th>
                             <th scope="col">Produsen</th>
                             <th scope="col">Supplier</th>
@@ -55,6 +56,7 @@
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td><?= $dl['nomer_analisa']; ?></td>
                                 <td><?= $dl['nomer_batch']; ?></td>
+                                <td><?= $dl['tgl_sampling']; ?></td>
                                 <td><?= $dl['exp_date']; ?></td>
                                 <td><?= $dl['produsen']; ?></td>
                                 <td><?= $dl['supplier']; ?></td>
@@ -66,7 +68,7 @@
                                 <td>
                                 <?php if ($dl['print_lhu'] == 1) : ?>
                                 <?php else : ?>
-                                    <a href="<?= base_url('Laporan/index/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                    <a href="<?= base_url('Laporan/printLhuBBA/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                 <?php endif; ?>
                                 </td>
                             </tr>

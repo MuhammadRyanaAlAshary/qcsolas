@@ -64,7 +64,7 @@
                                 <td>
                                 <?php if ($dl['print_lhu'] == 1) : ?>
                                 <?php else : ?>
-                                    <a href="<?= base_url('Laporan/index/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                    <a href="<?= base_url('Laporan/printLhuBKP/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                 <?php endif; ?>
                                 </td>
                             </tr>
