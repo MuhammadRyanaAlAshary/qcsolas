@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form class="user" method="post" action="<?= base_url('superuser'); ?>">
+                <form class="user" method="post" action="<?= base_url('superuser/addUser'); ?>">
                     <div class="form-group">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
@@ -52,6 +52,7 @@
                             <div class="form-group">
                                 <label for="role_id">User Access</label>
                                 <select class="form-control" id="role_id" name="role_id">
+                                    <option selected>-- Pilih User Access -- </option>                                        
                                     <option value="1">Administrator</option>
                                     <option value="2">User</option>
                                     <option value="3">Superuser</option>

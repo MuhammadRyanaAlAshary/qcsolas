@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Muhammad Ryana Al Ashary <?= date('Y'); ?></span>
+            <span>Copyright &copy; PT. Solas Langgeng Sejahtera <?= date('Y'); ?></span>
         </div>
     </div>
 </footer>
@@ -116,7 +116,6 @@
     })
 </script> -->
 
-<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/script.js"></script>
 <script>
     // Call the dataTables jQuery plugin
@@ -124,7 +123,6 @@
         $('#dataTable').DataTable();
     });
 </script>
-
 
 </body>
 

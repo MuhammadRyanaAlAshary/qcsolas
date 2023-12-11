@@ -1,21 +1,21 @@
 const flashData = $('.flash-data').data('flashdata');
 
 if (flashData) {
-    Swal({
-        title: 'Sukses',
-        text: '' + flashData,
-        type: 'success'
+    Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "" + flashData,
     });
 }
 
-// // tombol-hapus
+// tombol-hapus
 $('.tombol-hapus').on('click', function (e) {
 
     e.preventDefault();
     const href = $(this).attr('href');
 
     Swal({
-        title: 'Apakah anda yakin',
+        title: 'Apakah anda yakin?',
         text: "Data akan Dihapus",
         type: 'warning',
         showCancelButton: true,
@@ -35,7 +35,7 @@ $('.tombol-print').on('click', function (e) {
     e.preventDefault();
     const href = $(this).attr('href');
 
-    Swal({
+    Swal.fire({
         title: 'Apakah anda yakin ingin print dokumen?',
         text: "Data akan di print",
         type: 'warning',

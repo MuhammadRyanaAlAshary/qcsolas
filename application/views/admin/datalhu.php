@@ -1,17 +1,13 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <?php if ($this->session->flashdata('flash')) : ?>
-        <!--<div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data LHU<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data LHU Berhasil Di Tambahkan",
+        });
+    </script>
     <?php endif; ?>
     <i class="icofont-angle-double-left"></i>
     <!-- Page Heading -->
@@ -53,8 +49,7 @@
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td>
                                     <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-                                    <a href="<?= base_url('admin/editlhu/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    <a href="<?= base_url('admin/hapuslhu/') . $dl['id']; ?>/<?= $dl['file_lhu']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash-alt" aria-hidden="true"></i> Hapus</a>
+                                    <a href="<?= base_url('admin/editlhu/') . $dl['id_tb_pdf_book']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

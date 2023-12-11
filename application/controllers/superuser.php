@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class  superuser extends CI_Controller
+class superuser extends CI_Controller
 {
     public function __construct()
     {
@@ -12,9 +12,102 @@ class  superuser extends CI_Controller
         is_logged_in();
     }
 
-    public function index()
+    public function role()
     {
-        $data['title'] = 'Registration';
+        $data['title'] = 'Role';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['role'] = $this->db->get('user_role')->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('superuser/role', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }
+
+    public function roleAdd()
+    {
+        $this->form_validation->set_rules('role', 'Role', 'required');
+
+        $this->menu->roleAdd();
+        $this->session->set_flashdata('flash', 'Data Role Berhasil Di Tambahkan');
+        redirect('superuser/role');    
+    }
+
+    public function roleDeleted($id)
+    {
+        $this->menu->deleteRoleByID($id);
+        $this->session->set_flashdata('flash', 'Data Role Berhasil Di Hapus');
+        redirect('superuser/role');    
+    }
+
+    public function roleaccess($role_id)
+    {
+        $data['title'] = 'Role Access';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['role'] = $this->db->get_where('user_role', ['id' => $role_id])->row_array();
+
+        $this->db->where('id !=', 1);
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('superuser/roleaccess', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }    
+
+    public function changeaccess()
+    {
+        $menu_id = $this->input->post('menuId');
+        $role_id = $this->input->post('roleId');
+
+        $data = [
+            'role_id' => $role_id,
+            'menu_id' => $menu_id
+        ];
+
+        $result = $this->db->get_where('user_access_menu', $data);
+
+        if ($result->num_rows() < 1) {
+            $this->db->insert('user_access_menu', $data);
+        } else {
+            $this->db->delete('user_access_menu', $data);
+        }
+
+        $this->session->set_flashdata('flash', 'Change Access');
+    }
+
+    public function usersManagement()
+    {
+        $data['title'] = 'Users Management';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT name, email, role, date_created, user.id 
+                    FROM user
+                    JOIN user_role 
+                    ON user.role_id = user_role.id;";
+
+        $data['data_user'] = $this->db->query($query)->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('superuser/users-management', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1');
+    }
+
+    public function addUser()
+    {
+        $data['title'] = 'Add Users';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -38,7 +131,7 @@ class  superuser extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('superuser/registration');
+            $this->load->view('superuser/add-user');
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
@@ -51,68 +144,19 @@ class  superuser extends CI_Controller
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => htmlspecialchars($this->input->post('role_id', true)),
                 'is_active' => 1,
-                'date_created' => time()
-
+                'date_created' => date("Y-m-d")
             ];
 
             $this->db->insert('user', $data);
             $this->session->set_flashdata('flash', 'Data User Berhasil Ditambahkan');
-            redirect('superuser');
+            redirect('superuser/usersmanagement');
         }
     }
-    public function role()
+
+    public function deleteUser($id)
     {
-        $data['title'] = 'Role';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $data['role'] = $this->db->get('user_role')->result_array();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('superuser/role', $data);
-        $this->load->view('templates/footer');
-        $this->load->view('templates/query1');
-    }
-
-    public function roleaccess($role_id)
-    {
-        $data['title'] = 'Role Access';
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $data['role'] = $this->db->get_where('user_role', ['id' => $role_id])->row_array();
-
-        $this->db->where('id !=', 1);
-        $data['menu'] = $this->db->get('user_menu')->result_array();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('superuser/roleaccess', $data);
-        $this->load->view('templates/footer');
-        $this->load->view('templates/query1');
-    }
-
-    public function changeaccess()
-    {
-        $menu_id = $this->input->post('menuId');
-        $role_id = $this->input->post('roleId');
-
-        $data = [
-            'role_id' => $role_id,
-            'menu_id' => $menu_id
-        ];
-
-        $result = $this->db->get_where('user_access_menu', $data);
-
-        if ($result->num_rows() < 1) {
-            $this->db->insert('user_access_menu', $data);
-        } else {
-            $this->db->delete('user_access_menu', $data);
-        }
-
-        $this->session->set_flashdata('flash', 'Change Access');
+        $this->menu->deleteUserByID($id);
+        $this->session->set_flashdata('flash', 'Data User Berhasil Di Hapus');
+        redirect('superuser/usersmanagement');    
     }
 }

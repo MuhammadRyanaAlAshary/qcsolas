@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2023 at 10:41 AM
+-- Generation Time: Dec 10, 2023 at 06:16 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -40,9 +40,10 @@ CREATE TABLE `jenis_lhu` (
 INSERT INTO `jenis_lhu` (`id`, `jenis_lhu`) VALUES
 (1, 'Obat Jadi'),
 (2, 'BBA'),
-(3, 'BBT'),
-(4, 'Mikro Biologi BB'),
-(5, 'Mikro Biologi OJ');
+(3, 'BBP'),
+(4, 'MikroBiologi BB'),
+(5, 'MikroBiologi OJ'),
+(7, 'BKP');
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,7 @@ CREATE TABLE `produk` (
   `id` int(11) NOT NULL,
   `produk_type` varchar(256) NOT NULL,
   `kode_produk` varchar(256) NOT NULL,
-  `sales_type` varchar(256) NOT NULL,
+  `sales_type` varchar(256) DEFAULT NULL,
   `produk_name` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -105,8 +106,8 @@ INSERT INTO `produk` (`id`, `produk_type`, `kode_produk`, `sales_type`, `produk_
 (40, 'Prodak Jadi', 'REGKFCT50', 'REG', 'Fucotrap Kapsul 50'),
 (41, 'Prodak Jadi', 'REGLFCT100', 'REG', 'Fucotrap Syrup 100'),
 (42, 'Prodak Jadi', 'REGLGDL60', 'REG', 'Gigadryl Syrup 60'),
-(43, 'Prodak Jadi', 'EXLGDL60', 'Export', 'Gigadryl Syrup 60 Ex.CAM'),
-(44, 'Prodak Jadi', 'EXLGDL60', 'Export', 'Gigadryl Syrup 60 Ex.MYA'),
+(43, 'Prodak Jadi', 'EXLGDLCAM60', 'Export', 'Gigadryl Syrup 60 Ex.CAM'),
+(44, 'Prodak Jadi', 'EXLGDLMYA60', 'Export', 'Gigadryl Syrup 60 Ex.MYA'),
 (45, 'Prodak Jadi', 'REGKGTS30', 'REG', 'Glutasol Kapsul 30'),
 (46, 'Prodak Jadi', 'REGLKMS15', 'REG', 'Kamolas Drops 15'),
 (47, 'Prodak Jadi', 'REGLKMS F60', 'REG', 'Kamolas Forte 60'),
@@ -169,8 +170,8 @@ INSERT INTO `produk` (`id`, `produk_type`, `kode_produk`, `sales_type`, `produk_
 (104, 'Prodak Jadi', '3SKSVMAX30', '3S', 'Solvita Max 30 kapsul'),
 (105, 'Prodak Jadi', '3SKSVMAX50', '3S', 'Solvita Max Kapsul 50'),
 (106, 'Prodak Jadi', '3SLSVP60', '3S', 'Solvita Plus Syrup 60'),
-(107, 'Prodak Jadi', 'EXLSVP60', 'Export', 'Solvita Plus Syrup 60 Ex.CAM'),
-(108, 'Prodak Jadi', 'EXLSVP60', 'Export', 'Solvita Plus Syrup 60 Ex.MYA'),
+(107, 'Prodak Jadi', 'EXLSVPCAM60', 'Export', 'Solvita Plus Syrup 60 Ex.CAM'),
+(108, 'Prodak Jadi', 'EXLSVPMYA60', 'Export', 'Solvita Plus Syrup 60 Ex.MYA'),
 (109, 'Prodak Jadi', '3SLSVA60', '3S', 'Solvita Syrup 60'),
 (110, 'Prodak Jadi', 'EXLSVA60', 'Export', 'Solvita Syrup 60 Ex.MYA'),
 (111, 'Prodak Jadi', '3SKSVZ100', '3S', 'Solvita Z 10 Kapsul'),
@@ -191,8 +192,8 @@ INSERT INTO `produk` (`id`, `produk_type`, `kode_produk`, `sales_type`, `produk_
 (126, 'Prodak Jadi', '3SKVGM30', '3S', 'Vegamon Kapsul'),
 (127, 'Prodak Jadi', 'REGKVRN100', 'REG', 'Verona Kapsul'),
 (128, 'Prodak Jadi', 'NRLVCD60', 'NON.REG', 'Vical-D Syrup 60'),
-(129, 'Prodak Jadi', 'EXLVCD60', 'Export', 'Vical-D Syrup 60 Ex.CAM'),
-(130, 'Prodak Jadi', 'EXLVCD60', 'Export', 'Vical-D Syrup 60 Ex.MYA'),
+(129, 'Prodak Jadi', 'EXLVCDCAM60', 'Export', 'Vical-D Syrup 60 Ex.CAM'),
+(130, 'Prodak Jadi', 'EXLVCDMYA60', 'Export', 'Vical-D Syrup 60 Ex.MYA'),
 (131, 'Prodak Jadi', 'REGKVTX30', 'REG', 'Vistanax Kapsul'),
 (132, 'Prodak Jadi', '3SKVTWL30', '3S', 'Vitawell Kapsul'),
 (133, 'Prodak Jadi', '3SKVTM100', '3S', 'Vitromega Kapsul'),
@@ -803,9 +804,9 @@ INSERT INTO `produk` (`id`, `produk_type`, `kode_produk`, `sales_type`, `produk_
 (738, 'Bahan Kemas', 'K001', '', 'Inner Box Anstrep kaplet Duplex 310g,UV'),
 (739, 'Bahan Kemas', 'K003', '', 'Inner Box Antrexol Kapsul Duplex 310g,UV'),
 (740, 'Bahan Kemas', 'K004', '', 'Inner Box Arfen Kaplet Duplex 310g,UV'),
-(741, 'Bahan Kemas', 'K133', '', 'Inner Box Arfen Suspensi Forte Ivory 300g,UV'),
-(742, 'Bahan Kemas', 'K132', '', 'Inner Box Arfen Suspensi Ivory 300g,UV');
+(741, 'Bahan Kemas', 'K133', '', 'Inner Box Arfen Suspensi Forte Ivory 300g,UV');
 INSERT INTO `produk` (`id`, `produk_type`, `kode_produk`, `sales_type`, `produk_name`) VALUES
+(742, 'Bahan Kemas', 'K132', '', 'Inner Box Arfen Suspensi Ivory 300g,UV'),
 (743, 'Bahan Kemas', 'K142', '', 'Inner Box Ascolas Kapsul Ivory 300g,UV'),
 (744, 'Bahan Kemas', 'K005', '', 'Inner Box Asten Soft Kapsul Duplex 310g,UV'),
 (745, 'Bahan Kemas', 'K006', '', 'Inner Box Axtan Kapsul Duplex 310g,UV'),
@@ -1427,8 +1428,19 @@ CREATE TABLE `tb_pdf_book` (
 --
 
 INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu`) VALUES
-(140, 6, 'BBT', '686f11213c1a85aba29565aee3435208.pdf'),
-(141, 317, 'BBT', '9f961c9d326fef0d1e478b820dbf9759.pdf');
+(148, 58, 'BBA', '8778e4f0f1396fb90fc3dfbde59ce3af.pdf'),
+(149, 2, 'Mikro Biologi BB', '4e8c4d32b6b3c77ade883c5673120189.pdf'),
+(150, 18, 'Mikro Biologi OJ', 'c7ecdb8a8333d6f4fe7ec909e6b6b988.pdf'),
+(151, 28, 'Mikro Biologi BB', 'default.pdf'),
+(152, 12, 'Mikro Biologi BB', 'default.pdf'),
+(153, 1346, 'Obat Jadi', '9f9f90a6886619d2d3561b749c7f31ec.pdf'),
+(154, 6, 'BBT', '62366c65b10d5a17fa56eb93dab4ff0a.pdf'),
+(155, 8, 'Mikro Biologi BB', '3ff3e17279e38abcd6e61bbd7e73b7bf.pdf'),
+(156, 1, 'Obat Jadi', 'default.pdf'),
+(157, 1, 'Obat Jadi', 'default.pdf'),
+(158, 53, 'BBA', 'default.pdf'),
+(159, 157, 'BBP', 'default.pdf'),
+(160, 43, 'BKP', 'default.pdf');
 
 -- --------------------------------------------------------
 
@@ -1444,7 +1456,7 @@ CREATE TABLE `user` (
   `password` varchar(256) NOT NULL,
   `role_id` int(11) NOT NULL,
   `is_active` int(1) NOT NULL,
-  `date_created` int(11) NOT NULL
+  `date_created` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1452,11 +1464,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(3, 'Ryan', 'ryana6661007@gmail.com', 'default.jpg', '$2y$10$TdJeRU9/rK1wVNEuB1Zkoe3Wi4dpBgzWJMhXaEhD79DuAzirx0cMq', 3, 1, 1698718444),
-(4, 'SLS.MGR.QC', 'mgr@gmail.com', 'default.jpg', '$2y$10$9/6uaCYqpBWjTtXWszWn8egSaOuBi/OLWIfjqDNpuUm.giRXp3386', 1, 1, 1698718470),
-(5, 'SLS.QC.1', 'qc1@gmail.com', 'default.jpg', '$2y$10$GQCW.2kaITWfKA2KaHgkv.Q7UFnTM4KSDmskxnFYjlLf7z8/c97T6', 2, 1, 1700232093),
-(10, 'Aam Priatna', 'ryana666fdsfdsf1007@gmail.com', 'default.jpg', '$2y$10$tHmVJxe9xVsaWcLiMVzDJugZ8djGvbYUwQdKyrdh9crybfPCgdyQe', 1, 1, 1701141032),
-(11, 'Valentio', 'valen@gmail.com', 'default.jpg', '$2y$10$xvI9UZe6syAZ26ipSm.SS.MQ4T8UBdQqoeEoeNOzOrmUREIZqHKmy', 2, 1, 1701400282);
+(3, 'Ryan', 'ryana6661007@gmail.com', 'default.jpg', '$2y$10$TdJeRU9/rK1wVNEuB1Zkoe3Wi4dpBgzWJMhXaEhD79DuAzirx0cMq', 3, 1, '0000-00-00'),
+(4, 'SLS.MGR.QC', 'mgr@gmail.com', 'default.jpg', '$2y$10$9/6uaCYqpBWjTtXWszWn8egSaOuBi/OLWIfjqDNpuUm.giRXp3386', 1, 1, '0000-00-00'),
+(5, 'SLS.QC.1', 'qc1@gmail.com', 'default.jpg', '$2y$10$GQCW.2kaITWfKA2KaHgkv.Q7UFnTM4KSDmskxnFYjlLf7z8/c97T6', 2, 1, '0000-00-00'),
+(10, 'Aam Priatna', 'ryana666fdsfdsf1007@gmail.com', 'default.jpg', '$2y$10$tHmVJxe9xVsaWcLiMVzDJugZ8djGvbYUwQdKyrdh9crybfPCgdyQe', 1, 1, '2017-01-14'),
+(11, 'Valentio', 'valen@gmail.com', 'default.jpg', '$2y$10$xvI9UZe6syAZ26ipSm.SS.MQ4T8UBdQqoeEoeNOzOrmUREIZqHKmy', 1, 1, '0000-00-00'),
+(13, 'Valentio', 'admin@gmail.com', 'default.jpg', '$2y$10$MItJ9TOLnxluR7H2mn5s3OBxJbOy1LKEz12q5PoNbCTv4oLUU3rW2', 3, 1, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -1476,14 +1489,72 @@ CREATE TABLE `user_access_menu` (
 
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (1, 1, 1),
-(20, 2, 2),
-(25, 1, 4),
-(27, 3, 2),
-(30, 3, 5),
-(31, 3, 1),
 (32, 1, 2),
+(25, 1, 4),
+(20, 2, 2),
+(31, 3, 1),
+(27, 3, 2),
+(41, 3, 3),
 (34, 3, 4),
-(41, 3, 3);
+(30, 3, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_data_bbp_bba_history`
+--
+
+CREATE TABLE `user_data_bbp_bba_history` (
+  `id` int(11) NOT NULL,
+  `nomer_analisa` varchar(200) NOT NULL,
+  `nomer_batch` varchar(200) NOT NULL,
+  `exp_date` date NOT NULL,
+  `produsen` varchar(200) NOT NULL,
+  `supplier` varchar(200) NOT NULL,
+  `jumlah_penerimaan` int(11) NOT NULL,
+  `no_protap_analisa_bb` varchar(200) NOT NULL,
+  `tgl_berlaku` date NOT NULL,
+  `id_tb_pdf_book` int(11) NOT NULL,
+  `print_lhu` tinyint(1) DEFAULT NULL,
+  `print_date` date DEFAULT NULL,
+  `users` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data_bbp_bba_history`
+--
+
+INSERT INTO `user_data_bbp_bba_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `produsen`, `supplier`, `jumlah_penerimaan`, `no_protap_analisa_bb`, `tgl_berlaku`, `id_tb_pdf_book`, `print_lhu`, `print_date`, `users`) VALUES
+(1, 'test', 'test', '2003-11-11', '12', '12', 12, '12', '1970-01-01', 159, NULL, NULL, NULL),
+(2, 'test', 'test', '2000-11-11', 'test', 'test', 5, 'test', '2000-11-11', 159, NULL, NULL, NULL),
+(3, 'a', 'a', '2023-12-12', 'a', 'a', 2, 'test', '2023-12-14', 148, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_data_bkp_history`
+--
+
+CREATE TABLE `user_data_bkp_history` (
+  `id` int(11) NOT NULL,
+  `nomer_analisa` varchar(200) NOT NULL,
+  `nomer_batch` varchar(200) NOT NULL,
+  `exp_date` date NOT NULL,
+  `tgl_kedatangan` date NOT NULL,
+  `nama_produsen` varchar(150) NOT NULL,
+  `nama_supplier` varchar(150) NOT NULL,
+  `jumlah_bahan` int(11) NOT NULL,
+  `id_tb_pdf_book` int(11) NOT NULL,
+  `print_lhu` tinyint(1) DEFAULT NULL,
+  `users` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data_bkp_history`
+--
+
+INSERT INTO `user_data_bkp_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_kedatangan`, `nama_produsen`, `nama_supplier`, `jumlah_bahan`, `id_tb_pdf_book`, `print_lhu`, `users`) VALUES
+(1, 'b', 'b', '2002-11-11', '2000-11-11', '2003-11-12', 'test', 2, 160, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1513,9 +1584,7 @@ CREATE TABLE `user_data_lhu_history` (
 --
 
 INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `is_active`, `active_print_cover`, `active_print_lhu`, `print_date`, `users`) VALUES
-(63, 'ABC123', 'MNA123', '2023-12-15', '2023-12-22', '2023-12-20', 10, 'KG', 140, 1, 1, 1, NULL, NULL),
-(64, 'MNB1982', 'MNA123', '2023-12-13', '2023-12-15', '2023-12-18', 10, 'KG', 141, 1, 1, NULL, NULL, NULL),
-(65, 'MNB1982', 'ABC', '2023-12-13', '2023-12-16', '2023-12-25', 5, 'BOTOL', 140, 1, 1, NULL, NULL, NULL);
+(91, 'RGLF2023', '001', '2023-12-16', '2023-12-21', '2023-12-30', 5, 'BATCH', 156, 1, 1, 1, '2023-12-10', 13);
 
 -- --------------------------------------------------------
 
@@ -1581,15 +1650,18 @@ CREATE TABLE `user_sub_menu` (
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
 (1, 1, 'Administrator', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
 (2, 2, 'Dashboard', 'user', 'fas fa-fw fa-tachometer-alt', 1),
-(3, 5, 'Registration', 'superuser', 'fa fa-fw fa-sharp fa-light fa-users', 1),
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
 (7, 1, 'Entry LHU', 'admin/datalhu', 'fas fa-fw fa-sharp fa-light fa-book', 1),
 (8, 4, 'Jenis LHU', 'item', 'fa fa-fw fa-light fa-pen-nib', 1),
-(10, 2, 'Data LHU', 'user/datalhuuser', 'fas fa-fw fa-sharp fa-light fa-book\r\n', 1),
+(10, 2, 'Obat Jadi', 'user/datalhuuser', 'fas fa-fw fa-sharp fa-light fa-book\r\n', 1),
 (13, 4, 'Satuan', 'item/satuan', 'fa fa-fw fa-solid fa-layer-group', 1),
 (14, 5, 'Role', 'superuser/role', 'fas fa-fw fa-user-tie', 1),
-(15, 4, 'Prodak', 'item/prodak', 'fa fa-fw fa-sharp fa-light fa-capsules', 1);
+(15, 4, 'Prodak', 'item/prodak', 'fa fa-fw fa-sharp fa-light fa-capsules', 1),
+(17, 5, 'Users Management', 'superuser/usersmanagement', 'fa fa-solid fa-users', 1),
+(18, 2, 'BBP', 'user/bbp', 'fas fa-fw fa-sharp fa-light fa-book', 1),
+(19, 2, 'BBA', 'user/bba', 'fas fa-fw fa-sharp fa-light fa-book ', 1),
+(20, 2, 'BKP', 'user/bkp', 'fas fa-fw fa-sharp fa-light fa-book ', 1);
 
 --
 -- Indexes for dumped tables
@@ -1624,12 +1696,27 @@ ALTER TABLE `tb_pdf_book`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id` (`role_id`,`menu_id`),
+  ADD KEY `menu_id` (`menu_id`);
+
+--
+-- Indexes for table `user_data_bbp_bba_history`
+--
+ALTER TABLE `user_data_bbp_bba_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_data_bkp_history`
+--
+ALTER TABLE `user_data_bkp_history`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1656,7 +1743,8 @@ ALTER TABLE `user_role`
 -- Indexes for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `menu_id` (`menu_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1666,7 +1754,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `jenis_lhu`
 --
 ALTER TABLE `jenis_lhu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -1684,13 +1772,13 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -1699,10 +1787,22 @@ ALTER TABLE `user_access_menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
+-- AUTO_INCREMENT for table `user_data_bbp_bba_history`
+--
+ALTER TABLE `user_data_bbp_bba_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user_data_bkp_history`
+--
+ALTER TABLE `user_data_bkp_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -1720,7 +1820,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

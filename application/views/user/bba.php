@@ -12,7 +12,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/addBBA/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
     </div>
 
     <!--  Divider -->
@@ -29,40 +29,25 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">K.Prod
-                            </th>
-                            <th scope="col">Nama Produk
-                            </th>
-                            <th scope="col">Jenis Lhu
-                            </th>
-                            <th scope="col">N.Analisa
-                            </th>
-                            <th scope="col">N.Batch
-                            </th>
-                            <th scope="col">Exp.Date
-                            </th>
-                            <th scope="col">Tgl.Prod
-                            </th>
-                            <th scope="col">Tgl.Sampling
-                            </th>
-                            <th scope="col">Qty
-                            </th>
-                            <th scope="col">Sat
-                            </th>
-                            <th scope="col">Print Date
-                            </th>
-                            <th scope="col">Print By
-                            </th>
-                            <th scope="col">Action
-                            </th>
+                            <th scope="col">K.Prod</th>
+                            <th scope="col">Nama Produk</th>
+                            <th scope="col">Jenis Lhu</th>
+                            <th scope="col">N.Analisa</th>
+                            <th scope="col">N.Batch</th>
+                            <th scope="col">Exp.Date</th>
+                            <th scope="col">Produsen</th>
+                            <th scope="col">Supplier</th>
+                            <th scope="col">Jumlah Penerimaan</th>
+                            <th scope="col">No. Protap Analisa BB</th>
+                            <th scope="col">Tanggal Berlaku</th>
+                            <th scope="col">Print Date</th>
+                            <th scope="col">Print By</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($datalhu as $dl) : ?>
-                            <!-- <?php 
-                            var_export($dl);
-                            ?> -->
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $dl['kode_produk']; ?></td>
@@ -71,23 +56,17 @@
                                 <td><?= $dl['nomer_analisa']; ?></td>
                                 <td><?= $dl['nomer_batch']; ?></td>
                                 <td><?= $dl['exp_date']; ?></td>
-                                <td><?= $dl['tgl_produksi']; ?></td>
-                                <td><?= $dl['tgl_sampling']; ?></td>
-                                <td><?= $dl['besaran_batch']; ?></td>
-                                <td><?= $dl['satuan']; ?></td>
+                                <td><?= $dl['produsen']; ?></td>
+                                <td><?= $dl['supplier']; ?></td>
+                                <td><?= $dl['jumlah_penerimaan']; ?></td>
+                                <td><?= $dl['no_protap_analisa_bb']; ?></td>
+                                <td><?= $dl['tgl_berlaku']; ?></td>
                                 <td><?= $dl['print_date']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                <?php if ($dl['active_print_cover'] == 1 && $dl['active_print_lhu'] == 1) : ?>
-                                    <?php if ($dl['active_print_cover'] == 1 && $dl['active_print_lhu'] == 1) : ?>
-                                    <?php endif; ?>
-                                <?php elseif ($dl['active_print_cover'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/printLhu/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
-                                <?php elseif ($dl['active_print_lhu'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/index/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                <?php if ($dl['print_lhu'] == 1) : ?>
                                 <?php else : ?>
                                     <a href="<?= base_url('Laporan/index/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                    <a href="<?= base_url('Laporan/printLhu/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
                                 <?php endif; ?>
                                 </td>
                             </tr>
@@ -99,7 +78,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 <!-- /.container-fluid -->
 

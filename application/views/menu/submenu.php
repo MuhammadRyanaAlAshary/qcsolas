@@ -1,20 +1,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-    <?php if ($this->session->flashdata('flash')) : ?>
-        <!-- <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data Sub Menu<strong>Berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div>-->
-    <?php endif; ?>
-
-    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubmenuModal">Add New Submenu</a>
+    <!-- <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div> -->
+    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newSubmenuModal">Add New Submenu</a>
     <!-- Page Heading -->
     <!--  Divider -->
     <hr class="sidebar-divider">
@@ -35,18 +22,12 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title
-                            </th>
-                            <th scope="col">Menu
-                            </th>
-                            <th scope="col">Url
-                            </th>
-                            <th scope="col">Icon
-                            </th>
-                            <th scope="col">Active
-                            </th>
-                            <th scope="col">Action
-                            </th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Menu</th>
+                            <th scope="col">Url</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +41,6 @@
                                 <td><?= $sm['icon']; ?></td>
                                 <td><?= $sm['is_active']; ?></td>
                                 <td>
-                                    <a href="" class="badge badge-success">Edit</a>
                                     <a href="<?= base_url('menu/hapusSubmenu/') . $sm['id']; ?>" class="badge badge-danger tombol-hapus">Delete</a>
                                 </td>
                             </tr>
@@ -85,12 +65,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fs-5" id="newSubmenuModalLabel">Add New Submenu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="<?= base_url('menu/submenu'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Submenu title">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Submenu Title">
                     </div>
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
@@ -124,3 +103,16 @@
         </div>
     </div>
 </div>
+
+<?php if ($this->session->flashdata('flash')) : ?>
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Sub Menu Berhasil Di Tambahkan!",
+        });
+    </script>
+<?php endif; ?>
+
+<!-- End of Main Content -->
+<script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>

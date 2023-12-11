@@ -21,6 +21,9 @@
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/'); ?>css/table.css" rel="stylesheet">
     <link href="<?= base_url('./assets/img/logo/solaslogo.png'); ?>" rel="shortcut icon">
+
+    <!-- Sweetalert 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
