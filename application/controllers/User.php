@@ -101,9 +101,26 @@ class  User extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->tambahLhuUser();
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/datalhuuser/');
+            $nomer_analisa = $this->input->post('nomer_analisa');
+            // check duplicate nomer analisa
+             $nomerAnalisaObatJadi = $this->menu->checkNomorAnalisaObatJadi($nomer_analisa);
+             $nomerAnalisaBBA_BKP = $this->menu->cheeckNomorAnalisaBBP_BBA($nomer_analisa);
+             $nomerAnalisaBKP = $this->menu->checkNomorAnalisaBKP($nomer_analisa);
+
+             if ($nomerAnalisaObatJadi) {
+                $this->session->set_flashdata('existingObatJadi', 'Kode Analisa Sudah Ada!.');
+                redirect('user/datalhuuser/');
+             } elseif ($nomerAnalisaBBA_BKP) {
+                $this->session->set_flashdata('existingBBA_BKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/datalhuuser/');
+             } elseif ($nomerAnalisaBKP) {
+                $this->session->set_flashdata('existingBKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/datalhuuser/');
+             } else {
+                $this->menu->tambahLhuUser();
+                $this->session->set_flashdata('flash', 'Kode Analisa Sudah Ada!.');
+                redirect('user/datalhuuser/');
+             }
         }
     }
 
@@ -156,9 +173,26 @@ class  User extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->add_lhu_bbp_bba();
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/bbp/');
+            $nomer_analisa = $this->input->post('nomer_analisa');
+            // check duplicate nomer analisa
+             $nomerAnalisaObatJadi = $this->menu->checkNomorAnalisaObatJadi($nomer_analisa);
+             $nomerAnalisaBBA_BKP = $this->menu->cheeckNomorAnalisaBBP_BBA($nomer_analisa);
+             $nomerAnalisaBKP = $this->menu->checkNomorAnalisaBKP($nomer_analisa);
+
+             if ($nomerAnalisaObatJadi) {
+                $this->session->set_flashdata('existingObatJadi', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bbp/');
+             } elseif ($nomerAnalisaBBA_BKP) {
+                $this->session->set_flashdata('existingBBA_BKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bbp/');
+             } elseif ($nomerAnalisaBKP) {
+                $this->session->set_flashdata('existingBKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bbp/');
+             } else {
+                $this->menu->add_lhu_bbp_bba();
+                $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+                redirect('user/bbp/');    
+             }
         }
     } 
 
@@ -211,9 +245,26 @@ class  User extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->add_lhu_bbp_bba();
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/bba/');
+            $nomer_analisa = $this->input->post('nomer_analisa');
+            // check duplicate nomer analisa
+             $nomerAnalisaObatJadi = $this->menu->checkNomorAnalisaObatJadi($nomer_analisa);
+             $nomerAnalisaBBA_BKP = $this->menu->cheeckNomorAnalisaBBP_BBA($nomer_analisa);
+             $nomerAnalisaBKP = $this->menu->checkNomorAnalisaBKP($nomer_analisa);
+
+             if ($nomerAnalisaObatJadi) {
+                $this->session->set_flashdata('existingObatJadi', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bba/');
+             } elseif ($nomerAnalisaBBA_BKP) {
+                $this->session->set_flashdata('existingBBA_BKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bba/');
+             } elseif ($nomerAnalisaBKP) {
+                $this->session->set_flashdata('existingBKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bba/');
+             } else {
+                $this->menu->add_lhu_bbp_bba();
+                $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+                redirect('user/bba/');    
+             }
         }
     } 
 
@@ -264,9 +315,26 @@ class  User extends CI_Controller
             $this->load->view('templates/footer');
             $this->load->view('templates/query1');
         } else {
-            $this->menu->add_data_bkp_history();
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
-            redirect('user/bkp/');
+            $nomer_analisa = $this->input->post('nomer_analisa');
+            // check duplicate nomer analisa
+             $nomerAnalisaObatJadi = $this->menu->checkNomorAnalisaObatJadi($nomer_analisa);
+             $nomerAnalisaBBA_BKP = $this->menu->cheeckNomorAnalisaBBP_BBA($nomer_analisa);
+             $nomerAnalisaBKP = $this->menu->checkNomorAnalisaBKP($nomer_analisa);
+
+             if ($nomerAnalisaObatJadi) {
+                $this->session->set_flashdata('existingObatJadi', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bkp/');
+             } elseif ($nomerAnalisaBBA_BKP) {
+                $this->session->set_flashdata('existingBBA_BKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bkp/');
+             } elseif ($nomerAnalisaBKP) {
+                $this->session->set_flashdata('existingBKP', 'Kode Analisa Sudah Ada!.');
+                redirect('user/bkp/');
+             } else {
+                $this->menu->add_data_bkp_history();
+                $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+                redirect('user/bkp/');    
+             }
         }
     } 
 }

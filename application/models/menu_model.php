@@ -80,6 +80,30 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    public function checkNomorAnalisaObatJadi($id) {
+        $query= "SELECT * 
+                    FROM user_data_lhu_history 
+                    WHERE nomer_analisa = '$id' ";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function cheeckNomorAnalisaBBP_BBA($id){
+        $query= "SELECT * 
+                    FROM user_data_bbp_bba_history 
+                    WHERE nomer_analisa = '$id' ";
+
+        return $this->db->query($query)->result_array();
+    }
+
+    public function checkNomorAnalisaBKP($id) {
+        $query= "SELECT * 
+        FROM user_data_bkp_history 
+        WHERE nomer_analisa = '$id' ";
+
+        return $this->db->query($query)->result_array();
+    }
+
     public function getlhuId($id)
     {
         $query = "SELECT tb_pdf_book.id AS id_tb_pdf_book, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, produk.* 
