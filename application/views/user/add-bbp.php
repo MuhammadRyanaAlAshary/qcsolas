@@ -36,6 +36,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="tgl_sampling" class="col-sm-2 col-form-label">Tanggal Sampling</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" id="tgl_sampling" name="tgl_sampling" required>
+                        <?= form_error('tgl_sampling', '<small class="text-danger pl-3">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="exp_date" class="col-sm-2 col-form-label">Exp Date</label>
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="exp_date" name="exp_date" required>

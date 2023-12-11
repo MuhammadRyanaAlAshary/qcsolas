@@ -22,7 +22,7 @@ class  Menu_model extends CI_Model
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
                     ON user_data_lhu_history.users = user.id
-                    WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' ";
+                    WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' OR tb_pdf_book.jenis_lhu = 'MikroBiologi BB' OR tb_pdf_book.jenis_lhu = 'MikroBiologi OJ' ";
 
         return $this->db->query($query)->result_array();
     }
@@ -280,12 +280,13 @@ class  Menu_model extends CI_Model
         $this->db->insert('user_data_lhu_history', $data);
     }
 
-    public function add_lhu_bbp_bbk()
+    public function add_lhu_bbp_bba()
     {
         // cek jika ada gambar yang di upload
         $data = [
             'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
             'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+            'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
             'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
             'produsen' => htmlspecialchars($this->input->post('produsen', true)),
             'supplier' => htmlspecialchars($this->input->post('supplier', true)),
@@ -343,6 +344,36 @@ class  Menu_model extends CI_Model
 
         $this->db->where('user_data_lhu_history.id', $id);
         $this->db->update('user_data_lhu_history', $data);
+    }
+
+    public function printLhuBBA_BPP($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data = [
+            'users' => $data['user']['id'],
+            'print_lhu' => 1,
+            'print_date' => date("Y-m-d")  
+        ];
+        
+        $this->db->where('user_data_bbp_bba_history.id', $id);
+        $this->db->update('user_data_bbp_bba_history', $data);
+    }
+
+    public function printLhuBKP($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data = [
+            'users' => $data['user']['id'],
+            'print_lhu' => 1,
+            'print_date' => date("Y-m-d")  
+        ];
+        
+        $this->db->where('user_data_bkp_history.id', $id);
+        $this->db->update('user_data_bkp_history', $data);
     }
 
     public function hapuslhubyid($id)
