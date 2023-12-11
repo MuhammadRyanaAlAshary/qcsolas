@@ -10,6 +10,36 @@
     </script>
     <?php endif; ?>
 
+    <?php if ($this->session->flashdata('existingObatJadi')) : ?>
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Duplicate",
+            text: "Kode Analisa Sudah Ada!",
+        });
+    </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('existingBBA_BKP')) : ?>
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Duplicate",
+            text: "Kode Analisa Sudah Ada!",
+        });
+    </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('existingBKP')) : ?>
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Duplicate",
+            text: "Kode Analisa Sudah Ada!",
+        });
+    </script>
+    <?php endif; ?>
+
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
         <div class="col-md-6"><a href="<?= base_url('user/addBBP/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
