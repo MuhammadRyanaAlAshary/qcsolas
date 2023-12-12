@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 06:16 PM
+-- Generation Time: Dec 11, 2023 at 08:37 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1469,7 +1469,7 @@ INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_a
 (5, 'SLS.QC.1', 'qc1@gmail.com', 'default.jpg', '$2y$10$GQCW.2kaITWfKA2KaHgkv.Q7UFnTM4KSDmskxnFYjlLf7z8/c97T6', 2, 1, '0000-00-00'),
 (10, 'Aam Priatna', 'ryana666fdsfdsf1007@gmail.com', 'default.jpg', '$2y$10$tHmVJxe9xVsaWcLiMVzDJugZ8djGvbYUwQdKyrdh9crybfPCgdyQe', 1, 1, '2017-01-14'),
 (11, 'Valentio', 'valen@gmail.com', 'default.jpg', '$2y$10$xvI9UZe6syAZ26ipSm.SS.MQ4T8UBdQqoeEoeNOzOrmUREIZqHKmy', 1, 1, '0000-00-00'),
-(13, 'Valentio', 'admin@gmail.com', 'default.jpg', '$2y$10$MItJ9TOLnxluR7H2mn5s3OBxJbOy1LKEz12q5PoNbCTv4oLUU3rW2', 3, 1, '0000-00-00');
+(13, 'Valentio', 'admin@gmail.com', 'default.jpg', '$2y$10$MItJ9TOLnxluR7H2mn5s3OBxJbOy1LKEz12q5PoNbCTv4oLUU3rW2', 3, 1, '2023-12-01');
 
 -- --------------------------------------------------------
 
@@ -1508,6 +1508,7 @@ CREATE TABLE `user_data_bbp_bba_history` (
   `id` int(11) NOT NULL,
   `nomer_analisa` varchar(200) NOT NULL,
   `nomer_batch` varchar(200) NOT NULL,
+  `tgl_sampling` date NOT NULL,
   `exp_date` date NOT NULL,
   `produsen` varchar(200) NOT NULL,
   `supplier` varchar(200) NOT NULL,
@@ -1524,10 +1525,12 @@ CREATE TABLE `user_data_bbp_bba_history` (
 -- Dumping data for table `user_data_bbp_bba_history`
 --
 
-INSERT INTO `user_data_bbp_bba_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `produsen`, `supplier`, `jumlah_penerimaan`, `no_protap_analisa_bb`, `tgl_berlaku`, `id_tb_pdf_book`, `print_lhu`, `print_date`, `users`) VALUES
-(1, 'test', 'test', '2003-11-11', '12', '12', 12, '12', '1970-01-01', 159, NULL, NULL, NULL),
-(2, 'test', 'test', '2000-11-11', 'test', 'test', 5, 'test', '2000-11-11', 159, NULL, NULL, NULL),
-(3, 'a', 'a', '2023-12-12', 'a', 'a', 2, 'test', '2023-12-14', 148, NULL, NULL, NULL);
+INSERT INTO `user_data_bbp_bba_history` (`id`, `nomer_analisa`, `nomer_batch`, `tgl_sampling`, `exp_date`, `produsen`, `supplier`, `jumlah_penerimaan`, `no_protap_analisa_bb`, `tgl_berlaku`, `id_tb_pdf_book`, `print_lhu`, `print_date`, `users`) VALUES
+(1, 'test', 'test', '0000-00-00', '2003-11-11', '12', '12', 12, '12', '1970-01-01', 159, 1, '2023-12-11', 13),
+(2, 'test', 'test', '0000-00-00', '2000-11-11', 'test', 'test', 5, 'test', '2000-11-11', 159, NULL, '2023-12-11', 13),
+(3, 'a', 'a', '0000-00-00', '2023-12-12', 'a', 'a', 2, 'test', '2023-12-14', 148, 1, '2023-12-11', 13),
+(4, 'test', 'test', '2023-12-14', '2023-12-13', 'test', 'test', 2, 'test', '2023-12-16', 158, 1, '2023-12-11', 13),
+(5, 'b', 'b', '1970-01-01', '1970-01-01', 'b', 'b', 23, 'b', '1970-01-01', 159, 1, '2023-12-11', 13);
 
 -- --------------------------------------------------------
 
@@ -1545,6 +1548,7 @@ CREATE TABLE `user_data_bkp_history` (
   `nama_supplier` varchar(150) NOT NULL,
   `jumlah_bahan` int(11) NOT NULL,
   `id_tb_pdf_book` int(11) NOT NULL,
+  `print_date` date DEFAULT NULL,
   `print_lhu` tinyint(1) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1553,8 +1557,10 @@ CREATE TABLE `user_data_bkp_history` (
 -- Dumping data for table `user_data_bkp_history`
 --
 
-INSERT INTO `user_data_bkp_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_kedatangan`, `nama_produsen`, `nama_supplier`, `jumlah_bahan`, `id_tb_pdf_book`, `print_lhu`, `users`) VALUES
-(1, 'b', 'b', '2002-11-11', '2000-11-11', '2003-11-12', 'test', 2, 160, NULL, NULL);
+INSERT INTO `user_data_bkp_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_kedatangan`, `nama_produsen`, `nama_supplier`, `jumlah_bahan`, `id_tb_pdf_book`, `print_date`, `print_lhu`, `users`) VALUES
+(1, 'b', 'b', '2002-11-11', '2000-11-11', '2003-11-12', 'test', 2, 160, '2023-12-11', 1, 13),
+(2, 'test', 'test', '1970-01-01', '7712-12-06', '1267-12-26', 'test', 5, 160, '2023-12-11', 1, 13),
+(3, 'MNB1982', '1982MNB', '2023-12-14', '2023-12-21', '2023-12-22', 'dadang', 5, 160, '2023-12-11', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -1790,19 +1796,19 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_bbp_bba_history`
 --
 ALTER TABLE `user_data_bbp_bba_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_data_bkp_history`
 --
 ALTER TABLE `user_data_bkp_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
