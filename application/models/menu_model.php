@@ -67,7 +67,7 @@ class  Menu_model extends CI_Model
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
                     ON user_data_bkp_history.users = user.id
-                    WHERE tb_pdf_book.jenis_lhu = 'BKP' ";
+                    WHERE tb_pdf_book.jenis_lhu = 'BK' ";
 
         return $this->db->query($query)->result_array();
     }
