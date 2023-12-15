@@ -42,7 +42,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/addBBA/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/addBK/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
     </div>
 
     <!--  Divider -->
@@ -64,13 +64,11 @@
                             <th scope="col">Jenis Lhu</th>
                             <th scope="col">N.Analisa</th>
                             <th scope="col">N.Batch</th>
-                            <th scope="col">Tgl.Sampling</th>
                             <th scope="col">Exp.Date</th>
-                            <th scope="col">Produsen</th>
-                            <th scope="col">Supplier</th>
-                            <th scope="col">Jumlah Penerimaan</th>
-                            <th scope="col">No. Protap Analisa BB</th>
-                            <th scope="col">Tanggal Berlaku</th>
+                            <th scope="col">Tgl.Kedatangan</th>
+                            <th scope="col">Nama Produsen</th>
+                            <th scope="col">Nama Supplier</th>
+                            <th scope="col">Jumlah Bahan</th>
                             <th scope="col">Print Date</th>
                             <th scope="col">Print By</th>
                             <th scope="col">Action</th>
@@ -86,14 +84,12 @@
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td><?= $dl['nomer_analisa']; ?></td>
                                 <td><?= $dl['nomer_batch']; ?></td>
-                                <td><?= $dl['tgl_sampling']; ?></td>
                                 <td><?= $dl['exp_date']; ?></td>
-                                <td><?= $dl['produsen']; ?></td>
-                                <td><?= $dl['supplier']; ?></td>
-                                <td><?= $dl['jumlah_penerimaan']; ?></td>
-                                <td><?= $dl['no_protap_analisa_bb']; ?></td>
-                                <td><?= $dl['tgl_berlaku']; ?></td>
-                                <td><?= $dl['print_date']; ?></td>
+                                <td><?= $dl['tgl_kedatangan']; ?></td>
+                                <td><?= $dl['nama_produsen']; ?></td>
+                                <td><?= $dl['nama_supplier']; ?></td>
+                                <td><?= $dl['jumlah_bahan']; ?></td>
+                                <td><?= $dl['print_lhu']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
                                     <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_pdf']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
@@ -101,7 +97,7 @@
                                     <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_gambar']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
                                 <!-- <?php if ($dl['print_lhu'] == 1) : ?>
                                 <?php else : ?>
-                                    <a href="<?= base_url('Laporan/printLhuBBA/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                    <a href="<?= base_url('Laporan/printLhuBKP/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
                                 <?php endif; ?> -->
                                 </td>
                             </tr>

@@ -14,7 +14,7 @@ class  Menu_model extends CI_Model
 
     public function getlhuObatJadi()
     {
-        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
+        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu_pdf, tb_pdf_book.file_lhu_word, tb_pdf_book.file_lhu_gambar, user_data_lhu_history.*, user.name
                     FROM user_data_lhu_history  
                     JOIN tb_pdf_book
                     ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
@@ -29,7 +29,7 @@ class  Menu_model extends CI_Model
 
     public function getlhuBBP()
     {
-        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
+        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu_pdf, tb_pdf_book.file_lhu_word, tb_pdf_book.file_lhu_gambar, user_data_bbp_bba_history.*, user.name
                     FROM user_data_bbp_bba_history
                     JOIN tb_pdf_book
                     ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
@@ -44,7 +44,7 @@ class  Menu_model extends CI_Model
 
     public function getlhuBBA()
     {
-        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
+        $query = "SELECT user_data_bbp_bba_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu_pdf, tb_pdf_book.file_lhu_word, tb_pdf_book.file_lhu_gambar, user_data_bbp_bba_history.*, user.name
                 FROM user_data_bbp_bba_history
                 JOIN tb_pdf_book
                 ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
@@ -57,16 +57,16 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
-    public function getlhuBKP()
+    public function getlhuBK()
     {
-        $query = "SELECT user_data_bkp_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bkp_history.*, user.name
-                    FROM user_data_bkp_history
+        $query = "SELECT user_data_bk_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu_pdf, tb_pdf_book.file_lhu_word, tb_pdf_book.file_lhu_gambar, user_data_bk_history.*, user.name
+                    FROM user_data_bk_history
                     JOIN tb_pdf_book
-                    ON user_data_bkp_history.id_tb_pdf_book = tb_pdf_book.id
+                    ON user_data_bk_history.id_tb_pdf_book = tb_pdf_book.id
                     JOIN produk 
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
-                    ON user_data_bkp_history.users = user.id
+                    ON user_data_bk_history.users = user.id
                     WHERE tb_pdf_book.jenis_lhu = 'BK' ";
 
         return $this->db->query($query)->result_array();
@@ -96,9 +96,9 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
-    public function checkNomorAnalisaBKP($id) {
+    public function checkNomorAnalisaBK($id) {
         $query= "SELECT * 
-        FROM user_data_bkp_history 
+        FROM user_data_bk_history 
         WHERE nomer_analisa = '$id' ";
 
         return $this->db->query($query)->result_array();
@@ -193,46 +193,59 @@ class  Menu_model extends CI_Model
 
     public function tambahLhu()
     {
-        $filelhu = $_FILES['file_lhu']['name'];
+        $file_lhu_pdf = $_FILES['file_lhu_pdf']['name'];
+        $file_lhu_word = $_FILES['file_lhu_word']['name'];
+        $file_lhu_gambar = $_FILES['file_lhu_gambar']['name'];
 
-        if ($filelhu = '') {
-        } else {
-            // $config['allowed_types'] = 'docx|xlsx|pdf';
-            $config['allowed_types'] = 'pdf';
-            $config['max_size']      = '4000';
-            $config['upload_path'] = './assets/data/';
+        if (!empty($file_lhu_pdf) && !empty($file_lhu_word) && !empty($file_lhu_gambar)) {
+            $config['allowed_types'] = 'docx|pdf|jpg|png|jpeg';
+            $config['max_size'] = '10000';
+            $config['upload_path'] = './assets/file_lhu/';
             $config['remove_spaces'] = TRUE;
             $config['encrypt_name'] = TRUE;
-            // $new_name = time() . $_FILES["userfiles"]['name'];
-            // $config['file_name'] = $new_name;
 
             $this->load->library('upload', $config);
 
-            if (!$this->upload->do_upload('file_lhu')) {
-                $no_file = 'default.pdf';
-
-                $data = [
-                    'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-                    'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-                    'file_lhu' => $no_file,
-                ];
-
-                $this->db->insert('tb_pdf_book', $data);
-                $this->session->set_flashdata('flash', 'Ditambahkan & file gagal di upload,tipe file salah!.');
-                redirect('admin/datalhu/');
+            // Upload the files separately
+            if ($this->upload->do_upload('file_lhu_pdf')) {
+                $file_lhu_pdf = $this->upload->data('file_name');
             } else {
-                $filelhu = $this->upload->data('file_name');
-
-                $data = [
-                    'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-                    'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-                    'file_lhu' => $filelhu,
-                ];
-
-                $this->db->insert('tb_pdf_book', $data);
-                $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+                // Handle PDF upload failure
+                $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+                redirect('admin/datalhu/');
             }
+
+            if ($this->upload->do_upload('file_lhu_word')) {
+                $file_lhu_word = $this->upload->data('file_name');
+            } else {
+                // Handle Word upload failure
+                $this->session->set_flashdata('flash', 'File Word gagal di upload, tipe file salah.');
+                redirect('admin/datalhu/');
+            }
+
+            if ($this->upload->do_upload('file_lhu_gambar')) {
+                $file_lhu_gambar = $this->upload->data('file_name');
+            } else {
+                // Handle Image upload failure
+                $this->session->set_flashdata('flash', 'File Gambar gagal di upload, tipe file salah.');
+                redirect('admin/datalhu/');
+            }
+
+            $data = [
+                'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
+                'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
+                'file_lhu_pdf' => $file_lhu_pdf,
+                'file_lhu_word' => $file_lhu_word, 
+                'file_lhu_gambar' => $file_lhu_gambar
+            ];
+
+            $this->db->insert('tb_pdf_book', $data);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+        } else {
+            $this->session->set_flashdata('flash', 'File-file wajib diunggah.');
+            redirect('admin/datalhu/');
         }
+
     }
 
     public function editlhu($id)
@@ -323,7 +336,7 @@ class  Menu_model extends CI_Model
         $this->db->insert('user_data_bbp_bba_history', $data);
     }
 
-    public function add_data_bkp_history()
+    public function add_data_bk_history()
     {
         // cek jika ada gambar yang di upload
         $data = [
@@ -337,7 +350,7 @@ class  Menu_model extends CI_Model
             'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
         ];
 
-        $this->db->insert('user_data_bkp_history', $data);
+        $this->db->insert('user_data_bk_history', $data);
     }
 
     public function printCover($id)
@@ -355,14 +368,44 @@ class  Menu_model extends CI_Model
         $this->db->update('user_data_lhu_history', $data);
     }
 
-    public function printLhu($id)
+    public function printLhuPDF($id)
     {               
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
         $data = [
             'users' => $data['user']['id'],
-            'active_print_lhu' => 1,
+            'active_print_lhu_pdf' => 1,
+            'print_date' => date("Y-m-d")
+        ];
+
+        $this->db->where('user_data_lhu_history.id', $id);
+        $this->db->update('user_data_lhu_history', $data);
+    }
+
+    public function printLhuWORD($id)
+    {               
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data = [
+            'users' => $data['user']['id'],
+            'active_print_lhu_word' => 1,
+            'print_date' => date("Y-m-d")
+        ];
+
+        $this->db->where('user_data_lhu_history.id', $id);
+        $this->db->update('user_data_lhu_history', $data);
+    }
+
+    public function printLhuGambar($id)
+    {               
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data = [
+            'users' => $data['user']['id'],
+            'active_print_lhu_gambar' => 1,
             'print_date' => date("Y-m-d")
         ];
 
@@ -396,8 +439,8 @@ class  Menu_model extends CI_Model
             'print_date' => date("Y-m-d")  
         ];
         
-        $this->db->where('user_data_bkp_history.id', $id);
-        $this->db->update('user_data_bkp_history', $data);
+        $this->db->where('user_data_bk_history.id', $id);
+        $this->db->update('user_data_bk_history', $data);
     }
 
     public function hapuslhubyid($id)
@@ -454,32 +497,32 @@ class  Menu_model extends CI_Model
 
     function salesreg()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='REG'");
+        $query = ("SELECT * FROM produk WHERE keterangan='REG'");
 
         return $this->db->query($query)->num_rows();
     }
     function salesnonreg()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='NON.REG'");
+        $query = ("SELECT * FROM produk WHERE keterangan='NON.REG'");
 
         return $this->db->query($query)->num_rows();
     }
     function saless()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='3S'");
+        $query = ("SELECT * FROM produk WHERE keterangan='3S'");
 
         return $this->db->query($query)->num_rows();
     }
     function salesexport()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='Export'");
+        $query = ("SELECT * FROM produk WHERE keterangan='Export'");
 
         return $this->db->query($query)->num_rows();
     }
 
     function salesnosales()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type=''");
+        $query = ("SELECT * FROM produk WHERE keterangan=''");
 
         return $this->db->query($query)->num_rows();
     }

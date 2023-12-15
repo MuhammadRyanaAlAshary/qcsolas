@@ -8,7 +8,7 @@
         </div>
         <div class="card-body col-sm-10">
             <div class="table-responsive">
-                <?= form_open_multipart('user/addBKP'); ?>
+                <?= form_open_multipart('user/addBK'); ?>
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">

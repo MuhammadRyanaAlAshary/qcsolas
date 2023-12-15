@@ -48,7 +48,9 @@
                                 <td><?= $dl['produk_name']; ?></td>
                                 <td><?= $dl['jenis_lhu']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/data/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_pdf']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_word']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_gambar']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
                                     <a href="<?= base_url('admin/editlhu/') . $dl['id_tb_pdf_book']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
                                 </td>
                             </tr>

@@ -96,10 +96,15 @@
                                 <td><?= $dl['print_date']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                <?php if ($dl['print_lhu'] == 1) : ?>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_pdf']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_word']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_gambar']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
+                                <!-- <?php if ($dl['print_lhu'] == 1) : ?>
                                 <?php else : ?>
-                                    <a href="<?= base_url('Laporan/printLhuBBP/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                <?php endif; ?>
+                                    <a href="<?= base_url('Laporan/printLhuPDF/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
+                                    <a href="<?= base_url('Laporan/printLhuWORD/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
+                                    <a href="<?= base_url('Laporan/printLhuGambar/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
+                                <?php endif; ?> -->
                                 </td>
                             </tr>
                             <?php $i++ ?>
