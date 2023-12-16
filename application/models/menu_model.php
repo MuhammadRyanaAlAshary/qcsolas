@@ -256,7 +256,7 @@ class  Menu_model extends CI_Model
         $upload_word = $_FILES['file_lhu_word'];
         $upload_gambar = $_FILES['file_lhu_gambar'];
 
-        if ($upload_pdf) {
+        if ($upload_pdf || $upload_word || $upload_gambar) {
             $config['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
             $config['max_size']      = '10000';
             $config['upload_path'] = './assets/file_lhu/';
@@ -265,17 +265,45 @@ class  Menu_model extends CI_Model
             $this->load->library('upload', $config);
 
             // upload foto baru
-            if ($this->upload->do_upload('file_lhu_pdf')) {
-                $old_file = $data['datalhu']['file_lhu_pdf'];
-                $path = './assets/file_lhu/';
+            if ($this->upload->do_upload('file_lhu_pdf') || $this->upload->do_upload('file_lhu_word') || $this->upload->do_upload('file_lhu_word')) {
+                if ($this->upload->do_upload('file_lhu_pdf')) {
+                    $old_file = $data['datalhu']['file_lhu_pdf'];
+                    $path = './assets/file_lhu/';
 
-                // hapus foto lama selain foto default
-                if ($old_file != 'default.pdf') {
-                    unlink(FCPATH . $path . $old_file);
+                    // hapus foto lama selain foto default
+                    if ($old_file != 'default.pdf') {
+                        unlink(FCPATH . $path . $old_file);
+                    }
+                    // ganti foto lama dengan baru
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu_pdf', $new_file);
                 }
-                // ganti foto lama dengan baru
-                $new_file = $this->upload->data('file_name');
-                $this->db->set('file_lhu_pdf', $new_file);
+
+                if ($this->upload->do_upload('file_lhu_word')) {
+                    $old_file = $data['datalhu']['file_lhu_word'];
+                    $path = './assets/file_lhu/';
+
+                    // hapus foto lama selain foto default
+                    if ($old_file != 'default.pdf') {
+                        unlink(FCPATH . $path . $old_file);
+                    }
+                    // ganti foto lama dengan baru
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu_word', $new_file);
+                }
+
+                if ($this->upload->do_upload('file_lhu_gambar')) {
+                    $old_file = $data['datalhu']['file_lhu_gambar'];
+                    $path = './assets/file_lhu/';
+
+                    // hapus foto lama selain foto default
+                    if ($old_file != 'default.pdf') {
+                        unlink(FCPATH . $path . $old_file);
+                    }
+                    // ganti foto lama dengan baru
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu_gambar', $new_file);
+                }
             } else {
 
                 $data = [
@@ -299,58 +327,6 @@ class  Menu_model extends CI_Model
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('tb_pdf_book', $data);
     }
-
-
-    // public function editlhu($id)
-    // {
-    //     $data['datalhu'] = $this->db->get_where('tb_pdf_book', ['id' => $id])->row_array();
-    //     // cek jika ada gambar yang di upload
-    //     $upload_pdf = $_FILES['file_lhu'];
-
-    //     if ($upload_pdf) {
-    //         $config['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
-    //         // $config['allowed_types'] = 'pdf';
-    //         $config['max_size']      = '10000';
-    //         $config['upload_path'] = './assets/file_lhu/';
-    //         $config['encrypt_name'] = TRUE;
-
-    //         $this->load->library('upload', $config);
-
-    //         // upload foto baru
-    //         if ($this->upload->do_upload('file_lhu')) {
-    //             $old_file = $data['datalhu']['file_lhu'];
-    //             $path = './assets/data/';
-
-    //             // hapus foto lama selain foto default
-    //             if ($old_file != 'default.pdf') {
-    //                 unlink(FCPATH . $path . $old_file);
-    //             }
-    //             // ganti foto lama dengan baru
-    //             $new_file = $this->upload->data('file_name');
-    //             $this->db->set('file_lhu', $new_file);
-    //         } else {
-
-    //             $data = [
-    //                 'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-    //                 'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-    //             ];
-
-    //             $this->db->where('id', $this->input->post('id'));
-    //             $this->db->update('tb_pdf_book', $data);
-    //             $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
-
-    //             redirect('admin/datalhu/');
-    //         }
-    //     }
-
-    //     $data = [
-    //         'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-    //         'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-    //     ];
-
-    //     $this->db->where('id', $this->input->post('id'));
-    //     $this->db->update('tb_pdf_book', $data);
-    // }
 
     public function tambahLhuUser()
     {
