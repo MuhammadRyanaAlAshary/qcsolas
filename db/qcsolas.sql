@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2023 at 11:17 AM
+-- Generation Time: Dec 18, 2023 at 12:19 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1420,17 +1420,16 @@ CREATE TABLE `tb_pdf_book` (
   `id` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `jenis_lhu` varchar(100) NOT NULL,
-  `file_lhu_pdf` varchar(100) NOT NULL,
-  `file_lhu_word` varchar(100) NOT NULL,
-  `file_lhu_gambar` varchar(100) NOT NULL
+  `file_lhu` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_pdf_book`
 --
 
-INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu_pdf`, `file_lhu_word`, `file_lhu_gambar`) VALUES
-(172, 1, 'Obat Jadi', '03f34a159f4b96cfb38ded48b179f3ee.pdf', 'f28bd25ec0442fbd387a5b027f1e6408.docx', '7b45e3533ae8c4109b9c9631a4672c46.jpeg');
+INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu`) VALUES
+(174, 1, 'BBA', '47995dac2600e8e55c639ce57eb93725.pdf'),
+(175, 5, 'Obat Jadi', 'abc642e716102f6f77f49c1f263cf515.pdf');
 
 -- --------------------------------------------------------
 
@@ -1506,8 +1505,7 @@ CREATE TABLE `user_data_bbp_bba_history` (
   `no_protap_analisa_bb` varchar(200) NOT NULL,
   `tgl_berlaku` date NOT NULL,
   `id_tb_pdf_book` int(11) NOT NULL,
-  `print_lhu` tinyint(1) DEFAULT NULL,
-  `print_date` date DEFAULT NULL,
+  `file_lhu` tinyint(1) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1527,8 +1525,7 @@ CREATE TABLE `user_data_bk_history` (
   `nama_supplier` varchar(150) NOT NULL,
   `jumlah_bahan` int(11) NOT NULL,
   `id_tb_pdf_book` int(11) NOT NULL,
-  `print_date` date DEFAULT NULL,
-  `print_lhu` tinyint(1) DEFAULT NULL,
+  `file_lhu` tinyint(1) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1548,13 +1545,16 @@ CREATE TABLE `user_data_lhu_history` (
   `besaran_batch` int(12) NOT NULL,
   `satuan` varchar(128) NOT NULL,
   `id_tb_pdf_book` int(11) NOT NULL,
-  `is_active` tinyint(1) DEFAULT NULL,
-  `active_print_lhu_pdf` tinyint(1) DEFAULT NULL,
-  `active_print_lhu_word` tinyint(1) DEFAULT NULL,
-  `active_print_lhu_gambar` tinyint(1) DEFAULT NULL,
-  `print_date` date DEFAULT NULL,
+  `file_lhu` varchar(100) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data_lhu_history`
+--
+
+INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `file_lhu`, `users`) VALUES
+(93, 'test', 'test', '2023-12-18', '2023-12-19', '2023-12-20', 2, 'BATCH', 175, 'e0f7763c8ac1bd7e6cb1b5e0e2068124.pdf', NULL);
 
 -- --------------------------------------------------------
 
@@ -1744,7 +1744,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1774,7 +1774,7 @@ ALTER TABLE `user_data_bk_history`
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
