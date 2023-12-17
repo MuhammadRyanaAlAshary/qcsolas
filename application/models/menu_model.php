@@ -264,9 +264,13 @@ class  Menu_model extends CI_Model
 
             $this->load->library('upload', $config);
 
+            $upload_pdf = $this->upload->do_upload('file_lhu_pdf');
+            $upload_word = $this->upload->do_upload('file_lhu_word');
+            $upload_gambar = $this->upload->do_upload('file_lhu_gambar');
+
             // upload foto baru
-            if ($this->upload->do_upload('file_lhu_pdf') || $this->upload->do_upload('file_lhu_word') || $this->upload->do_upload('file_lhu_word')) {
-                if ($this->upload->do_upload('file_lhu_pdf')) {
+            if ($upload_pdf || $upload_word || $upload_gambar) {
+                if ($upload_pdf) {
                     $old_file = $data['datalhu']['file_lhu_pdf'];
                     $path = './assets/file_lhu/';
 
@@ -279,7 +283,7 @@ class  Menu_model extends CI_Model
                     $this->db->set('file_lhu_pdf', $new_file);
                 }
 
-                if ($this->upload->do_upload('file_lhu_word')) {
+                if ($upload_word) {
                     $old_file = $data['datalhu']['file_lhu_word'];
                     $path = './assets/file_lhu/';
 
@@ -292,7 +296,7 @@ class  Menu_model extends CI_Model
                     $this->db->set('file_lhu_word', $new_file);
                 }
 
-                if ($this->upload->do_upload('file_lhu_gambar')) {
+                if ($upload_gambar) {
                     $old_file = $data['datalhu']['file_lhu_gambar'];
                     $path = './assets/file_lhu/';
 
