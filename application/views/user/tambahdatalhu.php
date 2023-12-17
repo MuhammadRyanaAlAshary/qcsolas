@@ -7,7 +7,7 @@
             <h6 class="m-0 font-weight-bold text-primary"><a href="<?= base_url('user/datalhuuser'); ?>"><i class="fa fa-reply" aria-hidden="true"></i></a> Select Data yang akan di Print</h6>
         </div>
         <div class="card-body col-sm-10">
-            <div class="table-responsive" style="height:550px;">
+            <div class="table-responsive">
                 <?= form_open_multipart('user/tambahlhu'); ?>
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
@@ -21,6 +21,7 @@
                         <?= form_error('kode_produk', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="nomer_analsia" class="col-sm-2 col-form-label">Nomer Analisa</label>
                     <div class="col-sm-10">
@@ -28,6 +29,7 @@
                         <?= form_error('nomer_analisa', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="nomer_batch" class="col-sm-2 col-form-label">Nomer Batch</label>
                     <div class="col-sm-10">
@@ -35,6 +37,7 @@
                         <?= form_error('nomer_batch', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="exp_date" class="col-sm-2 col-form-label">Exp Date</label>
                     <div class="col-sm-3">
@@ -42,6 +45,7 @@
                         <?= form_error('exp_date', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="tgl_produksi" class="col-sm-2 col-form-label">Tgl Produksi</label>
                     <div class="col-sm-3">
@@ -49,6 +53,7 @@
                         <?= form_error('tgl_produksi', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+                
                 <div class="form-group row">
                     <label for="tgl_sampling" class="col-sm-2 col-form-label">Tgl Sampling</label>
                     <div class="col-sm-3">
@@ -56,6 +61,7 @@
                         <?= form_error('tgl_sampling', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="besaran_batch" class="col-sm-2 col-form-label">Besaran Batch</label>
                     <div class="col-sm-2">
@@ -75,6 +81,18 @@
                         <?= form_error('besaran_batch', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-9">
+                        <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg">
+                            <label class="custom-file-label" for="file_lhu">Choose File...</label>
+                        </div>
+                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
+                    </div>
+                </div>
+
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
                         <button type="submit" name="editlhu" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Tambah</button>

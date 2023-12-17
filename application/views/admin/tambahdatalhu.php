@@ -32,33 +32,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="file_lhu_pdf" class="col-sm-2 col-form-label">File LHU PDF</label>
+                <label for="file_lhu" class="col-sm-2 col-form-label">File LHU PDF</label>
                     <div class="col-sm-10">
                         <div class="col-sm-9">
-                            <input type="file" class="custom-file-input" id="file_lhu_pdf" name="file_lhu_pdf" accept="application/pdf">
-                            <label class="custom-file-label" for="file_lhu_pdf">Choose file</label>
+                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg">
+                            <label class="custom-file-label" for="file_lhu">Choose file</label>
                         </div>
-                        <small>* File Harus Berupa format .pdf (MAX SIZE: 10MB)</small>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="file_lhu_word" class="col-sm-2 col-form-label">File LHU WORD</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-9">
-                            <input type="file" class="custom-file-input" id="file_lhu_word" name="file_lhu_word" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                            <label class="custom-file-label" for="file_lhu_word">Choose file</label>
-                        </div>
-                        <small>* File Harus Berupa format .word (MAX SIZE: 10MB)</small>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="file_lhu_gambar" class="col-sm-2 col-form-label">File LHU Gambar</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-9">
-                            <input type="file" class="custom-file-input" id="file_lhu_gambar" name="file_lhu_gambar" accept="image/png, image/png, image/jpeg">
-                            <label class="custom-file-label" for="file_lhu_gambar">Choose file</label>
-                        </div>
-                        <small>* File Harus Berupa format .JPG, .PNG, .JPEG (MAX SIZE: 5MB)</small>
+                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

@@ -79,8 +79,6 @@
                             </th>
                             <th scope="col">Sat
                             </th>
-                            <th scope="col">Print Date
-                            </th>
                             <th scope="col">Print By
                             </th>
                             <th scope="col">Action
@@ -105,37 +103,11 @@
                                 <td><?= $dl['tgl_sampling']; ?></td>
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
-                                <td><?= $dl['print_date']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_pdf']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
-                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_word']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
-                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_gambar']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
-
-                                <!-- <?php if ($dl['active_print_lhu_pdf'] == 1 && $dl['active_print_lhu_word'] == 1 && $dl['active_print_lhu_gambar'] == 1) : ?>
-                                    <?php if ($dl['active_print_lhu_pdf'] == 1 && $dl['active_print_lhu_word'] == 1 && $dl['active_print_lhu_gambar'] == 1) : ?>
-                                    <?php endif; ?>
-
-                                <?php elseif ($dl['active_print_lhu_pdf'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/printLhuWORD/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
-                                    <a href="<?= base_url('Laporan/printLhuGambar/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
-
-                                <?php elseif ($dl['active_print_lhu_word'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/printLhuPDF/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
-                                    <a href="<?= base_url('Laporan/printLhuGambar/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
-
-                                <?php elseif ($dl['active_print_lhu_gambar'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/printLhuPDF/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
-                                    <a href="<?= base_url('Laporan/printLhuWORD/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
-
-                                <?php elseif ($dl['active_print_lhu_pdf'] == 1 && $dl['active_print_lhu_word'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/printLhuWORD/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
-
-                                <?php else : ?>
-                                    <a href="<?= base_url('Laporan/printLhuPDF/') . $dl['']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
-                                    <a href="<?= base_url('Laporan/printLhuWORD/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
-                                    <a href="<?= base_url('Laporan/printLhuGambar/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
-                                <?php endif; ?> -->
+                                    <a href="<?= base_url('./assets/file_lhu/lhu_admin/' . $dl['file_lhu_admin']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                    <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['lhu_obat_jadi']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
+                                    <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i> Update Cover</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>
