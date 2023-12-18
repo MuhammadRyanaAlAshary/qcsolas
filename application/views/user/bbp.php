@@ -71,7 +71,7 @@
                             <th scope="col">Jumlah Penerimaan</th>
                             <th scope="col">No. Protap Analisa BB</th>
                             <th scope="col">Tanggal Berlaku</th>
-                            <th scope="col">Print By</th>
+                            <th scope="col">Created by</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -95,7 +95,7 @@
                                 <td><?= $dl['name'] ?></td>
                                 <td>
                                     <a href="<?= base_url('./assets/file_lhu/bba_bbp/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
-                                    <a href="<?= base_url('user/editLHUBBP/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
+                                    <a href="<?= base_url('user/editLHUBBP/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update LHU</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>
