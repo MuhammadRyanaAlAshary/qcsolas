@@ -59,30 +59,18 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">K.Prod
-                            </th>
-                            <th scope="col">Nama Produk
-                            </th>
-                            <th scope="col">Jenis Lhu
-                            </th>
-                            <th scope="col">N.Analisa
-                            </th>
-                            <th scope="col">N.Batch
-                            </th>
-                            <th scope="col">Exp.Date
-                            </th>
-                            <th scope="col">Tgl.Prod
-                            </th>
-                            <th scope="col">Tgl.Sampling
-                            </th>
-                            <th scope="col">Qty
-                            </th>
-                            <th scope="col">Sat
-                            </th>
-                            <th scope="col">Print By
-                            </th>
-                            <th scope="col">Action
-                            </th>
+                            <th scope="col">K.Prod</th>
+                            <th scope="col">Nama Produk</th>
+                            <th scope="col">Jenis Lhu</th>
+                            <th scope="col">N.Analisa</th>
+                            <th scope="col">N.Batch</th>
+                            <th scope="col">Exp.Date</th>
+                            <th scope="col">Tgl.Prod</th>
+                            <th scope="col">Tgl.Sampling</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Satuan</th>
+                            <th scope="col">Created by</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,7 +95,7 @@
                                 <td>
                                     <a href="<?= base_url('./assets/file_lhu/lhu_admin/' . $dl['file_lhu_admin']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
                                     <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['lhu_obat_jadi']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
-                                    <a href="<?= base_url('user/editLhuObatJadi/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
+                                    <a href="<?= base_url('user/editLhuObatJadi/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update LHU</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

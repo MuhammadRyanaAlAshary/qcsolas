@@ -20,15 +20,26 @@
                 <input type="number" id="jumlah_bahan" name="jumlah_bahan" value="<?= $datalhu['jumlah_bahan'] ?>" hidden>
 
                 <div class="form-group row">
-                    <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
+                    <label for="file_lhu_skunder" class="col-sm-2 col-form-label">File LHU Skunder</label>
                     <div class="col-sm-10">
                         <div class="col-sm-9">
-                        <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg">
-                            <label class="custom-file-label" for="file_lhu">Choose File...</label>
+                        <input type="file" class="custom-file-input" id="file_lhu_skunder" name="file_lhu_skunder" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
+                            <label class="custom-file-label" for="file_lhu_skunder"><?= $datalhu['file_lhu_skunder']; ?></label>
                         </div>
                         <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="file_lhu_primer" class="col-sm-2 col-form-label">File LHU Primer</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-9">
+                        <input type="file" class="custom-file-input" id="file_lhu_primer" name="file_lhu_primer" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
+                            <label class="custom-file-label" for="file_lhu_primer"><?= $datalhu['file_lhu_primer'] ?></label>
+                        </div>
+                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
+                    </div>
+                </div>
+
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
                         <button type="submit" name="editBK" class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i> Tambah</button>

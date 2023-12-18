@@ -69,7 +69,7 @@
                             <th scope="col">Nama Produsen</th>
                             <th scope="col">Nama Supplier</th>
                             <th scope="col">Jumlah Bahan</th>
-                            <th scope="col">Print By</th>
+                            <th scope="col">Created by</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -90,8 +90,9 @@
                                 <td><?= $dl['jumlah_bahan']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/file_lhu/bk/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
-                                    <a href="<?= base_url('user/editBK/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
+                                    <a href="<?= base_url('./assets/file_lhu/bk/bahan_skunder/' . $dl['file_lhu_skunder']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU Sekunder </a>
+                                    <a href="<?= base_url('./assets/file_lhu/bk/bahan_primer/' . $dl['file_lhu_primer']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU Primer </a>
+                                    <a href="<?= base_url('user/editBK/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update LHU</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

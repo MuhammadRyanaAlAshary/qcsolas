@@ -589,21 +589,37 @@ class  Menu_model extends CI_Model
         $file_lhu_primer = $_FILES['file_lhu_primer']['name'];
 
         if (!empty($file_lhu_skunder) || !empty($file_lhu_primer)) {
-            $config_lhu['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
-            $config_lhu['max_size'] = '10000';
-            $config_lhu['upload_path'] = './assets/file_lhu/bk/';
-            $config_lhu['encrypt_name'] = TRUE;
+            $config_lhu_skunder['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
+            $config_lhu_skunder['max_size'] = '10000';
+            $config_lhu_skunder['upload_path'] = './assets/file_lhu/bk/bahan_skunder/';
+            $config_lhu_skunder['encrypt_name'] = TRUE;
+
+            $config_lhu_primer['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
+            $config_lhu_primer['max_size'] = '10000';
+            $config_lhu_primer['upload_path'] = './assets/file_lhu/bk/bahan_primer/';
+            $config_lhu_primer['encrypt_name'] = TRUE;
 
             $this->load->library('upload');
 
-            // Upload file PDF
-            $this->upload->initialize($config_lhu);
-            if ($this->upload->do_upload('file_lhu_skunder') && $this->upload->do_upload('file_lhu_primer')) {
-                $file_lhu = $this->upload->data('file_name');
+            // Upload file PDF for 'file_lhu_skunder'
+            $this->upload->initialize($config_lhu_skunder);
+            if ($this->upload->do_upload('file_lhu_skunder')) {
+                $file_lhu_skunder = $this->upload->data('file_name');
             } else {
-                $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+                $this->session->set_flashdata('flash', 'File LHU Skunder gagal di upload, tipe file salah atau melebihi ukuran maksimum.');
+                redirect('user/bk/');
             }
-            // cek jika ada gambar yang di upload
+
+            // Upload file PDF for 'file_lhu_primer'
+            $this->upload->initialize($config_lhu_primer);
+            if ($this->upload->do_upload('file_lhu_primer')) {
+                $file_lhu_primer = $this->upload->data('file_name');
+            } else {
+                $this->session->set_flashdata('flash', 'File LHU Primer gagal di upload, tipe file salah atau melebihi ukuran maksimum.');
+                redirect('user/bk/');
+            }
+
+            // Insert data to database
             $data = [
                 'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
                 'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
@@ -613,7 +629,8 @@ class  Menu_model extends CI_Model
                 'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
                 'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
                 'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-                'file_lhu' => $file_lhu
+                'file_lhu_skunder' => $file_lhu_skunder,
+                'file_lhu_primer' => $file_lhu_primer,
             ];
 
             $this->db->insert('user_data_bk_history', $data);
@@ -628,61 +645,73 @@ class  Menu_model extends CI_Model
         $data['datalhu'] = $this->db->get_where('user_data_bk_history', ['id' => $id])->row_array();
 
         // Cek jika ada file yang diunggah
-        $upload_lhu = $_FILES['file_lhu']['name'];
+        $upload_lhu_skunder = $_FILES['file_lhu_skunder']['name'];
+        $upload_lhu_primer = $_FILES['file_lhu_primer']['name'];
 
-        if ($upload_lhu != "") {
-            $config_lhu['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
-            $config_lhu['max_size'] = '10000';
-            $config_lhu['upload_path'] = './assets/file_lhu/bk/';
-            $config_lhu['encrypt_name'] = TRUE;
+        if ($upload_lhu_skunder != "" || $upload_lhu_primer != "") {
+            $config_lhu_skunder['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu_skunder['max_size'] = '10000';
+            $config_lhu_skunder['upload_path'] = './assets/file_lhu/bk/bahan_skunder/';
+            $config_lhu_skunder['encrypt_name'] = TRUE;
+
+            $config_lhu_primer['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu_primer['max_size'] = '10000';
+            $config_lhu_primer['upload_path'] = './assets/file_lhu/bk/bahan_primer/';
+            $config_lhu_primer['encrypt_name'] = TRUE;
 
             $this->load->library('upload');
 
-            if ($upload_lhu != "") {
-                $this->upload->initialize($config_lhu);
-                if ($this->upload->do_upload('file_lhu')) {
-                    $old_file = $data['datalhu']['file_lhu'];
-                    if ($old_file && $old_file != 'default.pdf') {
-                        unlink('./assets/file_lhu/bk/' . $old_file);
+            // Upload file LHU Skunder
+            if ($upload_lhu_skunder != "") {
+                $this->upload->initialize($config_lhu_skunder);
+                if ($this->upload->do_upload('file_lhu_skunder')) {
+                    $old_file_skunder = $data['datalhu']['file_lhu_skunder'];
+                    if ($old_file_skunder && $old_file_skunder != 'default.pdf') {
+                        unlink('./assets/file_lhu/bk/bahan_skunder/' . $old_file_skunder);
                     }
-                    $new_file = $this->upload->data('file_name');
-                    $this->db->set('file_lhu', $new_file);
+                    $new_file_skunder = $this->upload->data('file_name');
+                    $this->db->set('file_lhu_skunder', $new_file_skunder);
+                } else {
+                    $this->session->set_flashdata('flash', 'File LHU Skunder gagal diupload, tipe file salah atau ukuran melebihi batas.');
+                    redirect('user/bk/');
+                    return;
                 }
             }
 
-            $dataToUpdate = [
-                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-                'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
-                'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
-                'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
-                'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
-                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-            ];
-
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('user_data_bk_history', $dataToUpdate);
-
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
-            redirect('user/bk/');
-        } else {
-            $dataToUpdate = [
-                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-                'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
-                'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
-                'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
-                'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
-                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-            ];
-
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('user_data_bk_history', $dataToUpdate);
-
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            // Upload file LHU Primer
+            if ($upload_lhu_primer != "") {
+                $this->upload->initialize($config_lhu_primer);
+                if ($this->upload->do_upload('file_lhu_primer')) {
+                    $old_file_primer = $data['datalhu']['file_lhu_primer'];
+                    if ($old_file_primer && $old_file_primer != 'default.pdf') {
+                        unlink('./assets/file_lhu/bk/bahan_primer/' . $old_file_primer);
+                    }
+                    $new_file_primer = $this->upload->data('file_name');
+                    $this->db->set('file_lhu_primer', $new_file_primer);
+                } else {
+                    $this->session->set_flashdata('flash', 'File LHU Primer gagal diupload, tipe file salah atau ukuran melebihi batas.');
+                    redirect('user/bk/');
+                    return;
+                }
+            }
         }
+
+        $dataToUpdate = [
+            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+            'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
+            'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
+            'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
+            'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
+            'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+        ];
+
+        $this->db->where('id', $id);
+        $this->db->update('user_data_bk_history', $dataToUpdate);
+
+        $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+        redirect('user/bk/');
     }
 
     public function printCover($id)
