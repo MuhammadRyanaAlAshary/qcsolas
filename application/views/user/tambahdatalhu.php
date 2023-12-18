@@ -86,7 +86,7 @@
                     <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
                     <div class="col-sm-10">
                         <div class="col-sm-9">
-                        <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg">
+                        <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
                             <label class="custom-file-label" for="file_lhu">Choose File...</label>
                         </div>
                         <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>

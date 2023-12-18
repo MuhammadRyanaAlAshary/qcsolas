@@ -9,15 +9,15 @@
         <div class="card-body col-sm-10">
             <div class="table-responsive">
                 <?= form_open_multipart('user/editBK/' . $datalhu['id']); ?>
-                <input type="text" name="id" value="<?= $datalhu['id'] ?>" hidden>
-                <input type="text" name="id_tb_pdf_book" value="<?= $datalhu['id_tb_pdf_book'] ?>" hidden>
-                <input type="text" id="nomer_analisa" name="nomer_analisa" value="<?= $datalhu['nomer_analisa'] ?>" hidden>
-                <input type="text" id="nomer_batch" name="nomer_batch" value="<?= $datalhu['nomer_batch'] ?>" hidden>
-                <input type="date" id="exp_date" name="exp_date" value="<?= $datalhu['exp_date'] ?>" hidden>
-                <input type="date" id="tanggal_kedatangan" name="tanggal_kedatangan" value="<?= $datalhu['tgl_kedatangan'] ?>" hidden>
-                <input type="text" id="nama_produsen" name="nama_produsen" value="<?= $datalhu['nama_produsen'] ?>" hidden>
-                <input type="text" id="nama_supplier" name="nama_supplier" value="<?= $datalhu['nama_supplier'] ?>" hidden>
-                <input type="number" id="jumlah_bahan" name="jumlah_bahan" value="<?= $datalhu['jumlah_bahan'] ?>" hidden>
+                <input type="text" name="id" value="<?= $datalhu['id'] ?>" hidden required>
+                <input type="text" name="id_tb_pdf_book" value="<?= $datalhu['id_tb_pdf_book'] ?>" hidden required>
+                <input type="text" id="nomer_analisa" name="nomer_analisa" value="<?= $datalhu['nomer_analisa'] ?>" hidden required>
+                <input type="text" id="nomer_batch" name="nomer_batch" value="<?= $datalhu['nomer_batch'] ?>" hidden required>
+                <input type="date" id="exp_date" name="exp_date" value="<?= $datalhu['exp_date'] ?>" hidden required>
+                <input type="date" id="tanggal_kedatangan" name="tanggal_kedatangan" value="<?= $datalhu['tgl_kedatangan'] ?>" hidden required>
+                <input type="text" id="nama_produsen" name="nama_produsen" value="<?= $datalhu['nama_produsen'] ?>" hidden required>
+                <input type="text" id="nama_supplier" name="nama_supplier" value="<?= $datalhu['nama_supplier'] ?>" hidden required>
+                <input type="number" id="jumlah_bahan" name="jumlah_bahan" value="<?= $datalhu['jumlah_bahan'] ?>" hidden required>
 
                 <div class="form-group row">
                     <label for="file_lhu_skunder" class="col-sm-2 col-form-label">File LHU Skunder</label>
