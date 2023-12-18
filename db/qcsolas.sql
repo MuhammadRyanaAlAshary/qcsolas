@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2023 at 12:19 AM
+-- Generation Time: Dec 18, 2023 at 07:17 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1423,14 +1423,6 @@ CREATE TABLE `tb_pdf_book` (
   `file_lhu` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_pdf_book`
---
-
-INSERT INTO `tb_pdf_book` (`id`, `id_produk`, `jenis_lhu`, `file_lhu`) VALUES
-(174, 1, 'BBA', '47995dac2600e8e55c639ce57eb93725.pdf'),
-(175, 5, 'Obat Jadi', 'abc642e716102f6f77f49c1f263cf515.pdf');
-
 -- --------------------------------------------------------
 
 --
@@ -1505,7 +1497,7 @@ CREATE TABLE `user_data_bbp_bba_history` (
   `no_protap_analisa_bb` varchar(200) NOT NULL,
   `tgl_berlaku` date NOT NULL,
   `id_tb_pdf_book` int(11) NOT NULL,
-  `file_lhu` tinyint(1) DEFAULT NULL,
+  `file_lhu` varchar(100) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1525,7 +1517,8 @@ CREATE TABLE `user_data_bk_history` (
   `nama_supplier` varchar(150) NOT NULL,
   `jumlah_bahan` int(11) NOT NULL,
   `id_tb_pdf_book` int(11) NOT NULL,
-  `file_lhu` tinyint(1) DEFAULT NULL,
+  `file_lhu_primer` varchar(100) DEFAULT NULL,
+  `file_lhu_skunder` varchar(100) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1548,13 +1541,6 @@ CREATE TABLE `user_data_lhu_history` (
   `file_lhu` varchar(100) DEFAULT NULL,
   `users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_data_lhu_history`
---
-
-INSERT INTO `user_data_lhu_history` (`id`, `nomer_analisa`, `nomer_batch`, `exp_date`, `tgl_produksi`, `tgl_sampling`, `besaran_batch`, `satuan`, `id_tb_pdf_book`, `file_lhu`, `users`) VALUES
-(93, 'test', 'test', '2023-12-18', '2023-12-19', '2023-12-20', 2, 'BATCH', 175, 'e0f7763c8ac1bd7e6cb1b5e0e2068124.pdf', NULL);
 
 -- --------------------------------------------------------
 
@@ -1631,9 +1617,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (17, 5, 'Users Management', 'superuser/usersmanagement', 'fa fa-solid fa-users', 1),
 (18, 2, 'BBP', 'user/bbp', 'fas fa-fw fa-sharp fa-light fa-book', 1),
 (19, 2, 'BBA', 'user/bba', 'fas fa-fw fa-sharp fa-light fa-book ', 1),
-(20, 2, 'BK', 'user/bk', 'fas fa-fw fa-sharp fa-light fa-book ', 1),
-(21, 2, 'MikroBiologi BB', 'user/mikrobiologiBB', 'fas fa-fw fa-sharp fa-light fa-book ', 1),
-(22, 2, 'MikroBiologi OJ', 'user/mikrobiologiOJ', 'fas fa-fw fa-sharp fa-light fa-book ', 1);
+(20, 2, 'BK', 'user/bk', 'fas fa-fw fa-sharp fa-light fa-book ', 1);
 
 --
 -- Indexes for dumped tables
@@ -1744,7 +1728,7 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1762,19 +1746,19 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_bbp_bba_history`
 --
 ALTER TABLE `user_data_bbp_bba_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user_data_bk_history`
 --
 ALTER TABLE `user_data_bk_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
