@@ -107,7 +107,7 @@
                                 <td>
                                     <a href="<?= base_url('./assets/file_lhu/lhu_admin/' . $dl['file_lhu_admin']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
                                     <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['lhu_obat_jadi']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
-                                    <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-warning"><i class="fa fa-print" aria-hidden="true"></i> Update Cover</a>
+                                    <a href="<?= base_url('user/editLhuObatJadi/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

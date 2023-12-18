@@ -124,6 +124,36 @@ class  User extends CI_Controller
         }
     }
 
+    public function editLhuObatJadi($id)
+    {
+        $data['title'] = 'Edit LHU Obat Jadi';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->editLhuObatJadi($id);
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('tgl_produksi', 'Tgl Produksi', 'required');
+        $this->form_validation->set_rules('tgl_sampling', 'Tgl Sampling', 'required');
+        $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit-obat-jadi', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->editLhuUser($id);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bbp/'); 
+        }
+    }
+
     public function bbp()
     {
         $data['title'] = 'BBP';
@@ -195,6 +225,70 @@ class  User extends CI_Controller
              }
         }
     } 
+
+    public function editLHUBBP($id)
+    {
+        $data['title'] = 'Edit LHU BBP';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->getEditLhuBBP($id);
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('tgl_sampling', 'Tanggal Sampling', 'required');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('produsen', 'Produsen', 'required');
+        $this->form_validation->set_rules('supplier', 'Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
+        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
+        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit-bbp', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->editLHUBBP($id);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bbp/'); 
+        }
+    }
+
+    public function editLHUBBA($id)
+    {
+        $data['title'] = 'Edit LHU BBA';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->getEditLhuBBP($id);
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('tgl_sampling', 'Tanggal Sampling', 'required');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('produsen', 'Produsen', 'required');
+        $this->form_validation->set_rules('supplier', 'Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
+        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
+        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit-bba', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->editLHUBBA($id);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bba/'); 
+        }
+    }
 
     public function bba()
     {
@@ -334,9 +428,39 @@ class  User extends CI_Controller
                 $this->menu->add_data_bk_history();
                 $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
                 redirect('user/bk/');    
-             }
+            }
         }
     } 
+
+    public function editBK($id)
+    {
+        $data['title'] = 'Edit LHU BK';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->menu->getEditBK($id);
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+        $this->form_validation->set_rules('tanggal_kedatangan', 'Tanggal Kedatangan', 'required');
+        $this->form_validation->set_rules('nama_produsen', 'Nama Produsen', 'required');
+        $this->form_validation->set_rules('nama_supplier', 'Nama Supplier', 'required');
+        $this->form_validation->set_rules('jumlah_bahan', 'Jumlah Bahan', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/edit-bk', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $this->menu->editLHUBK($id);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!.');
+            redirect('user/bk/'); 
+        }
+    }
 
     public function mikrobiologiBB()
     {
