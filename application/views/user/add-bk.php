@@ -8,7 +8,7 @@
         </div>
         <div class="card-body col-sm-10">
             <div class="table-responsive">
-                <?= form_open_multipart('user/addBKP'); ?>
+                <?= form_open_multipart('user/addBK'); ?>
                 <div class="form-group row">
                     <label for="kode_produk" class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-sm-10">
@@ -51,8 +51,8 @@
                 </div>
                 <div class="form-group row">
                     <label for="nama_produsen" class="col-sm-2 col-form-label">Nama Produsen</label>
-                    <div class="col-sm-3">
-                        <input type="date" class="form-control" id="nama_produsen" name="nama_produsen" required>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama_produsen" name="nama_produsen" required>
                         <?= form_error('nama_produsen', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
@@ -68,6 +68,26 @@
                     <div class="col-sm-10">
                         <input type="number" class="form-control" id="jumlah_bahan" name="jumlah_bahan" required>
                         <?= form_error('jumlah_bahan', '<small class="text-danger pl-3">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="file_lhu_skunder" class="col-sm-2 col-form-label">File LHU Skunder</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-9">
+                        <input type="file" class="custom-file-input" id="file_lhu_skunder" name="file_lhu_skunder" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
+                            <label class="custom-file-label" for="file_lhu_skunder">Choose File...</label>
+                        </div>
+                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="file_lhu_primer" class="col-sm-2 col-form-label">File LHU Primer</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-9">
+                        <input type="file" class="custom-file-input" id="file_lhu_primer" name="file_lhu_primer" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
+                            <label class="custom-file-label" for="file_lhu_primer">Choose File...</label>
+                        </div>
+                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

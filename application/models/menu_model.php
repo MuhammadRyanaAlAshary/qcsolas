@@ -14,15 +14,25 @@ class  Menu_model extends CI_Model
 
     public function getlhuObatJadi()
     {
-        $query = "SELECT user_data_lhu_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_lhu_history.*, user.name
-                    FROM user_data_lhu_history  
-                    JOIN tb_pdf_book
-                    ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
-                    JOIN produk 
-                    ON tb_pdf_book.id_produk = produk.id
-                    LEFT JOIN user 
-                    ON user_data_lhu_history.users = user.id
-                    WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' OR tb_pdf_book.jenis_lhu = 'MikroBiologi BB' OR tb_pdf_book.jenis_lhu = 'MikroBiologi OJ' ";
+        $query = "SELECT 
+                    user_data_lhu_history.id AS id_user_data, 
+                    produk.kode_produk, 
+                    produk.produk_name, 
+                    tb_pdf_book.jenis_lhu, 
+                    tb_pdf_book.file_lhu AS file_lhu_admin, 
+                    user_data_lhu_history.*, 
+                    user_data_lhu_history.file_lhu AS lhu_obat_jadi,
+                    user.name
+                FROM 
+                    user_data_lhu_history  
+                JOIN 
+                    tb_pdf_book ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN 
+                    produk ON tb_pdf_book.id_produk = produk.id
+                LEFT JOIN 
+                    user ON user_data_lhu_history.users = user.id
+                WHERE 
+                    tb_pdf_book.jenis_lhu IN ('Obat Jadi', 'MikroBiologi BB', 'MikroBiologi OJ')";
 
         return $this->db->query($query)->result_array();
     }
@@ -57,17 +67,17 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
-    public function getlhuBKP()
+    public function getlhuBK()
     {
-        $query = "SELECT user_data_bkp_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bkp_history.*, user.name
-                    FROM user_data_bkp_history
+        $query = "SELECT user_data_bk_history.id AS id_user_data, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bk_history.*, user.name
+                    FROM user_data_bk_history
                     JOIN tb_pdf_book
-                    ON user_data_bkp_history.id_tb_pdf_book = tb_pdf_book.id
+                    ON user_data_bk_history.id_tb_pdf_book = tb_pdf_book.id
                     JOIN produk 
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
-                    ON user_data_bkp_history.users = user.id
-                    WHERE tb_pdf_book.jenis_lhu = 'BKP' ";
+                    ON user_data_bk_history.users = user.id
+                    WHERE tb_pdf_book.jenis_lhu = 'BK' ";
 
         return $this->db->query($query)->result_array();
     }
@@ -96,9 +106,9 @@ class  Menu_model extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
-    public function checkNomorAnalisaBKP($id) {
+    public function checkNomorAnalisaBK($id) {
         $query= "SELECT * 
-        FROM user_data_bkp_history 
+        FROM user_data_bk_history 
         WHERE nomer_analisa = '$id' ";
 
         return $this->db->query($query)->result_array();
@@ -111,6 +121,20 @@ class  Menu_model extends CI_Model
                   JOIN produk 
                   ON produk.id = tb_pdf_book.id_produk
                   WHERE tb_pdf_book.id = $id";
+
+        return $this->db->query($query)->row_array();
+    }
+
+    public function editLhuObatJadi($id)
+    {
+        $query = "SELECT * FROM user_data_lhu_history WHERE id = '$id'";
+
+        return $this->db->query($query)->row_array();
+    }
+
+    public function getEditBK($id)
+    {
+        $query = "SELECT * FROM user_data_bk_history WHERE id = '$id'";
 
         return $this->db->query($query)->row_array();
     }
@@ -193,151 +217,472 @@ class  Menu_model extends CI_Model
 
     public function tambahLhu()
     {
-        $filelhu = $_FILES['file_lhu']['name'];
+        $file_lhu = $_FILES['file_lhu']['name'];
 
-        if ($filelhu = '') {
-        } else {
-            // $config['allowed_types'] = 'docx|xlsx|pdf';
-            $config['allowed_types'] = 'pdf';
-            $config['max_size']      = '4000';
-            $config['upload_path'] = './assets/data/';
-            $config['remove_spaces'] = TRUE;
-            $config['encrypt_name'] = TRUE;
-            // $new_name = time() . $_FILES["userfiles"]['name'];
-            // $config['file_name'] = $new_name;
+        if (!empty($file_lhu)) {
+            $config_lhu['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/lhu_admin/';
+            $config_lhu['encrypt_name'] = TRUE;
 
-            $this->load->library('upload', $config);
+            $this->load->library('upload');
 
-            if (!$this->upload->do_upload('file_lhu')) {
-                $no_file = 'default.pdf';
-
-                $data = [
-                    'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-                    'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-                    'file_lhu' => $no_file,
-                ];
-
-                $this->db->insert('tb_pdf_book', $data);
-                $this->session->set_flashdata('flash', 'Ditambahkan & file gagal di upload,tipe file salah!.');
-                redirect('admin/datalhu/');
+            // Upload file PDF
+            $this->upload->initialize($config_lhu);
+            if ($this->upload->do_upload('file_lhu')) {
+                $file_lhu = $this->upload->data('file_name');
             } else {
-                $filelhu = $this->upload->data('file_name');
-
-                $data = [
-                    'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-                    'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-                    'file_lhu' => $filelhu,
-                ];
-
-                $this->db->insert('tb_pdf_book', $data);
-                $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+                $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+                redirect('admin/datalhu/');
             }
+
+            $data = [
+                'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
+                'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
+                'file_lhu' => $file_lhu,
+            ];
+
+            $this->db->insert('tb_pdf_book', $data);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+        } else {
+            $this->session->set_flashdata('flash', 'File-file wajib diunggah.');
         }
+
+        redirect('admin/datalhu/');
     }
 
-    public function editlhu($id)
+    public function editLhu($id)
     {
         $data['datalhu'] = $this->db->get_where('tb_pdf_book', ['id' => $id])->row_array();
-        // cek jika ada gambar yang di upload
-        $upload_pdf = $_FILES['file_lhu'];
 
-        if ($upload_pdf) {
-            // $config['allowed_types'] = 'docx|xlsx|pdf';
-            $config['allowed_types'] = 'pdf';
-            $config['max_size']      = '4000';
-            $config['upload_path'] = './assets/data/';
-            $config['encrypt_name'] = TRUE;
+        // Cek jika ada file yang diunggah
+        $upload_lhu = $_FILES['file_lhu']['name'];
 
-            $this->load->library('upload', $config);
+        if ($upload_lhu != "") {
+            $config_lhu['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/lhu_admin/';
+            $config_lhu['encrypt_name'] = TRUE;
 
-            // upload foto baru
-            if ($this->upload->do_upload('file_lhu')) {
-                $old_file = $data['datalhu']['file_lhu'];
-                $path = './assets/data/';
+            $this->load->library('upload');
 
-                // hapus foto lama selain foto default
-                if ($old_file != 'default.pdf') {
-                    unlink(FCPATH . $path . $old_file);
+            if ($upload_lhu != "") {
+                $this->upload->initialize($config_lhu);
+                if ($this->upload->do_upload('file_lhu')) {
+                    $old_file = $data['datalhu']['file_lhu'];
+                    if ($old_file && $old_file != 'default.pdf') {
+                        unlink('./assets/file_lhu/lhu_admin/' . $old_file);
+                    }
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu', $new_file);
                 }
-                // ganti foto lama dengan baru
-                $new_file = $this->upload->data('file_name');
-                $this->db->set('file_lhu', $new_file);
-            } else {
-
-                $data = [
-                    'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-                    'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-                ];
-
-                $this->db->where('id', $this->input->post('id'));
-                $this->db->update('tb_pdf_book', $data);
-                $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
-
-                redirect('admin/datalhu/');
             }
+
+            $dataToUpdate = [
+                'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
+                'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('tb_pdf_book', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            redirect('admin/datalhu/');
+        } else {
+            $dataToUpdate = [
+                'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
+                'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('tb_pdf_book', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            redirect('admin/datalhu/');
         }
-
-        $data = [
-            'id_produk' => htmlspecialchars($this->input->post('kode_produk', true)),
-            'jenis_lhu' => htmlspecialchars($this->input->post('jenis_lhu', true)),
-        ];
-
-        $this->db->where('id', $this->input->post('id'));
-        $this->db->update('tb_pdf_book', $data);
     }
 
     public function tambahLhuUser()
     {
-        // cek jika ada gambar yang di upload
-        $data = [
-            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-            'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
-            'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
-            'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
-            'satuan' => htmlspecialchars($this->input->post('satuan', true)),
-            'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-            'is_active' => 1,
-        ];
+        $file_lhu = $_FILES['file_lhu']['name'];
 
-        $this->db->insert('user_data_lhu_history', $data);
+        if (!empty($file_lhu)) {
+            $config_lhu['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/obat_jadi/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            // Upload file PDF
+            $this->upload->initialize($config_lhu);
+            if ($this->upload->do_upload('file_lhu')) {
+                $file_lhu = $this->upload->data('file_name');
+            } else {
+                $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+            }
+
+             // cek jika ada gambar yang di upload
+            $data = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
+                'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
+                'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+                'file_lhu' => $file_lhu
+            ];
+    
+            $this->db->insert('user_data_lhu_history', $data);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+        } else {
+            $this->session->set_flashdata('flash', 'File-file wajib diunggah.');
+        }
+    }
+
+    public function editLhuUser($id)
+    {
+        $data['datalhu'] = $this->db->get_where('user_data_lhu_history', ['id' => $id])->row_array();
+
+        // Cek jika ada file yang diunggah
+        $upload_lhu = $_FILES['file_lhu']['name'];
+
+        if ($upload_lhu != "") {
+            $config_lhu['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/obat_jadi/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            if ($upload_lhu != "") {
+                $this->upload->initialize($config_lhu);
+                if ($this->upload->do_upload('file_lhu')) {
+                    $old_file = $data['datalhu']['file_lhu'];
+                    if ($old_file && $old_file != 'default.pdf') {
+                        unlink('./assets/file_lhu/obat_jadi/' . $old_file);
+                    }
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu', $new_file);
+                }
+            }
+
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
+                'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
+                'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_lhu_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            redirect('user/datalhuuser/');
+        } else {
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
+                'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
+                'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_lhu_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+        }
+    }
+
+    public function getEditLhuBBP($id) {
+        $query = "SELECT * FROM user_data_bbp_bba_history WHERE id = '$id'";
+
+        return $this->db->query($query)->row_array();
+    }
+
+    public function editLHUBBP($id)
+    {
+        $data['datalhu'] = $this->db->get_where('user_data_bbp_bba_history', ['id' => $id])->row_array();
+
+        // Cek jika ada file yang diunggah
+        $upload_lhu = $_FILES['file_lhu']['name'];
+
+        if ($upload_lhu != "") {
+            $config_lhu['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/bba_bbp/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            if ($upload_lhu != "") {
+                $this->upload->initialize($config_lhu);
+                if ($this->upload->do_upload('file_lhu')) {
+                    $old_file = $data['datalhu']['file_lhu'];
+                    if ($old_file && $old_file != 'default.pdf') {
+                        unlink('./assets/file_lhu/bba_bbp/' . $old_file);
+                    }
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu', $new_file);
+                }
+            }
+
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'produsen' => htmlspecialchars($this->input->post('produsen', true)),
+                'supplier' => htmlspecialchars($this->input->post('supplier', true)),
+                'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
+                'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+                'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_bbp_bba_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            redirect('user/bbp/');
+        } else {
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'produsen' => htmlspecialchars($this->input->post('produsen', true)),
+                'supplier' => htmlspecialchars($this->input->post('supplier', true)),
+                'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
+                'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+                'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_bbp_bba_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+        }
+    }
+
+    public function editLHUBBA($id)
+    {
+        $data['datalhu'] = $this->db->get_where('user_data_bbp_bba_history', ['id' => $id])->row_array();
+
+        // Cek jika ada file yang diunggah
+        $upload_lhu = $_FILES['file_lhu']['name'];
+
+        if ($upload_lhu != "") {
+            $config_lhu['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/bba_bbp/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            if ($upload_lhu != "") {
+                $this->upload->initialize($config_lhu);
+                if ($this->upload->do_upload('file_lhu')) {
+                    $old_file = $data['datalhu']['file_lhu'];
+                    if ($old_file && $old_file != 'default.pdf') {
+                        unlink('./assets/file_lhu/bba_bbp/' . $old_file);
+                    }
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu', $new_file);
+                }
+            }
+
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'produsen' => htmlspecialchars($this->input->post('produsen', true)),
+                'supplier' => htmlspecialchars($this->input->post('supplier', true)),
+                'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
+                'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+                'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_bbp_bba_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            redirect('user/bba/');
+        } else {
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'produsen' => htmlspecialchars($this->input->post('produsen', true)),
+                'supplier' => htmlspecialchars($this->input->post('supplier', true)),
+                'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
+                'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+                'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_bbp_bba_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+        }
     }
 
     public function add_lhu_bbp_bba()
     {
-        // cek jika ada gambar yang di upload
-        $data = [
-            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-            'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
-            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-            'produsen' => htmlspecialchars($this->input->post('produsen', true)),
-            'supplier' => htmlspecialchars($this->input->post('supplier', true)),
-            'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
-            'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
-            'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
-            'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-        ];
+        $file_lhu = $_FILES['file_lhu']['name'];
 
-        $this->db->insert('user_data_bbp_bba_history', $data);
+        if (!empty($file_lhu)) {
+            $config_lhu['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/bba_bbp/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            // Upload file PDF
+            $this->upload->initialize($config_lhu);
+            if ($this->upload->do_upload('file_lhu')) {
+                $file_lhu = $this->upload->data('file_name');
+            } else {
+                $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+            }
+                // cek jika ada gambar yang di upload
+                $data = [
+                    'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                    'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                    'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),            
+                    'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                    'produsen' => htmlspecialchars($this->input->post('produsen', true)),
+                    'supplier' => htmlspecialchars($this->input->post('supplier', true)),
+                    'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
+                    'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+                    'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
+                    'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+                    'file_lhu' => $file_lhu
+                ];
+
+            $this->db->insert('user_data_bbp_bba_history', $data);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+        } else {
+            $this->session->set_flashdata('flash', 'File-file wajib diunggah.');
+        }
     }
 
-    public function add_data_bkp_history()
+    public function add_data_bk_history()
     {
-        // cek jika ada gambar yang di upload
-        $data = [
-            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-            'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
-            'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
-            'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
-            'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
-            'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-        ];
+        $file_lhu_skunder = $_FILES['file_lhu_skunder']['name'];
+        $file_lhu_primer = $_FILES['file_lhu_primer']['name'];
 
-        $this->db->insert('user_data_bkp_history', $data);
+        if (!empty($file_lhu_skunder) || !empty($file_lhu_primer)) {
+            $config_lhu['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/bk/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            // Upload file PDF
+            $this->upload->initialize($config_lhu);
+            if ($this->upload->do_upload('file_lhu_skunder') && $this->upload->do_upload('file_lhu_primer')) {
+                $file_lhu = $this->upload->data('file_name');
+            } else {
+                $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+            }
+            // cek jika ada gambar yang di upload
+            $data = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
+                'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
+                'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
+                'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+                'file_lhu' => $file_lhu
+            ];
+
+            $this->db->insert('user_data_bk_history', $data);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+        } else {
+            $this->session->set_flashdata('flash', 'File-file wajib diunggah.');
+        }
+    }
+
+    public function editLHUBK($id)
+    {
+        $data['datalhu'] = $this->db->get_where('user_data_bk_history', ['id' => $id])->row_array();
+
+        // Cek jika ada file yang diunggah
+        $upload_lhu = $_FILES['file_lhu']['name'];
+
+        if ($upload_lhu != "") {
+            $config_lhu['allowed_types'] = 'docx|pdf|jpg|jpeg|png';
+            $config_lhu['max_size'] = '10000';
+            $config_lhu['upload_path'] = './assets/file_lhu/bk/';
+            $config_lhu['encrypt_name'] = TRUE;
+
+            $this->load->library('upload');
+
+            if ($upload_lhu != "") {
+                $this->upload->initialize($config_lhu);
+                if ($this->upload->do_upload('file_lhu')) {
+                    $old_file = $data['datalhu']['file_lhu'];
+                    if ($old_file && $old_file != 'default.pdf') {
+                        unlink('./assets/file_lhu/bk/' . $old_file);
+                    }
+                    $new_file = $this->upload->data('file_name');
+                    $this->db->set('file_lhu', $new_file);
+                }
+            }
+
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
+                'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
+                'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
+                'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_bk_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+            redirect('user/bk/');
+        } else {
+            $dataToUpdate = [
+                'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
+                'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
+                'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+                'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
+                'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
+                'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
+                'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
+                'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_data_bk_history', $dataToUpdate);
+
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil Diupdate!..');
+        }
     }
 
     public function printCover($id)
@@ -355,14 +700,44 @@ class  Menu_model extends CI_Model
         $this->db->update('user_data_lhu_history', $data);
     }
 
-    public function printLhu($id)
+    public function printLhuPDF($id)
     {               
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
         $data = [
             'users' => $data['user']['id'],
-            'active_print_lhu' => 1,
+            'active_print_lhu_pdf' => 1,
+            'print_date' => date("Y-m-d")
+        ];
+
+        $this->db->where('user_data_lhu_history.id', $id);
+        $this->db->update('user_data_lhu_history', $data);
+    }
+
+    public function printLhuWORD($id)
+    {               
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data = [
+            'users' => $data['user']['id'],
+            'active_print_lhu_word' => 1,
+            'print_date' => date("Y-m-d")
+        ];
+
+        $this->db->where('user_data_lhu_history.id', $id);
+        $this->db->update('user_data_lhu_history', $data);
+    }
+
+    public function printLhuGambar($id)
+    {               
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data = [
+            'users' => $data['user']['id'],
+            'active_print_lhu_gambar' => 1,
             'print_date' => date("Y-m-d")
         ];
 
@@ -396,8 +771,8 @@ class  Menu_model extends CI_Model
             'print_date' => date("Y-m-d")  
         ];
         
-        $this->db->where('user_data_bkp_history.id', $id);
-        $this->db->update('user_data_bkp_history', $data);
+        $this->db->where('user_data_bk_history.id', $id);
+        $this->db->update('user_data_bk_history', $data);
     }
 
     public function hapuslhubyid($id)
@@ -454,32 +829,32 @@ class  Menu_model extends CI_Model
 
     function salesreg()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='REG'");
+        $query = ("SELECT * FROM produk WHERE keterangan='REG'");
 
         return $this->db->query($query)->num_rows();
     }
     function salesnonreg()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='NON.REG'");
+        $query = ("SELECT * FROM produk WHERE keterangan='NON.REG'");
 
         return $this->db->query($query)->num_rows();
     }
     function saless()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='3S'");
+        $query = ("SELECT * FROM produk WHERE keterangan='3S'");
 
         return $this->db->query($query)->num_rows();
     }
     function salesexport()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type='Export'");
+        $query = ("SELECT * FROM produk WHERE keterangan='Export'");
 
         return $this->db->query($query)->num_rows();
     }
 
     function salesnosales()
     {
-        $query = ("SELECT * FROM produk WHERE sales_type=''");
+        $query = ("SELECT * FROM produk WHERE keterangan=''");
 
         return $this->db->query($query)->num_rows();
     }

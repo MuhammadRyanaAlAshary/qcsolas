@@ -71,7 +71,6 @@
                             <th scope="col">Jumlah Penerimaan</th>
                             <th scope="col">No. Protap Analisa BB</th>
                             <th scope="col">Tanggal Berlaku</th>
-                            <th scope="col">Print Date</th>
                             <th scope="col">Print By</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -93,13 +92,10 @@
                                 <td><?= $dl['jumlah_penerimaan']; ?></td>
                                 <td><?= $dl['no_protap_analisa_bb']; ?></td>
                                 <td><?= $dl['tgl_berlaku']; ?></td>
-                                <td><?= $dl['print_date']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                <?php if ($dl['print_lhu'] == 1) : ?>
-                                <?php else : ?>
-                                    <a href="<?= base_url('Laporan/printLhuBBA/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                <?php endif; ?>
+                                    <a href="<?= base_url('./assets/file_lhu/bba_bbp/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                    <a href="<?= base_url('user/editLHUBBA/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

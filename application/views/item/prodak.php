@@ -74,8 +74,8 @@
                             <th scope="col">#</th>
                             <th scope="col">Kode Prodak</th>
                             <th scope="col">Produk Type</th>
-                            <th scope="col">Sales Type</th>
                             <th scope="col">Nama Produk</th>
+                            <th scope="col">Keterangan</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -86,8 +86,8 @@
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $p['kode_produk']; ?></td>
                                 <td><?= $p['produk_type']; ?></td>
-                                <td><?= $p['sales_type']; ?></td>
                                 <td><?= $p['produk_name']; ?></td>
+                                <td><?= $p['keterangan']; ?></td>
                                 <td>
                                     <!-- <a href="" class="badge badge-success">Update</a> -->
                                     <a href="<?= base_url('item/hapusobatjadi/') . $p['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fa fa-edit" aria-hidden="true"></i> Delete</a>
@@ -121,10 +121,10 @@
                             </select>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="sales_type" name="sales_type" placeholder="Sales Type">
+                            <input type="text" class="form-control" id="produk_name" name="produk_name" placeholder="Produk Name" required>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" id="produk_name" name="produk_name" placeholder="Produk Name" required>
+                            <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

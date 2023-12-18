@@ -42,7 +42,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/addBKP/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/addBK/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
     </div>
 
     <!--  Divider -->
@@ -69,7 +69,6 @@
                             <th scope="col">Nama Produsen</th>
                             <th scope="col">Nama Supplier</th>
                             <th scope="col">Jumlah Bahan</th>
-                            <th scope="col">Print Date</th>
                             <th scope="col">Print By</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -89,13 +88,10 @@
                                 <td><?= $dl['nama_produsen']; ?></td>
                                 <td><?= $dl['nama_supplier']; ?></td>
                                 <td><?= $dl['jumlah_bahan']; ?></td>
-                                <td><?= $dl['print_lhu']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                <?php if ($dl['print_lhu'] == 1) : ?>
-                                <?php else : ?>
-                                    <a href="<?= base_url('Laporan/printLhuBKP/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
-                                <?php endif; ?>
+                                    <a href="<?= base_url('./assets/file_lhu/bk/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                    <a href="<?= base_url('user/editBK/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
                                 </td>
                             </tr>
                             <?php $i++ ?>

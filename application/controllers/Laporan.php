@@ -33,7 +33,7 @@ class Laporan extends CI_Controller
         $this->mypdf->generate('user/laporanlhu', $data, 'laporan-lhu', 'A4', 'potret');
     }
 
-    public function printLhu($id)
+    public function printLhuPDF($id)
     { 
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
@@ -46,10 +46,48 @@ class Laporan extends CI_Controller
                 ON produk.id = user_data_lhu_history.id_tb_pdf_book
                 WHERE user_data_lhu_history.id = $id";
 
-        $this->menu->printLhu($id);
+        $this->menu->printLhuPDF($id);
 
         $data['datalhu'] = $this->db->query($query)->row_array();
-        redirect('./assets/data/' . $data['datalhu']['file_lhu']);
+        redirect('./assets/file_lhu/' . $data['datalhu']['file_lhu_pdf']);
+    }
+
+    public function printLhuWORD($id)
+    { 
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT * 
+                FROM tb_pdf_book
+                JOIN user_data_lhu_history
+                ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN produk 
+                ON produk.id = user_data_lhu_history.id_tb_pdf_book
+                WHERE user_data_lhu_history.id = $id";
+
+        $this->menu->printLhuWORD($id);
+
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/file_lhu/' . $data['datalhu']['file_lhu_word']);
+    }
+
+    public function printLhuGambar($id)
+    { 
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT * 
+                FROM tb_pdf_book
+                JOIN user_data_lhu_history
+                ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN produk 
+                ON produk.id = user_data_lhu_history.id_tb_pdf_book
+                WHERE user_data_lhu_history.id = $id";
+
+        $this->menu->printLhuGambar($id);
+
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/file_lhu/' . $data['datalhu']['file_lhu_gambar']);
     }
 
     public function printLhuBBP($id) {

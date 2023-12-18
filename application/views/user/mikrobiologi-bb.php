@@ -42,7 +42,7 @@
 
     <i class="icofont-angle-double-left"></i>
     <div class="row mt-3">
-        <div class="col-md-6"><a href="<?= base_url('user/tambahlhu/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
+        <div class="col-md-6"><a href="<?= base_url('user/addMikroBiologiBB/'); ?>" class="btn btn-primary btn-md"><i class="fa fa-plus" aria-hidden="true"></i> Select Data yang akan di Print</a></div>
     </div>
 
     <!--  Divider -->
@@ -59,38 +59,24 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">K.Prod
-                            </th>
-                            <th scope="col">Nama Produk
-                            </th>
-                            <th scope="col">Jenis Lhu
-                            </th>
-                            <th scope="col">N.Analisa
-                            </th>
-                            <th scope="col">N.Batch
-                            </th>
-                            <th scope="col">Exp.Date
-                            </th>
-                            <th scope="col">Tgl.Prod
-                            </th>
-                            <th scope="col">Tgl.Sampling
-                            </th>
-                            <th scope="col">Qty
-                            </th>
-                            <th scope="col">Sat
-                            </th>
-                            <th scope="col">Print By
-                            </th>
-                            <th scope="col">Action
-                            </th>
+                            <th scope="col">K.Prod</th>
+                            <th scope="col">Nama Produk</th>
+                            <th scope="col">Jenis Lhu</th>
+                            <th scope="col">N.Analisa</th>
+                            <th scope="col">N.Batch</th>
+                            <th scope="col">Exp.Date</th>
+                            <th scope="col">Tgl.Kedatangan</th>
+                            <th scope="col">Nama Produsen</th>
+                            <th scope="col">Nama Supplier</th>
+                            <th scope="col">Jumlah Bahan</th>
+                            <th scope="col">Print Date</th>
+                            <th scope="col">Print By</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($datalhu as $dl) : ?>
-                            <!-- <?php 
-                            var_export($dl);
-                            ?> -->
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $dl['kode_produk']; ?></td>
@@ -99,15 +85,20 @@
                                 <td><?= $dl['nomer_analisa']; ?></td>
                                 <td><?= $dl['nomer_batch']; ?></td>
                                 <td><?= $dl['exp_date']; ?></td>
-                                <td><?= $dl['tgl_produksi']; ?></td>
-                                <td><?= $dl['tgl_sampling']; ?></td>
-                                <td><?= $dl['besaran_batch']; ?></td>
-                                <td><?= $dl['satuan']; ?></td>
+                                <td><?= $dl['tgl_kedatangan']; ?></td>
+                                <td><?= $dl['nama_produsen']; ?></td>
+                                <td><?= $dl['nama_supplier']; ?></td>
+                                <td><?= $dl['jumlah_bahan']; ?></td>
+                                <td><?= $dl['print_lhu']; ?></td>
                                 <td><?= $dl['name'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/file_lhu/lhu_admin/' . $dl['file_lhu_admin']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
-                                    <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['lhu_obat_jadi']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
-                                    <a href="<?= base_url('user/editLhuObatJadi/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_pdf']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU PDF</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_word']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU WORD</a>
+                                    <a href="<?= base_url('./assets/file_lhu/' . $dl['file_lhu_gambar']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU Gambar</a>
+                                <!-- <?php if ($dl['print_lhu'] == 1) : ?>
+                                <?php else : ?>
+                                    <a href="<?= base_url('Laporan/printLhuBKP/') . $dl['id_user_data']; ?>" target="_blank" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> COVER</a>
+                                <?php endif; ?> -->
                                 </td>
                             </tr>
                             <?php $i++ ?>
@@ -118,7 +109,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 <!-- /.container-fluid -->
 
