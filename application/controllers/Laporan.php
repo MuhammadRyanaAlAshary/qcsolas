@@ -33,6 +33,25 @@ class Laporan extends CI_Controller
         $this->mypdf->generate('user/laporanlhu', $data, 'laporan-lhu', 'A4', 'potret');
     }
 
+    public function printlhuObatJadi($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT * 
+                FROM tb_pdf_book
+                JOIN user_data_lhu_history
+                ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN produk 
+                ON produk.id = user_data_lhu_history.id_tb_pdf_book
+                WHERE user_data_lhu_history.id = $id";
+    
+        $this->menu->printLhuObatJadi($id);
+        
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/file_lhu/lhu_admin/' . $data['datalhu']['file_lhu']);        
+    }
+
     public function printLhuPDF($id)
     { 
         $data['user'] = $this->db->get_where('user', ['email' =>

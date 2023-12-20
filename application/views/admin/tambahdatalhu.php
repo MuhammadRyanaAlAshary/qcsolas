@@ -38,7 +38,7 @@
                             <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
                             <label class="custom-file-label" for="file_lhu">Choose file</label>
                         </div>
-                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
+                        <small>* File Harus Berupa format .pdf (MAX SIZE: 10MB)</small>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">
