@@ -23,9 +23,7 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
 
-            $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/login');
-            $this->load->view('templates/auth_footer');
             $this->load->view('templates/query1');
         } else {
             $this->_login();
