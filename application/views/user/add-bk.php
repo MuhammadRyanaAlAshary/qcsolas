@@ -43,10 +43,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tanggal_kedatangan" class="col-sm-2 col-form-label">Tanggal Kedatangan</label>
+                    <label for="tgl_kedatangan" class="col-sm-2 col-form-label">Tanggal Kedatangan</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="tanggal_kedatangan" name="tanggal_kedatangan" required>
-                        <?= form_error('tanggal_kedatangan', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <input type="date" class="form-control" id="tgl_kedatangan" name="tgl_kedatangan" required>
+                        <?= form_error('tgl_kedatangan', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -65,29 +65,31 @@
                 </div>
                 <div class="form-group row">
                     <label for="jumlah_bahan" class="col-sm-2 col-form-label">Jumlah Bahan</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="jumlah_bahan" name="jumlah_bahan" required>
-                        <?= form_error('jumlah_bahan', '<small class="text-danger pl-3">', '</small>'); ?>
+                    <div class="col-sm-2">
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="jumlah_bahan" name="jumlah_bahan" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-1,5">
+                        <div class="input-group mb-3">
+                            <select class="selectpicker form-control" data-live-search="true" id="satuan" name="satuan" required>
+                                <option value="">Satuan</option>
+                                <?php foreach ($satuan as $s) : ?>
+                                    <option value="<?= $s['satuan']; ?>"><?= $s['satuan']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <?= form_error('satuan', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="file_lhu_skunder" class="col-sm-2 col-form-label">File LHU Skunder</label>
+                <label for="file_lhu" class="col-sm-2 col-form-label">File LHU PDF</label>
                     <div class="col-sm-10">
                         <div class="col-sm-9">
-                        <input type="file" class="custom-file-input" id="file_lhu_skunder" name="file_lhu_skunder" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
-                            <label class="custom-file-label" for="file_lhu_skunder">Choose File...</label>
+                            <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf" required>
+                            <label class="custom-file-label" for="file_lhu">Choose file</label>
                         </div>
-                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="file_lhu_primer" class="col-sm-2 col-form-label">File LHU Primer</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-9">
-                        <input type="file" class="custom-file-input" id="file_lhu_primer" name="file_lhu_primer" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg" required>
-                            <label class="custom-file-label" for="file_lhu_primer">Choose File...</label>
-                        </div>
-                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
+                        <small>* File Harus Berupa format .pdf (MAX SIZE: 10MB)</small>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

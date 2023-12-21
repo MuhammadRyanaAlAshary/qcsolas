@@ -69,16 +69,14 @@
                             <th scope="col">Tgl.Sampling</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Satuan</th>
-                            <th scope="col">Created by</th>
+                            <th scope="col">Print by</th>
+                            <th scope="col">Print date</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($datalhu as $dl) : ?>
-                            <!-- <?php 
-                            var_export($dl);
-                            ?> -->
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><?= $dl['kode_produk']; ?></td>
@@ -92,10 +90,17 @@
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
                                 <td><?= $dl['name'] ?></td>
+                                <td><?= $dl['print_date'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/file_lhu/lhu_admin/' . $dl['file_lhu_admin']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
-                                    <a href="<?= base_url('./assets/file_lhu/obat_jadi/' . $dl['lhu_obat_jadi']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
-                                    <a href="<?= base_url('user/editLhuObatJadi/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update LHU</a>
+                                <?php if ($dl['active_print_lhu'] == 1 && $dl['active_print_cover'] == 1) : ?>
+                                <?php elseif ($dl['active_print_lhu'] == 1) : ?>
+                                    <a href="<?= base_url('Laporan/index/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
+                                <?php elseif ($dl['active_print_cover'] == 1) : ?>
+                                    <a href="<?= base_url('Laporan/printlhuObatJadi/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                <?php else: ?>
+                                    <a href="<?= base_url('Laporan/index/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
+                                    <a href="<?= base_url('Laporan/printlhuObatJadi/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++ ?>

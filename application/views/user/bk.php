@@ -69,7 +69,9 @@
                             <th scope="col">Nama Produsen</th>
                             <th scope="col">Nama Supplier</th>
                             <th scope="col">Jumlah Bahan</th>
+                            <th scope="col">Satuan</th>
                             <th scope="col">Created by</th>
+                            <th scope="col">Print Date</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -88,11 +90,14 @@
                                 <td><?= $dl['nama_produsen']; ?></td>
                                 <td><?= $dl['nama_supplier']; ?></td>
                                 <td><?= $dl['jumlah_bahan']; ?></td>
-                                <td><?= $dl['name'] ?></td>
+                                <td><?= $dl['satuan']; ?></td>
+                                <td><?= $dl['name']; ?></td>
+                                <td><?= $dl['print_date']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/file_lhu/bk/bahan_skunder/' . $dl['file_lhu_skunder']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU Sekunder </a>
-                                    <a href="<?= base_url('./assets/file_lhu/bk/bahan_primer/' . $dl['file_lhu_primer']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU Primer </a>
-                                    <a href="<?= base_url('user/editBK/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update LHU</a>
+                                    <?php if ($dl['print_lhu_user'] == 1) :?>
+                                    <?php else : ?>
+                                        <a href="<?= base_url('Laporan/printLhuBK/' . $dl['id']); ?>"class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++ ?>
@@ -103,7 +108,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 

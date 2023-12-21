@@ -69,9 +69,10 @@
                             <th scope="col">Produsen</th>
                             <th scope="col">Supplier</th>
                             <th scope="col">Jumlah Penerimaan</th>
-                            <th scope="col">No. Protap Analisa BB</th>
+                            <th scope="col">Satuan</th>
                             <th scope="col">Tanggal Berlaku</th>
-                            <th scope="col">Created by</th>
+                            <th scope="col">Print By</th>
+                            <th scope="col">Print Date</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -90,12 +91,15 @@
                                 <td><?= $dl['produsen']; ?></td>
                                 <td><?= $dl['supplier']; ?></td>
                                 <td><?= $dl['jumlah_penerimaan']; ?></td>
-                                <td><?= $dl['no_protap_analisa_bb']; ?></td>
+                                <td><?= $dl['satuan']; ?></td>
                                 <td><?= $dl['tgl_berlaku']; ?></td>
                                 <td><?= $dl['name'] ?></td>
+                                <td><?= $dl['print_date'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('./assets/file_lhu/bba_bbp/' . $dl['file_lhu']); ?>" target="_blank" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
-                                    <a href="<?= base_url('user/editLHUBBA/') . $dl['id']; ?>" class="badge badge-warning"><i class="fa fa-edit" aria-hidden="true"></i> Update LHU</a>
+                                    <?php if ($dl['print_lhu_cover'] == 1) : ?>
+                                    <?php else : ?>
+                                        <a href="<?= base_url('Laporan/printLhuBBP/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++ ?>

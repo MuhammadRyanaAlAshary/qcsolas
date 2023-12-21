@@ -72,26 +72,21 @@
                 </div>
                 <div class="form-group row">
                     <label for="jumlah_penerimaan" class="col-sm-2 col-form-label">Jumlah Penerimaan</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="jumlah_penerimaan" name="jumlah_penerimaan" required>
-                        <?= form_error('jumlah_penerimaan', '<small class="text-danger pl-3">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="no_protap_analisa_bb" class="col-sm-2 col-form-label">No. Protap Analisa Bahan Baku</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="no_protap_analisa_bb" name="no_protap_analisa_bb" required>
-                        <?= form_error('no_protap_analisa_bb', '<small class="text-danger pl-3">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="file_lhu" class="col-sm-2 col-form-label">File LHU</label>
-                    <div class="col-sm-10">
-                        <div class="col-sm-9">
-                        <input type="file" class="custom-file-input" id="file_lhu" name="file_lhu" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/png, image/png, image/jpeg">
-                            <label class="custom-file-label" for="file_lhu">Choose File...</label>
+                    <div class="col-sm-2">
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="jumlah_penerimaan" name="jumlah_penerimaan" required>
                         </div>
-                        <small>* File Harus Berupa format .pdf, .word, .jpg, .jpeg, .png (MAX SIZE: 10MB)</small>
+                    </div>
+                    <div class="col-sm-1,5">
+                        <div class="input-group mb-3">
+                            <select class="selectpicker form-control" data-live-search="true" id="satuan" name="satuan" required>
+                                <option value="">Satuan</option>
+                                <?php foreach ($satuan as $s) : ?>
+                                    <option value="<?= $s['satuan']; ?>"><?= $s['satuan']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <?= form_error('besaran_batch', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

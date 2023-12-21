@@ -33,6 +33,25 @@ class Laporan extends CI_Controller
         $this->mypdf->generate('user/laporanlhu', $data, 'laporan-lhu', 'A4', 'potret');
     }
 
+    public function printlhuObatJadi($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $query = "SELECT * 
+                FROM tb_pdf_book
+                JOIN user_data_lhu_history
+                ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
+                JOIN produk 
+                ON produk.id = user_data_lhu_history.id_tb_pdf_book
+                WHERE user_data_lhu_history.id = $id";
+    
+        $this->menu->printLhuObatJadi($id);
+        
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/file_lhu/lhu_admin/' . $data['datalhu']['file_lhu']);        
+    }
+
     public function printLhuPDF($id)
     { 
         $data['user'] = $this->db->get_where('user', ['email' =>
@@ -91,24 +110,19 @@ class Laporan extends CI_Controller
     }
 
     public function printLhuBBP($id) {
-        $data['title'] = 'Laporan LHU BBP';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $query = "SELECT user_data_bbp_bba_history.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bbp_bba_history.*, user.name
-                    FROM user_data_bbp_bba_history  
-                    JOIN tb_pdf_book
-                    ON user_data_bbp_bba_history.id_tb_pdf_book = tb_pdf_book.id
-                    JOIN produk 
-                    ON tb_pdf_book.id_produk = produk.id
-                    LEFT JOIN user 
-                    ON user_data_bbp_bba_history.users = user.id
-                    WHERE user_data_bbp_bba_history.id = $id";
-                    
+        $query = "SELECT user_data_bbp_bba_history.id, tb_pdf_book.*
+                FROM user_data_bbp_bba_history
+                JOIN tb_pdf_book 
+                ON tb_pdf_book.id = user_data_bbp_bba_history.id_tb_pdf_book
+                WHERE user_data_bbp_bba_history.id = '$id'";
+    
         $this->menu->printLhuBBA_BPP($id);
         
-        $data['datalhu'] = $this->db->query($query)->result_array();
-        $this->mypdf->generate('user/laporanlhu-bbp', $data, 'laporan-lhu-bbp', 'A4', 'potret');
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/file_lhu/lhu_admin/' . $data['datalhu']['file_lhu']);  
     }
     
     public function printLhuBBA($id){
@@ -132,24 +146,16 @@ class Laporan extends CI_Controller
         $this->mypdf->generate('user/laporanlhu-bba', $data, 'laporan-lhu-bba', 'A4', 'potret');
     }
 
-    public function printLhuBKP($id) {
+    public function printLhuBK($id) {
         $data['title'] = 'Laporan LHU BKP';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $query = "SELECT user_data_bkp_history.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bkp_history.*, user.name
-                    FROM user_data_bkp_history
-                    JOIN tb_pdf_book
-                    ON user_data_bkp_history.id_tb_pdf_book = tb_pdf_book.id
-                    JOIN produk 
-                    ON tb_pdf_book.id_produk = produk.id
-                    LEFT JOIN user 
-                    ON user_data_bkp_history.users = user.id
-                    WHERE user_data_bkp_history.id = $id";
+        $query = "SELECT * FROM user_data_bk_history where id = '$id' ";
                     
-        $this->menu->printLhuBKP($id);
+        $this->menu->printLhuBK($id);
         
-        $data['datalhu'] = $this->db->query($query)->result_array();
-        $this->mypdf->generate('user/laporanlhu-bkp', $data, 'laporan-lhu-bba', 'A4', 'potret');
+        $data['datalhu'] = $this->db->query($query)->row_array();
+        redirect('./assets/file_lhu/bk/' . $data['datalhu']['file_lhu']);        
     }
 }
