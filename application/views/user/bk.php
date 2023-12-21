@@ -96,7 +96,7 @@
                                 <td>
                                     <?php if ($dl['print_lhu_user'] == 1) :?>
                                     <?php else : ?>
-                                        <a href="<?= base_url('Laporan/printLhuBK/' . $dl['id']); ?>"class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                        <a href="<?= base_url('Laporan/printLhuBK/' . $dl['id']); ?>"class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

@@ -98,7 +98,7 @@
                                 <td>
                                     <?php if ($dl['print_lhu_cover'] == 1) : ?>
                                     <?php else : ?>
-                                        <a href="<?= base_url('Laporan/printLhuBBP/' . $dl['id']); ?>" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                        <a href="<?= base_url('Laporan/printLhuBBP/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

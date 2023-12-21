@@ -94,12 +94,12 @@
                                 <td>
                                 <?php if ($dl['active_print_lhu'] == 1 && $dl['active_print_cover'] == 1) : ?>
                                 <?php elseif ($dl['active_print_lhu'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/index/' . $dl['id']); ?>" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
+                                    <a href="<?= base_url('Laporan/index/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
                                 <?php elseif ($dl['active_print_cover'] == 1) : ?>
-                                    <a href="<?= base_url('Laporan/printlhuObatJadi/' . $dl['id']); ?>" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                    <a href="<?= base_url('Laporan/printlhuObatJadi/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
                                 <?php else: ?>
-                                    <a href="<?= base_url('Laporan/index/' . $dl['id']); ?>" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
-                                    <a href="<?= base_url('Laporan/printlhuObatJadi/' . $dl['id']); ?>" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
+                                    <a href="<?= base_url('Laporan/index/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> Cover LHU</a>
+                                    <a href="<?= base_url('Laporan/printlhuObatJadi/' . $dl['id']); ?>" class="badge badge-success tombol-print"><i class="fa fa-print" aria-hidden="true"></i> File LHU</a>
                                 <?php endif; ?>
                                 </td>
                             </tr>
