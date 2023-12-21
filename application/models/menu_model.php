@@ -496,7 +496,7 @@ class  Menu_model extends CI_Model
             'produsen' => htmlspecialchars($this->input->post('produsen', true)),
             'supplier' => htmlspecialchars($this->input->post('supplier', true)),
             'jumlah_penerimaan' => htmlspecialchars($this->input->post('jumlah_penerimaan', true)),
-            'no_protap_analisa_bb' => htmlspecialchars($this->input->post('no_protap_analisa_bb', true)),
+            'satuan' => htmlspecialchars($this->input->post('satuan', true)),
             'tgl_berlaku' => date('Y-m-d', strtotime($this->input->post('tgl_berlaku'))),
             'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
             'users' => $data['user']['id']
@@ -508,41 +508,7 @@ class  Menu_model extends CI_Model
 
     public function add_data_bk_history()
     {
-        $file_lhu_skunder = $_FILES['file_lhu_skunder']['name'];
-        $file_lhu_primer = $_FILES['file_lhu_primer']['name'];
-
-        if (!empty($file_lhu_skunder) || !empty($file_lhu_primer)) {
-            $config_lhu_skunder['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
-            $config_lhu_skunder['max_size'] = '10000';
-            $config_lhu_skunder['upload_path'] = './assets/file_lhu/bk/bahan_skunder/';
-            $config_lhu_skunder['encrypt_name'] = TRUE;
-
-            $config_lhu_primer['allowed_types'] = 'pdf|docx|jpg|jpeg|png';
-            $config_lhu_primer['max_size'] = '10000';
-            $config_lhu_primer['upload_path'] = './assets/file_lhu/bk/bahan_primer/';
-            $config_lhu_primer['encrypt_name'] = TRUE;
-
-            $this->load->library('upload');
-
-            // Upload file PDF for 'file_lhu_skunder'
-            $this->upload->initialize($config_lhu_skunder);
-            if ($this->upload->do_upload('file_lhu_skunder')) {
-                $file_lhu_skunder = $this->upload->data('file_name');
-            } else {
-                $this->session->set_flashdata('flash', 'File LHU Skunder gagal di upload, tipe file salah atau melebihi ukuran maksimum.');
-                redirect('user/bk/');
-            }
-
-            // Upload file PDF for 'file_lhu_primer'
-            $this->upload->initialize($config_lhu_primer);
-            if ($this->upload->do_upload('file_lhu_primer')) {
-                $file_lhu_primer = $this->upload->data('file_name');
-            } else {
-                $this->session->set_flashdata('flash', 'File LHU Primer gagal di upload, tipe file salah atau melebihi ukuran maksimum.');
-                redirect('user/bk/');
-            }
-
-            $data['user'] = $this->db->get_where('user', ['email' =>
+        $data['user'] = $this->db->get_where('user', ['email' =>
             $this->session->userdata('email')])->row_array();
 
             // Insert data to database
@@ -554,17 +520,13 @@ class  Menu_model extends CI_Model
                 'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
                 'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
                 'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
+                'satuan' => htmlspecialchars($this->input->post('satuan', true)),
                 'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-                'file_lhu_skunder' => $file_lhu_skunder,
-                'file_lhu_primer' => $file_lhu_primer,
                 'users' => $data['user']['id']
             ];
 
-            $this->db->insert('user_data_bk_history', $data);
-            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
-        } else {
-            $this->session->set_flashdata('flash', 'File-file wajib diunggah.');
-        }
+        $this->db->insert('user_data_bk_history', $data);
+        $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
     }
 
     public function editLHUBK($id)
@@ -721,7 +683,7 @@ class  Menu_model extends CI_Model
 
         $data = [
             'users' => $data['user']['id'],
-            'print_lhu' => 1,
+            'print_lhu_cover' => 1,
             'print_date' => date("Y-m-d")  
         ];
         
@@ -729,15 +691,16 @@ class  Menu_model extends CI_Model
         $this->db->update('user_data_bbp_bba_history', $data);
     }
 
-    public function printLhuBKP($id)
+    public function printLhuBK($id)
     {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
         $data = [
             'users' => $data['user']['id'],
-            'print_lhu' => 1,
-            'print_date' => date("Y-m-d")  
+            'print_lhu_cover' => 1,
+            'print_date' => date("Y-m-d") ,
+            'print_by' => $data['user']['id']
         ];
         
         $this->db->where('user_data_bk_history.id', $id);

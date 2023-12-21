@@ -101,7 +101,7 @@
     style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:11px;font-family:"Calibri",sans-serif;'>
     <span style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'>No. Protap Analisa Bahan Baku :
         &nbsp;</span><span
-        style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'><?= $dl['no_protap_analisa_bb'] ?></span><span
+        style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'></span><span
         style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'>&nbsp;Rev. 06 Tanggal Berlaku : <?= $dl['tgl_berlaku'] ?></span>
 </p>
 </div>
@@ -675,7 +675,7 @@
     style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:11px;font-family:"Calibri",sans-serif;'>
     <span style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'>No. Protap Analisa Bahan Baku :
         &nbsp;</span><span
-        style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'><?= $dl['no_protap_analisa_bb'] ?></span><span
+        style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'></span><span
         style='font-size:10px;line-height:115%;font-family:"Arial",sans-serif;'>&nbsp;Rev. 06 Tanggal Berlaku : <?= $dl['tgl_berlaku'] ?></span>
 </p>
 <div

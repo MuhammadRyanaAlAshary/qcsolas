@@ -86,7 +86,6 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <?= form_error('besaran_batch', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="form-group row justify-content-end">

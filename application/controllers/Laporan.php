@@ -151,22 +151,22 @@ class Laporan extends CI_Controller
         $this->mypdf->generate('user/laporanlhu-bba', $data, 'laporan-lhu-bba', 'A4', 'potret');
     }
 
-    public function printLhuBKP($id) {
+    public function printLhuBK($id) {
         $data['title'] = 'Laporan LHU BKP';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $query = "SELECT user_data_bkp_history.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bkp_history.*, user.name
-                    FROM user_data_bkp_history
+        $query = "SELECT user_data_bk_history.id, produk.kode_produk, produk.produk_name, tb_pdf_book.jenis_lhu, tb_pdf_book.file_lhu, user_data_bk_history.*, user.name
+                    FROM user_data_bk_history
                     JOIN tb_pdf_book
-                    ON user_data_bkp_history.id_tb_pdf_book = tb_pdf_book.id
+                    ON user_data_bk_history.id_tb_pdf_book = tb_pdf_book.id
                     JOIN produk 
                     ON tb_pdf_book.id_produk = produk.id
                     LEFT JOIN user 
-                    ON user_data_bkp_history.users = user.id
-                    WHERE user_data_bkp_history.id = $id";
+                    ON user_data_bk_history.users = user.id
+                    WHERE user_data_bk_history.id = $id";
                     
-        $this->menu->printLhuBKP($id);
+        $this->menu->printLhuBK($id);
         
         $data['datalhu'] = $this->db->query($query)->result_array();
         $this->mypdf->generate('user/laporanlhu-bkp', $data, 'laporan-lhu-bba', 'A4', 'potret');

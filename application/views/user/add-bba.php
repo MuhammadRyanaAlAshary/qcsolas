@@ -72,13 +72,6 @@
                 </div>
                 <div class="form-group row">
                     <label for="jumlah_penerimaan" class="col-sm-2 col-form-label">Jumlah Penerimaan</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control" id="jumlah_penerimaan" name="jumlah_penerimaan" required>
-                        <?= form_error('jumlah_penerimaan', '<small class="text-danger pl-3">', '</small>'); ?>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="jumlah_penerimaan" class="col-sm-2 col-form-label">Jumlah Penerimaan</label>
                     <div class="col-sm-2">
                         <div class="input-group mb-3">
                             <input type="number" class="form-control" id="jumlah_penerimaan" name="jumlah_penerimaan" required>

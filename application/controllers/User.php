@@ -188,12 +188,12 @@ class  User extends CI_Controller
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
         $this->form_validation->set_rules('tgl_sampling', 'Tanggal Sampling', 'required');
+        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
         $this->form_validation->set_rules('produsen', 'Produsen', 'required');
         $this->form_validation->set_rules('supplier', 'Supplier', 'required');
         $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
-        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
-        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -241,7 +241,6 @@ class  User extends CI_Controller
         $this->form_validation->set_rules('produsen', 'Produsen', 'required');
         $this->form_validation->set_rules('supplier', 'Supplier', 'required');
         $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
-        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
         $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -324,13 +323,13 @@ class  User extends CI_Controller
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
         $this->form_validation->set_rules('tgl_sampling', 'Tanggal Sampling', 'required');
+        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
         $this->form_validation->set_rules('produsen', 'Produsen', 'required');
         $this->form_validation->set_rules('supplier', 'Supplier', 'required');
         $this->form_validation->set_rules('jumlah_penerimaan', 'Jumlah Penerimaan', 'required');
-        $this->form_validation->set_rules('no_protap_analisa_bb', 'No Protap Analisa BB', 'required');
-        $this->form_validation->set_rules('tgl_berlaku', 'Tanggal Berlaku', 'required');
-        
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
+
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);

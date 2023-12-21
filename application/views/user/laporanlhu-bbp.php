@@ -83,7 +83,7 @@
 <p
     style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:115%;font-size:11px;font-family:"Calibri",sans-serif;'>
     <span style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>Jumlah Penerimaan&nbsp; &nbsp; &nbsp;
-        &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <?= $dl['jumlah_penerimaan']; ?></span>
+        &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: <?= $dl['jumlah_penerimaan']; ?> <?= $dl['satuan']; ?></span>
 </p>
 <p
     style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:115%;font-size:11px;font-family:"Calibri",sans-serif;'>
@@ -92,12 +92,12 @@
 </p>
 <p
     style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:11px;font-family:"Calibri",sans-serif;'>
-    <span style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>No. Protap Analisa Bahan Baku : <?= $dl['no_protap_analisa_bb']; ?></span><span
+    <span style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>No. Protap Analisa Bahan Baku : </span><span
         style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>10RD-012-B</span><span
         style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>P</span><span
         style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>004</span><span
         style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>&nbsp;</span><span
-        style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>Rev. 07 Tanggal Berlaku : <?= $dl['tgl_berlaku']; ?>
+        style='font-size:13px;line-height:115%;font-family:"Arial",sans-serif;'>Rev. 07 Tanggal Berlaku :
         2023</span>
 </p>
 </div>
