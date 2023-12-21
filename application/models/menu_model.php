@@ -316,8 +316,6 @@ class  Menu_model extends CI_Model
             'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
             'satuan' => htmlspecialchars($this->input->post('satuan', true)),
             'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-            'file_lhu' => $file_lhu,
-            'users' => $data['user']['id'],
         ];
 
         $this->db->insert('user_data_lhu_history', $data);
@@ -508,25 +506,39 @@ class  Menu_model extends CI_Model
 
     public function add_data_bk_history()
     {
-        $data['user'] = $this->db->get_where('user', ['email' =>
-            $this->session->userdata('email')])->row_array();
+        $this->load->library('upload');
 
-            // Insert data to database
+        $config_lhu['allowed_types'] = 'pdf';
+        $config_lhu['max_size'] = '10000';
+        $config_lhu['upload_path'] = './assets/file_lhu/bk';
+        $config_lhu['encrypt_name'] = TRUE;
+
+        $this->upload->initialize($config_lhu);
+
+        if (!$this->upload->do_upload('file_lhu')) {
+            $this->session->set_flashdata('flash', 'File PDF gagal di upload, tipe file salah.');
+            redirect('admin/datalhu/');
+        } else {
+            $file_lhu_data = $this->upload->data();
+            $file_lhu = $file_lhu_data['file_name'];
+
             $data = [
                 'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
                 'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
                 'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
-                'tgl_kedatangan' => htmlspecialchars($this->input->post('tanggal_kedatangan', true)),
+                'tgl_kedatangan' => htmlspecialchars($this->input->post('tgl_kedatangan', true)),
                 'nama_produsen' => htmlspecialchars($this->input->post('nama_produsen', true)),
                 'nama_supplier' => htmlspecialchars($this->input->post('nama_supplier', true)),
                 'jumlah_bahan' => htmlspecialchars($this->input->post('jumlah_bahan', true)),
                 'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+                'file_lhu' => $file_lhu,
                 'id_tb_pdf_book' => $this->input->post('id_tb_pdf_book'),
-                'users' => $data['user']['id']
             ];
 
-        $this->db->insert('user_data_bk_history', $data);
-        $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+            $this->db->insert('user_data_bk_history', $data);
+            $this->session->set_flashdata('flash', 'Data LHU Berhasil ditambahkan');
+            redirect('user/bk/');
+        }
     }
 
     public function editLHUBK($id)
@@ -698,9 +710,8 @@ class  Menu_model extends CI_Model
 
         $data = [
             'users' => $data['user']['id'],
-            'print_lhu_cover' => 1,
+            'print_lhu_user' => 1,
             'print_date' => date("Y-m-d") ,
-            'print_by' => $data['user']['id']
         ];
         
         $this->db->where('user_data_bk_history.id', $id);

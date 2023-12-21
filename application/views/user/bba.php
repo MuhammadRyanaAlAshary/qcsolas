@@ -71,7 +71,6 @@
                             <th scope="col">Jumlah Penerimaan</th>
                             <th scope="col">Satuan</th>
                             <th scope="col">Tanggal Berlaku</th>
-                            <th scope="col">Created by</th>
                             <th scope="col">Print By</th>
                             <th scope="col">Print Date</th>
                             <th scope="col">Action</th>
@@ -95,10 +94,12 @@
                                 <td><?= $dl['satuan']; ?></td>
                                 <td><?= $dl['tgl_berlaku']; ?></td>
                                 <td><?= $dl['name'] ?></td>
-                                <td><?= $dl['print_by'] ?></td>
                                 <td><?= $dl['print_date'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('Laporan/printLhuBBA/') . $dl['id']; ?>" class="badge badge-success"><i class="fa fa-edit" aria-hidden="true"></i> Cover LHU</a>
+                                    <?php if ($dl['print_lhu_cover'] == 1) : ?>
+                                    <?php else : ?>
+                                        <a href="<?= base_url('Laporan/printLhuBBP/' . $dl['id']); ?>" class="badge badge-success"><i class="fa fa-print" aria-hidden="true"></i> LHU</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php $i++ ?>

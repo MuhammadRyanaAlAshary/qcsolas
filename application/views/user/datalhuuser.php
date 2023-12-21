@@ -69,7 +69,6 @@
                             <th scope="col">Tgl.Sampling</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Satuan</th>
-                            <th scope="col">Created by</th>
                             <th scope="col">Print by</th>
                             <th scope="col">Print date</th>
                             <th scope="col">Action</th>
@@ -91,8 +90,7 @@
                                 <td><?= $dl['besaran_batch']; ?></td>
                                 <td><?= $dl['satuan']; ?></td>
                                 <td><?= $dl['name'] ?></td>
-                                <td></td>
-                                <td></td>
+                                <td><?= $dl['print_date'] ?></td>
                                 <td>
                                 <?php if ($dl['active_print_lhu'] == 1 && $dl['active_print_cover'] == 1) : ?>
                                 <?php elseif ($dl['active_print_lhu'] == 1) : ?>

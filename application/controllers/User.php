@@ -395,10 +395,11 @@ class  User extends CI_Controller
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
         $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
         $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
-        $this->form_validation->set_rules('tanggal_kedatangan', 'Tanggal Kedatangan', 'required');
+        $this->form_validation->set_rules('tgl_kedatangan', 'Tanggal Kedatangan', 'required');
         $this->form_validation->set_rules('nama_produsen', 'Nama Produsen', 'required');
         $this->form_validation->set_rules('nama_supplier', 'Nama Supplier', 'required');
         $this->form_validation->set_rules('jumlah_bahan', 'Jumlah Bahan', 'required');
+        $this->form_validation->set_rules('satuan', 'Satuan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
