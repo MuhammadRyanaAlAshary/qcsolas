@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class  admin extends CI_Controller
+class admin extends CI_Controller
 {
     public function __construct()
     {
@@ -9,6 +9,7 @@ class  admin extends CI_Controller
         $this->load->library('pagination');
         $this->load->library('form_validation');
         $this->load->model('menu_model', 'menu');
+        $this->load->model('nomer_analisa');
         is_logged_in();
     }
 
@@ -125,5 +126,108 @@ class  admin extends CI_Controller
         $this->menu->hapuslhubyid($id);
         $this->session->set_flashdata('flash', 'Data LHU Berhasil Dihapus');
         redirect('admin/datalhu/');
+    }
+
+    public function nomer_analisa()
+    {
+        $data['title'] = 'Nomer Analisa';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['datalhu'] = $this->nomer_analisa->index();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/nomer_analisa', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/query1'); 
+    }
+
+    public function tambah_nomer_analisa(){
+        $data['title'] = 'Nomer Analisa';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/tambah_nomer_analisa', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $nomer_analisa = $this->input->post('nomer_analisa');
+            $nomer_batch = $this->input->post('nomer_batch');
+            // check duplicate nomer analisa
+            $checkNomerAnalisa = $this->nomer_analisa->checkDuplicateNomerAnalisa($nomer_analisa);
+            $checkNomerBatch = $this->nomer_analisa->checkDuplicateNomerBatch($nomer_batch);
+            
+            if ($checkNomerAnalisa) {
+                $this->session->set_flashdata('existingNomerAnalisa', 'Nomer Analisa Sudah Ada!.');
+                redirect('admin/nomer_analisa/');
+            }elseif ($checkNomerBatch) {
+                $this->session->set_flashdata('existingNomerBatch', 'Nomer Analisa Sudah Ada!.');
+                redirect('admin/nomer_analisa/');
+            }else {
+                $this->nomer_analisa->store();
+                $this->session->set_flashdata('flash', 'Data Nomer Analisa Berhasil ditambahkan');
+                redirect('admin/datalhu/');
+            }
+        }
+    }
+
+    public function edit_nomer_analisa($id) {
+        $data['title'] = 'Nomer Analisa';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    
+        $data['nomer_analisa'] = $this->nomer_analisa->edit($id);
+    
+        $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required');
+        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required');
+        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
+    
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/edit_nomer_analisa', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/query1');
+        } else {
+            $nomer_analisa = $this->input->post('nomer_analisa');
+            $nomer_batch = $this->input->post('nomer_batch');
+            
+            // Check if the entered values are the same as the existing values
+            if ($data['nomer_analisa']['nomer_analisa'] == $nomer_analisa && $data['nomer_analisa']['nomer_batch'] == $nomer_batch) {
+                // Update directly if the values are unchanged
+                $this->nomer_analisa->update($id);
+                redirect('admin/nomer_analisa/');
+            } else {
+                // Check for duplicates in nomer analisa and nomer batch separately
+                $checkNomerAnalisa = $this->nomer_analisa->checkDuplicateNomerAnalisa($nomer_analisa);
+                $checkNomerBatch = $this->nomer_analisa->checkDuplicateNomerBatch($nomer_batch);
+    
+                if ($checkNomerAnalisa) {
+                    $this->session->set_flashdata('existingNomerAnalisa', 'Nomer Analisa Sudah Ada!.');
+                } elseif ($checkNomerBatch) {
+                    $this->session->set_flashdata('existingNomerBatch', 'Nomer Batch Sudah Ada!.');
+                } else {
+                    // No duplicates found, perform the update
+                    $this->nomer_analisa->update($id);
+                    $this->session->set_flashdata('flash', 'Data Nomer Analisa Berhasil ditambahkan');
+                }
+                redirect('admin/nomer_analisa/');
+            }
+        }
+    }
+    
+
+    public function delete_nomer_analisa($id) {
+        $this->nomer_analisa->delete($id);
     }
 }

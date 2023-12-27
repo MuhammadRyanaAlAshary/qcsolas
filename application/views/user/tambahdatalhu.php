@@ -23,31 +23,20 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="nomer_analsia" class="col-sm-2 col-form-label">Nomer Analisa</label>
+                    <label for="nomer_analisa" class="col-sm-2 col-form-label">Nomer Analisa</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nomer_analisa" name="nomer_analisa" required>
+                        <select class="selectpicker form-control" data-live-search="true" id="nomer_analisa" name="nomer_analisa" required>
+                            <option value="">[Nomer Analisa] - [Nomer Batch] - [EXP DATE]</option>
+                            <?php foreach ($dataNomerAnalisa as $dataNomerAnalisa) : ?>
+                                <option value="<?= $dataNomerAnalisa['id']; ?>">[ <?= $dataNomerAnalisa['nomer_analisa']; ?> ] - [ <?= $dataNomerAnalisa['nomer_batch']; ?> ] - [ <?= $dataNomerAnalisa['exp_date']; ?> ]</option>
+                            <?php endforeach; ?>
+                        </select>
                         <?= form_error('nomer_analisa', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="nomer_batch" class="col-sm-2 col-form-label">Nomer Batch</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nomer_batch" name="nomer_batch" required>
-                        <?= form_error('nomer_batch', '<small class="text-danger pl-3">', '</small>'); ?>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="exp_date" class="col-sm-2 col-form-label">Exp Date</label>
-                    <div class="col-sm-3">
-                        <input type="date" class="form-control" id="exp_date" name="exp_date" required>
-                        <?= form_error('exp_date', '<small class="text-danger pl-3">', '</small>'); ?>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="tgl_produksi" class="col-sm-2 col-form-label">Tgl Produksi</label>
+                    <label for="tgl_produksi" class="col-sm-2 col-form-label">Tanggal Produksi</label>
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="tgl_produksi" name="tgl_produksi" required>
                         <?= form_error('tgl_produksi', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -55,7 +44,7 @@
                 </div>
                 
                 <div class="form-group row">
-                    <label for="tgl_sampling" class="col-sm-2 col-form-label">Tgl Sampling</label>
+                    <label for="tgl_sampling" class="col-sm-2 col-form-label">Tanggal Sampling</label>
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="tgl_sampling" name="tgl_sampling" required>
                         <?= form_error('tgl_sampling', '<small class="text-danger pl-3">', '</small>'); ?>

@@ -21,9 +21,14 @@ class  Menu_model extends CI_Model
                     tb_pdf_book.jenis_lhu, 
                     tb_pdf_book.file_lhu AS file_lhu_admin, 
                     user_data_lhu_history.*, 
-                    user.name
+                    user.name,
+                    nomer_analisa.nomer_analisa,
+                    nomer_analisa.nomer_batch,
+                    nomer_analisa.exp_date
                 FROM 
                     user_data_lhu_history  
+                JOIN 
+                    nomer_analisa ON user_data_lhu_history.id_nomer_analisa = nomer_analisa.id
                 JOIN 
                     tb_pdf_book ON user_data_lhu_history.id_tb_pdf_book = tb_pdf_book.id
                 JOIN 
@@ -92,7 +97,7 @@ class  Menu_model extends CI_Model
     public function checkNomorAnalisaObatJadi($id) {
         $query= "SELECT * 
                     FROM user_data_lhu_history 
-                    WHERE nomer_analisa = '$id' ";
+                    WHERE id_nomer_analisa = '$id' ";
 
         return $this->db->query($query)->result_array();
     }
@@ -308,9 +313,7 @@ class  Menu_model extends CI_Model
 
          // cek jika ada gambar yang di upload
         $data = [
-            'nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
-            'nomer_batch' => htmlspecialchars($this->input->post('nomer_batch', true)),
-            'exp_date' => date('Y-m-d', strtotime($this->input->post('exp_date'))),
+            'id_nomer_analisa' => htmlspecialchars($this->input->post('nomer_analisa', true)),
             'tgl_produksi' => date('Y-m-d', strtotime($this->input->post('tgl_produksi'))),
             'tgl_sampling' => date('Y-m-d', strtotime($this->input->post('tgl_sampling'))),
             'besaran_batch' => htmlspecialchars($this->input->post('besaran_batch', true)),
