@@ -83,11 +83,10 @@ class  User extends CI_Controller
         WHERE tb_pdf_book.jenis_lhu = 'Obat Jadi' OR tb_pdf_book.jenis_lhu = 'MikroBiologi BB' OR tb_pdf_book.jenis_lhu = 'MikroBiologi OJ'";
 
         $data['dataLhu'] = $this->db->query($query)->result_array();
+        $data['dataNomerAnalisa'] = $this->db->get('nomer_analisa')->result_array();
         $data['satuan'] = $this->db->get('satuan')->result_array();
 
         $this->form_validation->set_rules('nomer_analisa', 'Nomer Analisa', 'required|trim');
-        $this->form_validation->set_rules('nomer_batch', 'Nomer Batch', 'required|trim');
-        $this->form_validation->set_rules('exp_date', 'Exp Date', 'required');
         $this->form_validation->set_rules('tgl_produksi', 'Tgl Produksi', 'required');
         $this->form_validation->set_rules('tgl_sampling', 'Tgl Sampling', 'required');
         $this->form_validation->set_rules('besaran_batch', 'Besaran Batch', 'required');

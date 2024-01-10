@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2023 at 07:10 AM
+-- Generation Time: Dec 27, 2023 at 02:12 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -1445,12 +1445,28 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(3, 'Ryan', 'ryana6661007@gmail.com', 'default.jpg', '$2y$10$TdJeRU9/rK1wVNEuB1Zkoe3Wi4dpBgzWJMhXaEhD79DuAzirx0cMq', 3, 1, '0000-00-00'),
 (4, 'SLS.MGR.QC', 'mgr@gmail.com', 'default.jpg', '$2y$10$9/6uaCYqpBWjTtXWszWn8egSaOuBi/OLWIfjqDNpuUm.giRXp3386', 1, 1, '0000-00-00'),
 (5, 'SLS.QC.1', 'qc1@gmail.com', 'default.jpg', '$2y$10$GQCW.2kaITWfKA2KaHgkv.Q7UFnTM4KSDmskxnFYjlLf7z8/c97T6', 2, 1, '0000-00-00'),
 (10, 'Aam Priatna', 'ryana666fdsfdsf1007@gmail.com', 'default.jpg', '$2y$10$tHmVJxe9xVsaWcLiMVzDJugZ8djGvbYUwQdKyrdh9crybfPCgdyQe', 1, 1, '2017-01-14'),
-(11, 'Valentio', 'valen@gmail.com', 'default.jpg', '$2y$10$xvI9UZe6syAZ26ipSm.SS.MQ4T8UBdQqoeEoeNOzOrmUREIZqHKmy', 1, 1, '0000-00-00'),
-(13, 'Valentio', 'admin@gmail.com', 'default.jpg', '$2y$10$MItJ9TOLnxluR7H2mn5s3OBxJbOy1LKEz12q5PoNbCTv4oLUU3rW2', 3, 1, '2023-12-01');
+(14, 'Valentio Aditama', 'valentioaditama8@gmail.com', 'default.jpg', '$2y$10$JG44ceSNLyRovVCAE8QkPuHi4ic6i18kqj7ndKMO3mHWHda..RCCO', 3, 1, '2023-12-21'),
+(15, 'Ryan', 'ryan.solas@gmail.com', 'default.jpg', '$2y$10$hqgAfgazySmAlFJWOD5MDeRydWKEEf1SqOoF9g3q2m4jBjzKk7.1y', 3, 1, '2023-12-21'),
+(18, 'Yeti Sumarni', 'qc.solas.yeti.sumarni@gmail.com', 'default.jpg', '$2y$10$uTs2NMHvYe3VljOQPHLDHOHehpJWLACX6DYNYSyFUA0RaTMtBESqG', 2, 1, '2023-12-21'),
+(19, 'Sophia Juariah Irawan', 'qc.solas.sophia.juariah@gmail.com', 'default.jpg', '$2y$10$xHG.oB67W4hZihDDjb/C1OXjqcz.Hjbz.dTRIduHxS6kelZHHhqK2', 2, 1, '2023-12-21'),
+(20, 'Purnama Oktapian', 'qc.solas.purnama.oktapian@gmail.com', 'default.jpg', '$2y$10$p76Wpz6iZiOVTw5CJKms/.kkJrtg79EQbBFhXlpG694J3WgZ32E.q', 2, 1, '2023-12-21'),
+(21, 'Angga Tri Saputra', 'qc.solas.angga.tri@gmail.com', 'default.jpg', '$2y$10$NltXjxSitMhwUOYUQfVlEu0ISlZ4FtwRIdYFCepixmriSvMbL7Rc2', 2, 1, '2023-12-21'),
+(22, 'Rheiva Maranthi Wahyu', 'qc.solas.rheiva.maranthi@gmail.com', 'default.jpg', '$2y$10$SXGJzEVGuiq3Rxz6D70OtuZwEB02B.el0NU7mH4BbhJk5meo9c832', 2, 1, '2023-12-21'),
+(23, 'Rina Nur Akbar', 'qc.solas.rina.nur.akbar@gmail.com', 'default.jpg', '$2y$10$cuH2pHO7cwqV0ugxeePAW.O0oGjMm0xIUjHn/3gZmh0/FQa.7ID4W', 2, 1, '2023-12-21'),
+(24, 'Feti Fazriah', 'qc.solas.feti.fazriah@gmail.com', 'default.jpg', '$2y$10$2eIRUDlQWsCeVUDVMjiSHOsGKB.74BKyioZJZ0KOTqZnM3uLY4AMe', 2, 1, '2023-12-21'),
+(25, 'Agus Odang', 'qc.solas.agus.odang@gmail.com', 'default.jpg', '$2y$10$J6UifOq9RpvaSDcJOTUSAOYGY8YV8PJ0JLRSz3Ax1oM64gHieRVcG', 2, 1, '2023-12-21'),
+(26, 'Tediana Priadi', 'qc.solas.tediana.priadi@gmail.com', 'default.jpg', '$2y$10$yFPQ0ETSbDrEiWWqlGjs6uKWBeeMHPd1SdUU7Rvn4jAEDeYNoRWA6', 2, 1, '2023-12-21'),
+(27, 'Mugni Rahmat Nugraha', 'qc.solas.mugni.rahmat@gmail.com', 'default.jpg', '$2y$10$cxuNGvHde3BT/dl716ficeLgfG3TF0pn8jNc4Iu2VBywA3Vuk5YZ2', 2, 1, '2023-12-21'),
+(28, 'Sinta Nuriyah', 'qc.solas.sinta.nuriyah@gmail.com', 'default.jpg', '$2y$10$N85vIOtqCQpyqytDEfP5CuhyrJ36QMcxARD3sTeB8X4txiGA2GS0K', 2, 1, '2023-12-21'),
+(29, 'Ilham Nurarifin', 'qc.solas.ilham.nurarifin@gmail.com', 'default.jpg', '$2y$10$n0sTwI6cYV2q6C.VS5rAne3/peAhimWrqhixML0wHhUQKquYfmDdq', 2, 1, '2023-12-21'),
+(30, 'Putri Insani Kamila', 'qc.solas.putri.insani@gmail.com', 'default.jpg', '$2y$10$cDmgmGxzXjhtq4aK7B1qsOAjcc49IOIcRXlwq4SdfCg2Wsx6fqFh6', 2, 1, '2023-12-21'),
+(31, 'Ahmad Anwar Yusuf', 'qc.solas.ahmad.anwar@gmail.com', 'default.jpg', '$2y$10$VMo4WpiL.Sf7IMdfnB5X.OlRpfB.ofwh/Lj2uRke8OQkdcC1NSYEq', 2, 1, '2023-12-21'),
+(32, 'Irma Ayu Septiani', 'qc.solas.irma.ayu@gmail.com', 'default.jpg', '$2y$10$60.BOpQdPbVDaD.JOA5Qd.DnnC1yK4n.xg1OiD8wLCaHIa7Nb2moy', 2, 1, '2023-12-21'),
+(33, 'Resti', 'qc.solas.resti@gmail.com', 'default.jpg', '$2y$10$KfG5ZvCHaK2wm1.FMjCwOO6XZ/h5ckpaQQYSuVa6oWIsq71qWTtZG', 1, 1, '2023-12-22'),
+(35, 'Dety Rohayati', 'qc.solas.deti@gmail.com', 'default.jpg', '$2y$10$Ut0g5HzBGqBVLs/9sn8JteYWhfUn0SnTBt3DK9dIp4cP5pS1kx2Fi', 1, 1, '2023-12-22');
 
 -- --------------------------------------------------------
 
@@ -1733,13 +1749,13 @@ ALTER TABLE `satuan`
 -- AUTO_INCREMENT for table `tb_pdf_book`
 --
 ALTER TABLE `tb_pdf_book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -1751,19 +1767,19 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_data_bbp_bba_history`
 --
 ALTER TABLE `user_data_bbp_bba_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_data_bk_history`
 --
 ALTER TABLE `user_data_bk_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_data_lhu_history`
 --
 ALTER TABLE `user_data_lhu_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -1781,7 +1797,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
